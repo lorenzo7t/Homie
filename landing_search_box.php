@@ -4,7 +4,7 @@
         <div class="searchBox" id="landing-search-box">
             <div class="search-line-container">
                 <input class="searchInput" id="bigSearchInput" type="text" name="" placeholder="Inserisci la tua località..." onkeyup="handleInput()">
-                <button class="searchButton" href="#">
+                <button class="searchButton" id="search-button-landing" href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
                         <g clip-path="url(#clip0_2_17)">
                             <g filter="url(#filter0_d_2_17)">
@@ -29,7 +29,27 @@
                     </svg>
                 </button>
             </div>
-            <div id="resultsContainer"></div>
+            <div class="mini-maps-container">
+                <div class="mini-maps-wrapper">
+                    <div id="roma-mini-map" class="single-mini-map-container">
+                        <img class="mini-map" src="img/map/roma.png" alt="mini map">
+                        <p class="mini-map-text light_text" title="Roma, RM, Italia">Roma</p>
+                    </div>
+                    <div id="milano-mini-map" class="single-mini-map-container">
+                        <img class="mini-map" src="img/map/milano.png" alt="mini map">
+                        <p class="mini-map-text light_text" title="Milano, MI, Italia">Milano</p>
+                    </div>
+                    <div id="torino-mini-map" class="single-mini-map-container">
+                        <img class="mini-map" src="img/map/torino.png" alt="mini map">
+                        <p class="mini-map-text light_text" title="Torino, TO, Italia">Torino</p>
+                    </div>
+                    <div id="napoli-mini-map" class="single-mini-map-container">
+                        <img class="mini-map" src="img/map/napoli.png" alt="mini map">
+                        <p class="mini-map-text light_text" title="Napoli, NA, Italia">Napoli</p>
+                    </div>
+                </div>
+                <ul id="resultsContainer"></ul>
+            </div>
         </div>
 
     </div>

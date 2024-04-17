@@ -20,12 +20,19 @@ async function handleInput() {
     console.log(inputField.value);
     const userInput = inputField.value;
 
+    const miniMap2 = document.getElementsByClassName("single-mini-map-container");
+
+    for (let i = 0; i < miniMap2.length; i++) {
+        miniMap2[i].classList.remove("single-mini-map-container-active");
+    }
+
+
     // Fetch data based on user input
     const resultsContainer = document.getElementById('resultsContainer');
-    resultsContainer.classList.add("results-container-active")
 
     if (userInput.length < 3){
         resultsContainer.innerHTML = ''; // Clear previous results
+        resultsContainer.classList.remove("results-container-active")
         return;
     }
 
@@ -33,12 +40,12 @@ async function handleInput() {
 
     // Display results on the page
     if (results) {
+        resultElement = document.createElement('ul');
         resultsContainer.innerHTML = ''; // Clear previous results
-        // Replace 'resultsContainer' with the ID of the HTML element where you want to display the results
         resultsContainer.classList.add("results-container-active")
         
         if (results['predictions'].length == 0){
-            const resultElement = document.createElement('div');
+            const resultElement = document.createElement('li');
             resultElement.textContent = "Nessun risultato trovato";
             resultElement.className = "suggest-item light_text";
             resultElement.id = "no-results";
@@ -46,15 +53,32 @@ async function handleInput() {
         }
 
         for(let i in results['predictions']){
-            console.log(results['predictions'][i]['description']);
-            const resultElement = document.createElement('div');
+            const resultElement = document.createElement('li');
             resultElement.textContent = results['predictions'][i]['description'];
             resultElement.className = "suggest-item light_text";
+            resultElement.addEventListener('click', function() {
+                inputField.value = results['predictions'][i]['description'];
+                resultsContainer.innerHTML = '';
+                resultsContainer.classList.remove("results-container-active")
+
+                const miniMap = document.getElementsByClassName("single-mini-map-container");
+
+                var selectedCity = results['predictions'][i]['description'].split(",").reverse()[2].trim();
+                console.log(selectedCity);
+                if (["Roma", "Milano", "Napoli", "Torino"].includes(selectedCity)) {
+                    for (let i = 0; i < miniMap.length; i++) {
+                        console.log(miniMap[i].outerText);
+                        if (miniMap[i].outerText.includes(selectedCity)) {
+                            miniMap[i].classList.add("single-mini-map-container-active");
+                        }
+                    }
+                }
+                
+            });
             resultsContainer.appendChild(resultElement);
+
         };
     }
 }
 
-// Attach event listener to the input field
-const inputField = document.getElementById('inputField'); // Replace 'inputField' with the ID of your HTML input field
-inputField.addEventListener('input', handleInput);
+
