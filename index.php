@@ -15,7 +15,7 @@
 
         <?php include 'header.php'; ?>
         <?php include 'landing_search_box.php'; ?>
-        <div id="resultsContainer"></div>
+        
     </div>
 </body>
 </html>
