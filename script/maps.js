@@ -20,7 +20,8 @@ mapContainers.forEach(container => {
 
         // Aggiungi la classe "single-mini-map-container-active" all'elemento cliccato
         container.classList.add('single-mini-map-container-active');
-
+        const resultsContainer = document.getElementById('resultsContainer');
+        resultsContainer.innerHTML = '';
     });
 });
 

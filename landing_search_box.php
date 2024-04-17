@@ -48,8 +48,9 @@
                         <p class="mini-map-text light_text" title="Napoli, NA, Italia">Napoli</p>
                     </div>
                 </div>
-                <ul id="resultsContainer"></ul>
+                
             </div>
+            <ul id="resultsContainer"></ul>
         </div>
 
     </div>
