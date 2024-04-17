@@ -274,6 +274,8 @@ button:active {
     justify-content: center;
     width: 100%;
     overflow: hidden;
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
 }
 
 
