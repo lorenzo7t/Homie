@@ -202,6 +202,7 @@ p {
 /* SEARCH BAR */
 
 .searchBox {
+    position: relative;
     display: flex;
     width: 700px;
     align-items: flex-start;
@@ -220,9 +221,6 @@ p {
     justify-content: center;
 
 }
-
-
-
 
 .searchButton {
     color: white;
@@ -272,10 +270,16 @@ button:active {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    width: 100%;
     overflow: hidden;
+    position: absolute;
+    top: 100%;  /* Si posiziona subito sotto l'input di ricerca */
+    left: 0;
+    width: 100%; /* Assicurati che copra l'intera larghezza del `searchBox` */
+    background-color: #1D3557; /* Colore di sfondo, opzionale per migliorare la visibilità */
+    z-index: 1000; /* Assicurati che sia sopra altri elementi */
     border-bottom-left-radius: 35px;
     border-bottom-right-radius: 35px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3)
 }
 
 
