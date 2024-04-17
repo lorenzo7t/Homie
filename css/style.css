@@ -1,6 +1,8 @@
 html {
     font-size: 16px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 body {
@@ -19,6 +21,90 @@ a {
     padding: 15px;
 }
 
+/* FONTS */
+
+.roboto-thin {
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+  }
+  
+.roboto-light {
+font-family: "Roboto", sans-serif;
+font-weight: 300;
+font-style: normal;
+}
+
+.roboto-regular {
+font-family: "Roboto", sans-serif;
+font-weight: 400;
+font-style: normal;
+}
+
+.roboto-medium {
+font-family: "Roboto", sans-serif;
+font-weight: 500;
+font-style: normal;
+}
+
+.roboto-bold {
+font-family: "Roboto", sans-serif;
+font-weight: 700;
+font-style: normal;
+}
+
+.roboto-black {
+font-family: "Roboto", sans-serif;
+font-weight: 900;
+font-style: normal;
+}
+
+.roboto-thin-italic {
+font-family: "Roboto", sans-serif;
+font-weight: 100;
+font-style: italic;
+}
+
+.roboto-light-italic {
+font-family: "Roboto", sans-serif;
+font-weight: 300;
+font-style: italic;
+}
+
+.roboto-regular-italic {
+font-family: "Roboto", sans-serif;
+font-weight: 400;
+font-style: italic;
+}
+
+.roboto-medium-italic {
+font-family: "Roboto", sans-serif;
+font-weight: 500;
+font-style: italic;
+}
+
+.roboto-bold-italic {
+font-family: "Roboto", sans-serif;
+font-weight: 700;
+font-style: italic;
+}
+
+.roboto-black-italic {
+font-family: "Roboto", sans-serif;
+font-weight: 900;
+font-style: italic;
+}
+  
+
+
+/* UTILS */
+
+.center-vertical {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 .light_text {
     color: #F1FAEE;
 }
@@ -27,13 +113,19 @@ a {
     color: #1D3557;
 }
 
+/* HEADER */
+.main-page-top{
+    background: rgb(168,218,220);
+    background: linear-gradient(180deg, rgba(168,218,220,1) 66%, rgba(241,250,238,1) 100%);    /*-webkit-box-shadow: 0px 0px 21px -2px #898989; 
+    box-shadow: 0px 0px 21px -2px #898989;*/
+    padding-bottom: 200px;
+}
 .header {
-    background-color: #A8DADC;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    -webkit-box-shadow: 0px 0px 21px -2px #898989; 
-    box-shadow: 0px 0px 21px -2px #898989;
+    /*-webkit-box-shadow: 0px 0px 21px -2px #898989; 
+    box-shadow: 0px 0px 21px -2px #898989;*/
 }
 
 .header__left {
@@ -41,6 +133,8 @@ a {
     align-items: center;
     margin-left: 20px;
 }
+
+/* HEADER BUTTONS */
 
 #login-button{
     font-size: 18px;
@@ -53,8 +147,88 @@ a {
     margin-left: 50px;
     margin-right: 20px;
     border: none;
+    transition: cubic-bezier(0, 1.15, 0.65, 0.96) 1s;
 }
 
-#login_button:hover {
+#login-button:hover {
     background-color: #1D3557;
+    transition: cubic-bezier(0, 1.15, 0.65, 0.96) 1s;
 }
+
+#business-signup-button {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 15px;
+    border: solid 1px transparent;
+    transition: cubic-bezier(0, 1.15, 0.65, 0.96) 1s;
+}
+
+#business-signup-button:hover{
+    border: solid 1px #457B9D;
+    transition: cubic-bezier(0, 1.15, 0.65, 0.96) 1s;
+}
+
+/* LANDING TITLE */
+.landing-title {
+    text-align: center;
+    font-size: 90px;
+    width: 50%;
+}
+
+/* SEARCH BAR */
+
+.searchBox {
+    display: flex;
+    width: 700px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    background: #1D3557;
+    border-radius: 50px;
+    position: relative;
+    -webkit-box-shadow: 0px 0px 21px -2px #898989; 
+    box-shadow: 0px 0px 21px -2px #898989;
+  }
+  
+  .searchButton {
+    color: white;
+    position: absolute;
+    right: 8px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--gradient-2, linear-gradient(90deg, #A8DADC 0%, #457B9D 100%));
+    border: 0;
+    display: inline-block;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  }
+  /*hover effect*/
+  button:hover {
+    color: #fff;
+    background-color: #1A1A1A;
+    box-shadow: rgba(0, 0, 0, 0.5) 0 10px 20px;
+    transform: translateY(-3px);
+  }
+  /*button pressing effect*/
+  button:active {
+    box-shadow: none;
+    transform: translateY(0);
+  }
+  
+  .searchInput {
+    border: none;
+    background: none;
+    outline: none;
+    color: white;
+    font-size: 18px;
+    width: 400px;
+    padding: 24px 46px 24px 26px;
+  }
+  
+  ::placeholder {
+    color: #F1FAEE;
+    opacity: 0.7; /* Firefox */
+  }
+  
