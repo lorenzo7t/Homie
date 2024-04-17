@@ -209,8 +209,14 @@ p {
 /* LANDING TITLE */
 .landing-title {
     text-align: center;
-    font-size: 90px;
-    width: 50%;
+    font-size: 85px;
+    width: 60%;
+}
+.subtitle {
+    color: #457B9D;
+    text-align: center;
+    font-size: 30px;
+    padding-bottom: 20px;
 }
 
 /* SEARCH BAR */

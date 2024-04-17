@@ -1,5 +1,6 @@
 <div class="landing-search center-vertical">
-    <h1 class="landing-title roboto-bold dark_text">Scopri i servizi vicino a te!</h1>
+    <h1 class="landing-title roboto-bold dark_text">Dal web alla porta di casa, è subito, è <span style="color: #E63946;">Homie!</span></h1>
+    <p class="subtitle roboto-bold">Scopri i servizi vicino a te!</p>
     <div class="search-box-container">
         <div class="searchBox" id="landing-search-box">
             <div class="search-line-container">
