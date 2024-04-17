@@ -1,8 +1,7 @@
 <div class="landing-search center-vertical">
     <h1 class="landing-title roboto-bold dark_text">Scopri i servizi vicino a te!</h1>
-
     <div class="searchBox">
-        <input class="searchInput" type="text" name="" placeholder="Inserisci la tua località...">
+        <input class="searchInput" id="bigSearchInput" type="text" name="" placeholder="Inserisci la tua località..." onkeyup="handleInput()">
         <button class="searchButton" href="#">
         <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
         <g clip-path="url(#clip0_2_17)">
