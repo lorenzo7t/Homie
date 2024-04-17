@@ -16,7 +16,7 @@
 
         <?php include 'header.php'; ?>
         <?php include 'landing_search_box.php'; ?>
-        
+        <?php include 'footer.php'; ?>
     </div>
 </body>
 </html>
