@@ -13,10 +13,12 @@
 </head>
 <body>
     <div class="main-page-top">
-
         <?php include 'header.php'; ?>
         <?php include 'landing_search_box.php'; ?>
         <?php include 'footer.php'; ?>
+    </div>
+    <div class="main-page-bottom">
+        <?php include 'landing_description.php'; ?>
     </div>
 </body>
 </html>
