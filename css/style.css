@@ -142,8 +142,10 @@ p {
 
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .header-right {
@@ -209,8 +211,14 @@ p {
 /* LANDING TITLE */
 .landing-title {
     text-align: center;
-    font-size: 90px;
-    width: 80%;
+    font-size: 85px;
+    width: 60%;
+}
+.subtitle {
+    color: #457B9D;
+    text-align: center;
+    font-size: 30px;
+    padding-bottom: 20px;
 }
 
 /* SEARCH BAR */
