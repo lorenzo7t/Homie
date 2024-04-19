@@ -210,12 +210,13 @@ p {
 .landing-title {
     text-align: center;
     font-size: 90px;
-    width: 50%;
+    width: 80%;
 }
 
 /* SEARCH BAR */
 
 .searchBox {
+    position: relative;
     display: flex;
     width: 700px;
     align-items: flex-start;
@@ -224,8 +225,7 @@ p {
     background: #1D3557;
     border-radius: 35px;
     position: relative;
-    -webkit-box-shadow: 0px 0px 21px -2px #898989;
-    box-shadow: 0px 0px 21px -2px #898989;
+    box-shadow: 0px 0px 15px -2px #3e3e3e;
 }
 
 .search-line-container {
@@ -234,9 +234,6 @@ p {
     justify-content: center;
 
 }
-
-
-
 
 .searchButton {
     color: white;
@@ -265,6 +262,10 @@ button:active {
     transform: translateY(0);
 }
 
+.search-wrapper {
+    z-index: 2000;
+}
+
 .searchInput {
     border: none;
     background: none;
@@ -278,7 +279,6 @@ button:active {
 ::placeholder {
     color: #F1FAEE;
     opacity: 0.7;
-    /* Firefox */
 }
 
 #resultsContainer {
@@ -286,10 +286,19 @@ button:active {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    width: 100%;
     overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    background-color: #1D3557; 
+    z-index: 1000;
     border-bottom-left-radius: 35px;
-    border-bottom-right-radius: 35px;
+    border-bottom-right-radius: 35px;   
+}
+
+.results-container-active {
+    padding-top: 5%;
 }
 
 
@@ -316,6 +325,15 @@ button:active {
 
 /* MINIMAPS */
 
+.mini-maps-background{
+    background-color: #457B9D;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 80%;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
 .mini-maps-container{
     width: 100%;
     display: flex;
@@ -333,7 +351,7 @@ button:active {
 .mini-map {
     width: 80px;
     height: 80px;
-    border: solid 3px #F1FAEE;
+    border: solid 3px #f1faee;
     border-radius: 15px;
 }
 
@@ -371,7 +389,7 @@ button:active {
     border-radius: 15px;
     -webkit-box-shadow: 0px 0px 21px -2px #1e1e1e;
     box-shadow: 0px 0px 21px -2px #1e1e1e;
-    transform: translateY(7px);
+    transform: translateY(-15px);
 }
 
 /* FOOTER */
