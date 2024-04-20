@@ -1,5 +1,5 @@
 <div class="landing-search center-vertical">
-    <h1 class="landing-title roboto-bold dark_text">Dal web alla porta di casa, è subito, è <span style="color: #E63946;">Homie!</span></h1>
+    <h1 class="landing-title roboto-regular dark_text">Dal web alla porta di casa, è subito, è <span style="color: #E63946; font-weight: 700;">Homie!</span></h1>
     <p class="subtitle roboto-regular">Scopri i servizi vicino a te!</p>
 
     <div class="search-box-container center-vertical">
@@ -58,6 +58,58 @@
             </div>
             <ul id="resultsContainer"></ul>
         </div>
+    </div>
+
+    <div class="scroll-action container">
+        <a href="#landing" class="scroll-to-landing">
+            <svg width="50" height="80" viewBox="0 0 50 80" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+                <style>
+                    .scroll-to-landing {
+                        cursor: pointer;
+                        transition: opacity 0.3s;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+                        height: 100%;
+                        transition: cubic-bezier(0, 1.15, 0.65, 0.96) 5s;
+                    }
+
+                    .scroll-to-landing:hover {
+                        width: 90%;
+                        height: 90%;
+                        transition: cubic-bezier(0, 1.15, 0.65, 0.96) 2s;
+                        opacity: 0.7;
+                    }
+
+                    .scroll-arrow {
+                        animation: scroll-animation 3s infinite;
+                    }
+
+                    @keyframes scroll-animation {
+
+                        0%,
+                        20%,
+                        50%,
+                        80%,
+                        100% {
+                            transform: translateY(0);
+                        }
+
+                        40% {
+                            transform: translateY(5px);
+                        }
+
+                        60% {
+                            transform: translateY(3px);
+                        }
+                    }
+                </style>
+                <rect x="10" y="10" fill="none" rx="15" ry="15" width="30" height="50" stroke="#1D3557" stroke-width="2"></rect>
+                <circle class="scroll-arrow" cx="25" cy="25" r="3" stroke="#F1FAEE" fill="#1D3557"></circle>
+            </svg>
+            </a>
+
     </div>
 
 </div>
