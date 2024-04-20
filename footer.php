@@ -1,7 +1,7 @@
 <!-- Purpose: This file contains the footer of the website. It is included in the main index.php file to display the footer on the page. -->
 <footer class="main-footer">
     <div class="footer-container">
-        <div class="columns-wrapper">
+        <div class="columns-wrapper fixed-width">
             <div class="column">
                 <h3 class="footer-title dark_text">Chi siamo</h3>
                 <p class="footer-text dark_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut turpis eget nunc fermentum ultricies. Nullam nec purus nec nunc fermentum ultricies.</p>

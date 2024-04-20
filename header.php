@@ -1,4 +1,4 @@
-<div class="header">
+<div class="header fixed-width">
     <div class="header-right">
         <a href="index.html" class="logo-container">
             <img class="logo" src="img/logo.png">
