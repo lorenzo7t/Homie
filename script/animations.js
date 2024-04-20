@@ -1,15 +1,12 @@
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      const square = entry.target.querySelector('.step');
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    var scrollLink = document.querySelector('.scroll-to-landing');
   
-      if (entry.isIntersecting) {
-        square.classList.add('wipe-animation');
-        return; // if we added the class, exit the function
-      }
-  
-      // We're not intersecting, so remove the class!
-      square.classList.remove('wipe-animation');
+    scrollLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = document.querySelector(this.getAttribute('href'));
+      target.scrollIntoView({ behavior: 'smooth' });
     });
   });
   
-  observer.observe(document.querySelector('.step'));

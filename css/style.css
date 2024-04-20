@@ -52,12 +52,6 @@ h1 {
 }
 
 
-@media (prefers-reduced-motion: no-preference) {
-    .wipe-animation {
-      animation: wipe-enter 1s 1;
-    }
-  }
-
 /* FONTS */
 
 .roboto-thin {

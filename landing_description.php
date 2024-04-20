@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id = "landing">
     <div class="text-container fixed-width">
         <h2 id="main-title" class="section-title dark_text ">
             Benvenuto in <span style="color: #E63946;">Homie!</span>
