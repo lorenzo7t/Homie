@@ -152,11 +152,11 @@ h1 {
     justify-content: center;
 }
 /* HEADER */
-
+.background{
+    background: linear-gradient(180deg, rgba(168, 218, 220, 1) 10%, rgba(241, 250, 238, 1) 100%);
+}
 .main-page-top {
     position: relative;
-    background: rgb(168, 218, 220);
-    background: linear-gradient(180deg, rgba(168, 218, 220, 1) 66%, rgba(241, 250, 238, 1) 100%);
     padding-bottom: 20%;
     max-height: 550px;
 }
@@ -164,14 +164,21 @@ h1 {
 .header-sticky {
     background-color: #F1FAEE; 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
-    transition: background-color 0.3s, box-shadow 0.3s; 
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s; 
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+}
+
+.header-sticky:hover {
+    transition: cubic-bezier(0, 1.15, 0.65, 0.96) 1s;
+    transform: scale(1.01);
 }
 
 .header {
     position: -webkit-sticky; 
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 5000;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -303,6 +310,7 @@ button:active {
     box-shadow: none;
     transform: translateY(0);
 }
+
 
 .search-wrapper {
     z-index: 2000;

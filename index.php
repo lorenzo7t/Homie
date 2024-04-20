@@ -13,17 +13,17 @@
     <script src="script/animations.js" defer></script>
 </head>
 <body>
-    
-    <div class="main-page-top">
+    <div class="background">
         <?php include 'header.php'; ?>
-        <?php include 'landing_search_box.php'; ?>
-        
-    </div>
-    <div class="main-page-body">
-        <?php include 'landing_description.php'; ?>
-    </div>
-    <div class="mp-footer">
-        <?php include 'footer.php'; ?>
+        <div class="main-page-top">
+            <?php include 'landing_search_box.php'; ?>
+        </div>
+        <div class="main-page-body">
+            <?php include 'landing_description.php'; ?>
+        </div>
+        <div class="mp-footer">
+            <?php include 'footer.php'; ?>
+        </div>
     </div>
 </body>
 </html>
