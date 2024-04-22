@@ -1,6 +1,6 @@
 <div class="header fixed-width">
     <div class="header-right">
-        <a href="index.html" class="logo-container">
+        <a href="index.php" class="logo-container">
             <img class="logo" src="img/logo_new.png">
         </a>
     </div>

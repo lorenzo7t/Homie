@@ -9,13 +9,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="icon" href="img/icons/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/icons/favicon.ico" type="image/x-icon">
     <script src="script/autocomplete.js" defer></script>
+    <script src="script/maps.js" defer></script>
+    <script src="script/animations.js" defer></script>
 </head>
 
 <body style="background-color: #A8DADC;">
     <div class="login-container">
-        <a href="index.php" class="home-logo">
-            <img class="logo" src="images/logo.png">
+        <a href="index.php" class="homie-logo">
+            <img class="logo" src="img/logo_new.png">
 
         </a>
         <form class="form">
@@ -24,14 +28,14 @@
             <div class="input-container">
                 <label>
                     <span>
-                        Inserisci Nome
+                        Nome
                     </span>
                     <input class="input-field" type="Nome" placeholder="Enter Name" required="">
                 </label>
             </div>
             <div class="input-container">
                 <span>
-                    Inserisci Cognome
+                    Cognome
                 </span>
                 <input class="input-field" type="Cognome" placeholder="Enter Surname" required="">
 
@@ -39,7 +43,7 @@
             <div class="input-container">
                 <label>
                     <span>
-                        Inserisci email
+                        Email
                     </span>
                     <input class="input-field" type="email" placeholder="Enter email" required="">
                 </label>
@@ -47,12 +51,13 @@
             </div>
             <div class="input-container">
                 <span>
-                    Inserisci indirizzo
+                    Indirizzo
                 </span>
                 <input class="input-field" type="indirizzo" placeholder="Enter Address" required="">
+            </div>
             <div class="input-container">
                 <span>
-                    Inserisci password
+                    Password
                 </span>
                 <input class="input-field" type="password" placeholder="Enter password" required="">
 
@@ -64,11 +69,11 @@
                 <input class="input-field" type="password" placeholder="Confirm password" required="">
 
             </div>
-            
-            <div class="imput-container" style="margin-top: 10%;">    
-            <button type="submit" class="login-button">
-                Registrati
-            </button>
+
+            <div class="input-container" style="margin-top: 10%;">
+                <button type="submit" class="login-button">
+                    Registrati
+                </button>
             </div>
             <p class="signup-link">
                 Già registrato?
@@ -76,4 +81,5 @@
             </p>
         </form>
     </div>
+    <div class="separator"></div>
 </body>
