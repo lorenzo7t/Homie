@@ -12,65 +12,65 @@
     <script src="script/autocomplete.js" defer></script>
 </head>
 
-<body>
-    <div class="register-container">
+<body style="background-color: #A8DADC;">
+    <div class="login-container">
         <a href="index.php" class="home-logo">
             <img class="logo" src="images/logo.png">
 
         </a>
-        <form class="register-form">
-            <p class="register-form-title">Registrati</p>
+        <form class="form">
+            <p class="form-title">Registrati</p>
 
-            <div class="register-input-container">
+            <div class="input-container">
                 <label>
                     <span>
                         Inserisci Nome
                     </span>
-                    <input type="Nome" placeholder="Enter Name" required="">
+                    <input class="input-field" type="Nome" placeholder="Enter Name" required="">
                 </label>
             </div>
-            <div class="register-input-container">
+            <div class="input-container">
                 <span>
                     Inserisci Cognome
                 </span>
-                <input type="Cognome" placeholder="Enter Surname" required="">
+                <input class="input-field" type="Cognome" placeholder="Enter Surname" required="">
 
             </div>
-            <div class="register-input-container">
+            <div class="input-container">
                 <label>
                     <span>
                         Inserisci email
                     </span>
-                    <input type="email" placeholder="Enter email" required="">
+                    <input class="input-field" type="email" placeholder="Enter email" required="">
                 </label>
 
             </div>
-            <div class="register-input-container">
+            <div class="input-container">
                 <span>
                     Inserisci indirizzo
                 </span>
-                <input type="indirizzo" placeholder="Enter Address" required="">
-            <div class="register-input-container">
+                <input class="input-field" type="indirizzo" placeholder="Enter Address" required="">
+            <div class="input-container">
                 <span>
                     Inserisci password
                 </span>
-                <input type="password" placeholder="Enter password" required="">
+                <input class="input-field" type="password" placeholder="Enter password" required="">
 
             </div>
-            <div class="register-input-container">
+            <div class="input-container">
                 <span>
                     Conferma password
                 </span>
-                <input type="password" placeholder="Confirm password" required="">
+                <input class="input-field" type="password" placeholder="Confirm password" required="">
 
             </div>
             
-            <div class="register-imput-container">    
-            <button type="submit" class="submit">
+            <div class="imput-container" style="margin-top: 10%;">    
+            <button type="submit" class="login-button">
                 Registrati
             </button>
             </div>
-            <p class="register-signup-link">
+            <p class="signup-link">
                 Già registrato?
                 <a href="login_page.php">Accedi</a>
             </p>
