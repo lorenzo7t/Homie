@@ -21,7 +21,7 @@
             <img class="logo" src="img/logo_new.png">
 
         </a>
-        <form class="form" style = "height: 50vh">
+        <form class="form" style = "height: 35vw; width:50vh">
             <p class="form-title">Accedi</p>
             <div class="input-container">
                 <label>

@@ -22,7 +22,7 @@
             <img class="logo" src="img/logo_new.png">
 
         </a>
-        <form class="form">
+        <form class="form" style="width: 50vh;">
             <p class="form-title">Registrati</p>
 
             <div class="input-container">
