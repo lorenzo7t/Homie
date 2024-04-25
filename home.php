@@ -18,5 +18,6 @@
     <div class="background">
         <?php include 'logged_header.php'; ?>
     </div>
+    
 </body>
 </html>
