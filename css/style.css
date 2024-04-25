@@ -166,7 +166,7 @@ h1 {
 }
 
 .background{
-    background: linear-gradient(180deg, rgba(168, 218, 220, 1) 10%, rgba(241, 250, 238, 1) 100%);
+    background: linear-gradient(180deg, rgba(168, 218, 220, 1) 10%, rgba(241, 250, 238, 1) 40%);
 }
 .main-page-top {
     position: relative;
