@@ -29,9 +29,42 @@
                     </div>
                 </div>
             </section>
+            <section class="workers-list">
+                <h3 class="section-title dark_text">I professionisti</h3>
+                <div class="workers-container">
+                    <div class="col">
+                        <div class="worker">
+                            <img src="img/idraulico.png" alt="Plumber">
+                            <a class="worker-title roboto-regular">Idraulico</a>
+                        </div>
+                        <div class="worker">
+                            <img src="img/elettricista.png" alt="Electrician">
+                            <a class="worker-title roboto-regular">Elettricista</a>
+                        </div>
+
+                        <div class="worker">
+                            <img src="img/fabbro.png" alt="Blacksmith">
+                            <a class="worker-title roboto-regular">Fabbro</a>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="worker">
+                            <img src="img/pittore.png" alt="Painter">
+                            <a class="worker-title roboto-regular">Pittore</a>
+                        </div>
+                        <div class="worker">
+                            <img src="img/colf.png" alt="Housekeeper">
+                            <a class="worker-title roboto-regular">Colf</a>
+                        </div>
+                        <div class="worker">
+                            <img src="img/tuttofare.png" alt="Handyman">
+                            <a class="worker-title roboto-regular">Tuttofare</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <section class="live-tracking">
                 <div class="live-tracking-container">
-                    <h3 class="section-title dark_text">Tracciamento in tempo reale</h3>
                     <div class="live-tracking-content">
                         <img src="img/tracking.png" alt="Live tracking">
                         <div class="text-wrapper">

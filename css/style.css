@@ -171,6 +171,7 @@ h1 {
 .main-page-top {
     position: relative;
     padding-bottom: 10%;
+    height: 65vh;
     max-height: 550px;
 }
 
@@ -811,6 +812,36 @@ span::before {
 
 }
 
+.workers-container {
+    display: flex;
+}
+
+.col {
+    width: 100%;
+}
+
+.worker {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 15px;
+    background-color: #F1FAEE;
+    color: #457B9D;
+    margin: 10px;
+    box-shadow: 0px 0px 20px -6px #666666;
+    height: 30%;
+}
+
+.workers-container .col .worker img {
+    height: 15vh;
+    width: 7vw;
+    margin: 3%;
+}
+
+.worker-title {
+    font-size: 20px;
+    padding-left: 20px;
+}
 
 /* LOGGED PAGE */
 
