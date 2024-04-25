@@ -163,7 +163,7 @@ h1 {
 }
 .main-page-top {
     position: relative;
-    padding-bottom: 20%;
+    padding-bottom: 10%;
     max-height: 550px;
 }
 
@@ -510,6 +510,7 @@ button:active {
 }
 
 .section-title {
+    text-align: left;
     font-size: 40px;
 }
 
@@ -521,20 +522,15 @@ button:active {
 
 .text-container {
     background-color: #a8dadc8f;
-    border-radius: 35px;
     transition: cubic-bezier(0, 1.15, 0.65, 0.96) 1s;
 }
 
 .text-container:hover {
-    box-shadow: 0px 0px 20px -6px #666666;
     transition: cubic-bezier(0, 1.15, 0.65, 0.96) 5s;
-    padding: 10px;
     margin-top: -10px;
 }
 
-.text-container h2,.text-container h3 {
-    padding-left: 40px;
-}
+
 
 
 
@@ -548,8 +544,10 @@ button:active {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    padding: 40px;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
+
 
 .step-title {
     color: #F1FAEE;
@@ -762,7 +760,7 @@ span::before {
     border-radius: 35px;
     margin-left: 1%;
     margin-right: 1%;
-    height: 400px;
+    height: 50vh;
     transition: cubic-bezier(0, 1.15, 0.65, 0.96) 1s;
     box-shadow: 0px 0px 20px -6px #666666;
 }
@@ -787,3 +785,26 @@ span::before {
     font-size: 20px;
 }
 
+.text-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 50vh;
+}
+.live-tracking-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.live-tracking-content img {
+    width: 50vw;
+    height: 50vh;
+}
+
+.description {
+    font-size: 20px;
+
+}
