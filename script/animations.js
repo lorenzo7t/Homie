@@ -41,3 +41,23 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+  var userButton = document.querySelector('.address-button');
+  var dropdownContent = document.querySelector('.address-modify-dropdown');
+
+  userButton.addEventListener('click', function (event) {
+    dropdownContent.classList.toggle('show');
+    userButton.classList.toggle('active'); // Aggiungi/rimuovi la classe 'active'
+    event.stopPropagation();
+  });
+
+  document.addEventListener('click', function (event) {
+    if (!dropdownContent.contains(event.target) && !userButton.contains(event.target)) {
+      dropdownContent.classList.remove('show');
+      userButton.classList.remove('active'); // Rimuovi la classe 'active'
+    }
+  });
+});
+
+
+

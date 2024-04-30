@@ -57,6 +57,9 @@ h1 {
     width: 80%;
 }
 
+.hidden {
+    display: none;
+}
 
 /* FONTS */
 
@@ -885,6 +888,10 @@ span::before {
     width: 100%;
 }
 
+.search-bar::placeholder {
+    color: #457B9D;
+}
+
 .search-button {
     height: 5.7vh;
     width: 3vw;
@@ -944,9 +951,7 @@ span::before {
     justify-content: space-between;
     padding: 10px;
     border-radius: 20px;
-    /* Arrotonda gli angoli */
     width: 160px;
-    /* Definisci una larghezza se necessario */
 }
 
 .username {
@@ -957,26 +962,21 @@ span::before {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     background-color: #457B9D;
-    /* Cambia colore quando attivo */
 }
 
 .dropdown-content {
     position: absolute;
     top: 100%;
-    /* Posiziona il menu direttamente sotto il pulsante */
     left: 0;
     background-color: #F1FAEE;
     min-width: 100%;
-    /* Larghezza uguale al pulsante */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     border-radius: 0 0 20px 20px;
-    /* Arrotonda solo gli angoli inferiori */
     overflow: hidden;
     max-height: 0;
     transition: all 0.3s ease;
     opacity: 0;
     z-index: 1;
-    /* Assicurati che il menu a tendina sia sopra gli altri elementi */
 }
 
 .user-button .icon {
@@ -993,9 +993,7 @@ span::before {
 
 .dropdown-content.show {
     max-height: 500px;
-    /* Imposta un'altezza massima adeguata */
     opacity: 1;
-    /* Rendi il menu visibile */
 }
 
 .dropdown-content a {
@@ -1006,7 +1004,7 @@ span::before {
 }
 
 .dropdown-content a:hover {
-    background-color: #f1f1f1;
+    background-color: #A8DADC;
 }
 
 body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
@@ -1021,4 +1019,77 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
 
 #question-mark {
     width: 100%;
+}
+
+.address-container {
+    position: relative;
+    display: inline-block;
+    margin-right: 30px;
+}
+
+.address-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.address-button:hover {
+    background-color: #f1faee7b;
+    transition: cubic-bezier(0, 1.15, 0.65, 0.96) 1s;
+}
+
+.address-button.active {
+    background-color: #f1faee7b;
+    transition: cubic-bezier(0, 1.15, 0.65, 0.96) 1s;
+}
+
+.address-container svg {
+    margin-right: 10px;
+}
+
+.address-modify-dropdown {
+    position: absolute;
+    top: 140%;
+    right: -40%;
+    background-color: #F1FAEE;
+    width: 25vw;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    height: 300px;
+    transition: all 0.3s ease;
+    opacity: 0;
+    z-index: 1;
+}
+
+.address-modify-dropdown.show::before {
+    content: "";
+    width: 1.6rem;
+    margin: auto;
+    transform: scale(0);
+    transform-origin: bottom;
+    transition: .3s ease;
+    border-width: 0 .8rem .8rem;
+    border-style: solid;
+    border-color: #0000 #0000 var(--background-main);
+    background-color: #0000;
+    transform: scale(1);
+}
+
+.address-modify-dropdown.show {
+    max-height: 500px;
+    opacity: 1;
+}
+
+.address-modify-dropdown form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
 }

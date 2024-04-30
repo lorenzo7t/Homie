@@ -18,14 +18,36 @@
 
         </div>
         <div class="header-left">
+            <div class="address-container">
+                <button class="address-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-pin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <circle cx="12" cy="11" r="3" />
+                        <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
+                    </svg>
+                    <span class="address">Via Roma 1, 00100 Roma RM</span>
+                </button>
+                <div class="address-modify-dropdown">
+                    <form action="change_address.php" method="POST">
+                        <label for="address" class="address-label">Modifica il tuo indirizzo</label>
+                        <input type="text" name="address" id="address" class="address-input" placeholder="Inserisci il tuo indirizzo">
+                        <button type="submit" class="address-submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M5 12l5 5l10 -10" />
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
             <div class="user-menu">
                 <button class="user-button">
-                    <span class="username">Nome Utente</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <circle cx="12" cy="7" r="4" />
                         <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                     </svg>
+                    <span class="username">Nome Utente</span>
                 </button>
                 <div class="dropdown-content">
                     <a href="profile.php">Profilo</a>
@@ -40,7 +62,7 @@
                     </a>
                 </div>
             </div>
-            <div class="help-icon-container">
+            <div class="help-icon-container hidden">
                 <div class="help-button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="#333" id="question-mark">
                         <circle cx="12" cy="12" r="10" fill="#F1FAEE" />
