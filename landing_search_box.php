@@ -29,7 +29,7 @@
         <div class="searchBox" id="landing-search-box">
             <div class="search-wrapper">
                 <div class="search-line-container">
-                    <input class="searchInput" id="bigSearchInput" type="text" name="" placeholder="Inserisci la tua località..." onkeyup="handleInput()">
+                    <input class="searchInput" id="bigSearchInput" type="text" name="" placeholder="Inserisci la tua località..." onkeyup="handleInputMain()">
                     <button class="searchButton big-search-button" id="search-button-landing" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
                             <g clip-path="url(#clip0_2_17)">
