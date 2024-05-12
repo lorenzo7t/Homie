@@ -60,4 +60,30 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+document.addEventListener('DOMContentLoaded', function() {
+  var categories = document.querySelectorAll('.category-button');
 
+  categories.forEach(function(button) {
+      button.addEventListener('click', function() {
+          categories.forEach(b => {
+              if (b !== button) b.classList.remove('active');
+          });
+          button.classList.toggle('active');
+      });
+  });
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var professionalsContainer = document.querySelector('.professionals-container');
+  var title = document.querySelector('.professionals-container-title');
+
+  professionalsContainer.addEventListener('scroll', function() {
+      if (professionalsContainer.scrollTop > 0) {
+          title.classList.add('shadow-active');
+      } else {
+          title.classList.remove('shadow-active');
+      }
+  });
+});
