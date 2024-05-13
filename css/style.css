@@ -1288,6 +1288,14 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
 
 }
 
+.external-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .professionals-container-title {
     background-color: #f1f1f1;
     border-radius: 0 0 20% 20%;
@@ -1348,7 +1356,7 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
     width: 100%;
 }
 
-.img-infos-column {
+.worker-entry.professional-selected .img-infos-container {
     flex-direction: column !important;
 }
 
@@ -1399,7 +1407,7 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
 
 }
 
-.worker-price-selected {
+.worker-entry.professional-selected .worker-price {
     display: flex;
     flex-direction: column !important;
     align-items: flex-start !important;
@@ -1419,13 +1427,29 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
     margin-right: 5px;
 }
 
+.worker-entry.professional-selected .call-price {
+    padding-top: 10px;
+}
+
+.hour-price{
+    display: flex; 
+    align-items: center;
+}
+
+.worker-entry.professional-selected .hour-price {
+    display: none;
+}
+
 .hour-price-open {
+    display: none;
+}
+
+.worker-entry.professional-selected .hour-price-open {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .worker-entry img {
@@ -1453,28 +1477,24 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
     justify-content: space-between;
 }
 
-.selected-worker-info {
+.worker-entry.professional-selected .worker-info {
     display: flex;
     flex-direction: column;
     padding-left: 0px;
     transition: all cubic-bezier(0, 1.15, 0.65, 0.96) 1s;
 }
 
-.selected-image {
+.worker-entry.professional-selected img {
     width: 6vw !important;
     height: 12vh !important;
     transition: cubic-bezier(0, 1.15, 0.65, 0.96) 1s;
 }
 
-.selected-worker-name {
+.worker-entry.professional-selected .worker-info>.worker-name {
     font-size: 25px;
     transition: cubic-bezier(0, 1.15, 0.65, 0.96) 1s;
 }
 
-.selected-worker-rating {
-    top: -165px !important;
-    right: -280px !important;
-}
 
 .hidden {
     display: none !important;
@@ -1485,15 +1505,22 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
 }
 
 .worker-menu {
-    display: flex;
+    display: none;
     width: 100%;
-    height: 100%;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.worker-position {
+.worker-entry.professional-selected .worker-menu {
     display: flex;
+}
+
+
+.worker-entry.professional-selected .worker-position {
+    display: flex;
+}
+.worker-position {
+    display: none;
     align-items: center;
 }
 
