@@ -1,5 +1,5 @@
 window.addEventListener('scroll', function() {
-    var header = document.querySelector('.header');
+    var header = document.querySelector('.header-container');
     var scrollPosition = window.scrollY || document.documentElement.scrollTop;
     var headerHeight = header.offsetHeight;
   

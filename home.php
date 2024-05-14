@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Homie</title>
+    <title>Homie - Homepage</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,16 +16,7 @@
 </head>
 <body>
     <div class="background">
-        <?php include 'header.php'; ?>
-        <div class="main-page-top">
-            <?php include 'landing_search_box.php'; ?>
-        </div>
-        <div class="main-page-body">
-            <?php include 'landing_description.php'; ?>
-        </div>
-        <div class="mp-footer">
-            <?php include 'footer.php'; ?>
-        </div>
+        <?php include 'logged_header.php'; ?>
     </div>
 </body>
 </html>
