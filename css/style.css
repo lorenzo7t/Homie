@@ -571,7 +571,7 @@ button:active {
     content: "";
     height: 10vh;
 }
-  .login-container {
+.login-container {
     background: #A8DADC;
     display: flex;
     place-items: center;
@@ -585,7 +585,7 @@ button:active {
     height: 10vh;
 }
 
-  .form {
+.form {
     display: flex;
     background-color: #fff;
     padding: 2rem;
