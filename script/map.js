@@ -11,6 +11,7 @@ var professionals = [
 var map;
 var openInfoWindow;
 var currentlySelectedProfessional;
+var executed = false;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -53,30 +54,29 @@ function initMap() {
   });
 }
 
-function populateProfessionalsList(filter) {
+function populateProfessionalsList(professionalList) {
+  console.log('propagating')
   const professionalsList = document.querySelector('.professionals-container ul');
   professionalsList.innerHTML = '';
 
-  let filteredProfessionals = professionals;
+  markers.forEach(marker => marker.setMap(null)); // Nascondi tutti i marker
 
-  markers.forEach(marker => marker.setMap(null));
-
-  if (filter) {
-    filteredProfessionals = professionals.filter(p => filter(p));
-  }
-
-  
-  filteredProfessionals.forEach(professional => {
+  professionalList.forEach(professional => {
     const listItem = document.createElement('li');
     listItem.innerHTML = generateProfessionalHTML(professional);
     professionalsList.appendChild(listItem);
-    markers.find(m => m.professional.id === professional.id).setMap(map);
 
-    listItem.firstChild.addEventListener('click', function () {
-      google.maps.event.trigger(markers.find(m => m.professional.id === professional.id), 'click');
+    const marker = markers.find(m => m.professional.id === professional.id);
+    if (marker) {
+      marker.setMap(map); // Rendi visibile il marker corrispondente
+    }
+
+    listItem.querySelector('.worker-entry').addEventListener('click', () => {
+      google.maps.event.trigger(marker, 'click');
     });
   });
 }
+
 
 function generateProfessionalHTML(professional) {
   const isChecked = favoritesList.includes(professional.id) ? 'checked' : '';
@@ -164,34 +164,65 @@ function generateProfessionalHTML(professional) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  populateProfessionalsList();
+  populateProfessionalsList(professionals);
   initMap();
 });
 
 document.querySelectorAll('.category-button').forEach(button => {
   button.addEventListener('click', function () {
     const category = this.getAttribute('data-category').toLowerCase();
+    let filteredProfessionals;
+
     if (this.classList.contains('active')) {
       this.classList.remove('active');
-      populateProfessionalsList();
+      filteredProfessionals = professionals; // Se disattivi la categoria, mostra tutti i professionisti.
     } else {
       document.querySelectorAll('.category-button').forEach(b => b.classList.remove('active'));
       this.classList.add('active');
-      populateProfessionalsList(p => p.category.toLowerCase() === category);
+      filteredProfessionals = professionals.filter(p => p.category.toLowerCase() === category);
     }
+
+    // Se il toggle dei preferiti è attivo, filtra ulteriormente per mostrare solo i preferiti nella categoria selezionata
+    if (document.querySelector('.favorites-toggle-button').classList.contains('active')) {
+      filteredProfessionals = filteredProfessionals.filter(p => favoritesList.includes(p.id));
+    }
+
+    populateProfessionalsList(filteredProfessionals);
   });
 });
 
-document.querySelector('.favorites-toggle-button').addEventListener('click', function () {
-  this.classList.toggle('active');
-  if (this.classList.contains('active')) {
-    populateProfessionalsList(p => favoritesList.includes(p.id));
-  } else {
-    populateProfessionalsList();
-  }
-});
 
-document.addEventListener('change', function (event) {
+
+function toggleFavorites() {
+  if (!executed) {
+    console.trace('Trace event handler calls');
+    console.log('Favorites toggle clicked');
+    this.classList.toggle('active');
+    let filteredProfessionals = professionals;
+
+    const activeCategoryButton = document.querySelector('.category-button.active');
+    if (activeCategoryButton) {
+      const category = activeCategoryButton.getAttribute('data-category').toLowerCase();
+      filteredProfessionals = filteredProfessionals.filter(p => p.category.toLowerCase() === category);
+    }
+
+    if (this.classList.contains('active')) {
+      filteredProfessionals = filteredProfessionals.filter(professional => favoritesList.includes(professional.id));
+    }
+
+    console.log('Filtered professionals:', filteredProfessionals);
+    populateProfessionalsList(filteredProfessionals);
+    executed = true
+  } else {
+    executed = false
+  }
+}
+
+const favoritesToggleButton = document.querySelector('.favorites-toggle-button');
+favoritesToggleButton.addEventListener('click', toggleFavorites);
+
+
+/* document.addEventListener('change', function (event) {
   if (event.target.matches('.heart-container .checkbox')) {
     const checkbox = event.target;
     const workerEntry = checkbox.closest('.worker-entry');
@@ -209,3 +240,4 @@ document.addEventListener('change', function (event) {
     }
   }
 });
+ */

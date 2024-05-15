@@ -15,10 +15,8 @@
     <script src="script/maps.js" defer></script>
     <script src="script/animations.js" defer></script>
     <script src="script/map.js" defer></script>
-    <script src="script/filters.js" defer></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAV2pCTErRiX6IWUu6Ol7gVE0U37rWWB_s&callback=initMap"></script>
-
 </head>
 
 <body>
@@ -27,10 +25,24 @@
     </div>
     <div class="home-body-wrapper">
         <?php include 'home-body.php'; ?>
+        <?php
+        include 'utilities.php';
+        $professionals = downloadProfessionals();
+        if ($professionals) {
+            foreach ($professionals as $professional) {
+                echo "<p>" . htmlspecialchars($professional['nome']) . "</p>"; // Assumi 'name' come colonna
+            }
+        } else {
+            echo "<p>No professionals found.</p>";
+        }
+
+        ?>
     </div>
     <div class="mp-footer">
         <?php include 'footer.php'; ?>
+
     </div>
+
 </body>
 
 </html>
