@@ -2,16 +2,44 @@ var markers = [];
 
 var favoritesList = [1, 3];
 
-var professionals = [
+/* var professionals = [
   { name: "Mario Rossi", category: "Idraulico", lat: 41.9028, lng: 12.4964, rating: 4.5, image: "mario-rossi-1.jpeg", callPrice: "€10", hPrice: "€12/ora", id: 1, position: "Via dell'arcipelago" },
   { name: "Gianna Limone", category: "Colf", lat: 41.9050, lng: 12.5000, rating: 4.5, image: "gianna-limone-2.jpeg", callPrice: "€10", hPrice: "€12/ora", id: 2, position: "Via del mare" },
   { name: "Paolo Pelo", category: "Fabbro", lat: 41.9060, lng: 12.5050, rating: 4.5, image: "paolo-pelo-3.jpeg", callPrice: "€10", hPrice: "€12/ora", id: 3, position: "Via del sole" }
-];
+]; */
+
+var professionals = [];
 
 var map;
 var openInfoWindow;
 var currentlySelectedProfessional;
 var executed = false;
+
+var professionals = []; // Inizializza l'array vuoto se non è già definito altrove.
+
+function populateProfessionalsList(data) {
+    // Pulisci l'array esistente.
+    professionals = [];
+
+    // Aggiungi i nuovi dati scaricati.
+    data.forEach(professional => {
+        professionals.push({
+            name: professional.nome,
+            category: professional.professione,
+            lat: parseFloat(professional.lat), // Assicurati che lat e lng siano numeri.
+            lng: parseFloat(professional.lng),
+            rating: parseFloat(professional.rating),
+            image: professional.image,
+            callPrice: professional.callPrice,
+            hPrice: professional.hPrice,
+            id: professional.id,
+            position: professional.position
+        });
+    });
+
+    console.log("Professionals array updated:", professionals);
+}
+
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -54,7 +82,7 @@ function initMap() {
   });
 }
 
-function populateProfessionalsList(professionalList) {
+function populateProfessionalsSection(professionalList) {
   console.log('propagating')
   const professionalsList = document.querySelector('.professionals-container ul');
   professionalsList.innerHTML = '';
@@ -76,6 +104,8 @@ function populateProfessionalsList(professionalList) {
     });
   });
 }
+
+
 
 
 function generateProfessionalHTML(professional) {
@@ -163,6 +193,8 @@ function generateProfessionalHTML(professional) {
             </div>`;
 }
 
+
+
 document.addEventListener('DOMContentLoaded', function () {
   populateProfessionalsList(professionals);
   initMap();
@@ -187,7 +219,7 @@ document.querySelectorAll('.category-button').forEach(button => {
       filteredProfessionals = filteredProfessionals.filter(p => favoritesList.includes(p.id));
     }
 
-    populateProfessionalsList(filteredProfessionals);
+    populateProfessionalsSection(filteredProfessionals);
   });
 });
 
@@ -211,7 +243,7 @@ function toggleFavorites() {
     }
 
     console.log('Filtered professionals:', filteredProfessionals);
-    populateProfessionalsList(filteredProfessionals);
+    populateProfessionalsSection(filteredProfessionals);
     executed = true
   } else {
     executed = false
