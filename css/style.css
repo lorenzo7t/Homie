@@ -1274,11 +1274,6 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
     width: 30%;
 }
 
-
-if (filter) {
-    filteredProfessionals = professionals.filter(p => filter(p));
-  }
-  
 .professionals-container {
     display: flex;
     flex-direction: column;
