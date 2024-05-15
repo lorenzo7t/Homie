@@ -1219,7 +1219,9 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
 
 .category-button.active {
     background-color: #457B9D;
-    transition: cubic-bezier(0, 1.15, 0.65, 0.96) 1s;
+    transform: translateY(-5px); 
+    box-shadow: 0px 10px 20px 0px #6666668a;
+    transition: all cubic-bezier(0, 1.15, 0.65, 0.96) 1s;
 }
 
 .body-container {
@@ -1296,6 +1298,8 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
     justify-content: center;
 }
 
+
+
 .worker-entry.professional-selected .external-container {
     justify-content: space-between;
 }
@@ -1308,11 +1312,13 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
 }
 
 .favourite {
-    display: none;
+    visibility: hidden;
+    width: 0px;
 }
 
 .worker-entry.professional-selected .favourite {
-    display: block;
+    visibility: visible;
+    width: 25px;
 }
 
 .professionals-container-title {
@@ -1523,13 +1529,8 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
     transition: cubic-bezier(0, 1.15, 0.65, 0.96) 1s;
 }
 
-
-.hidden {
-    display: none !important;
-}
-
 .visible {
-    display: flex;
+    display: block !important;
 }
 
 .worker-menu {

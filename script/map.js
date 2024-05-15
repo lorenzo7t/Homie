@@ -1,29 +1,29 @@
-
 var markers = [];
 
+var favoritesList = [1, 3];
+
 var professionals = [
-  { name: "Mario Rossi", category: "Idraulico", lat: 41.9028, lng: 12.4964, rating: 4.5, image: "mario-rossi-1.jpeg", callPrice: "€10", hPrice: "€12/ora", id: 1, position: "Via dell'arcipelago"},
-  { name: "Gianna Limone", category: "Colf", lat: 41.9050, lng: 12.5000, rating: 4.5, image: "gianna-limone-2.jpeg", callPrice: "€10", hPrice: "€12/ora", id: 2, position: "Via del mare"},
-  { name: "Paolo Pelo", category: "Fabbro", lat: 41.9060, lng: 12.5050, rating: 4.5, image: "paolo-pelo-3.jpeg", callPrice: "€10", hPrice: "€12/ora", id: 3, position: "Via del sole"}
+  { name: "Mario Rossi", category: "Idraulico", lat: 41.9028, lng: 12.4964, rating: 4.5, image: "mario-rossi-1.jpeg", callPrice: "€10", hPrice: "€12/ora", id: 1, position: "Via dell'arcipelago" },
+  { name: "Gianna Limone", category: "Colf", lat: 41.9050, lng: 12.5000, rating: 4.5, image: "gianna-limone-2.jpeg", callPrice: "€10", hPrice: "€12/ora", id: 2, position: "Via del mare" },
+  { name: "Paolo Pelo", category: "Fabbro", lat: 41.9060, lng: 12.5050, rating: 4.5, image: "paolo-pelo-3.jpeg", callPrice: "€10", hPrice: "€12/ora", id: 3, position: "Via del sole" }
 ];
 
 var map;
+var openInfoWindow;
+var currentlySelectedProfessional;
 
 function initMap() {
-  const customStyle = [/* Your Styles Here */];
-
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 15,
     center: { lat: 41.9028, lng: 12.4964 },
-    styles: customStyle,
     streetViewControl: false,
     mapTypeControl: false
   });
 
-  var openInfoWindow = null;
-  var currentlySelectedProfessional = null;
+  openInfoWindow = null;
+  currentlySelectedProfessional = null;
 
-  professionals.forEach(function (professional) {
+  professionals.forEach(professional => {
     var marker = new google.maps.Marker({
       position: { lat: professional.lat, lng: professional.lng },
       map: map,
@@ -32,23 +32,20 @@ function initMap() {
     });
 
     var infoWindow = new google.maps.InfoWindow({
-      content: '<h3>' + professional.name + '</h3><p>' + professional.category + '</p>'
+      content: `<h3>${professional.name}</h3><p>${professional.category}</p>`
     });
 
     marker.addListener('click', function () {
       if (openInfoWindow) openInfoWindow.close();
       if (currentlySelectedProfessional) currentlySelectedProfessional.classList.remove('professional-selected');
-
       var professionalElement = document.querySelector(`.worker-entry[data-name='${professional.name}']`);
       professionalElement.classList.add('professional-selected');
-      currentlySelectedProfessional = professionalElement; 
-
+      currentlySelectedProfessional = professionalElement;
       map.setCenter(marker.getPosition());
       infoWindow.open(map, marker);
       openInfoWindow = infoWindow;
       professionalElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
-
     document.querySelector(`.worker-entry[data-name='${professional.name}']`).addEventListener('click', function () {
       google.maps.event.trigger(marker, 'click');
     });
@@ -56,19 +53,33 @@ function initMap() {
   });
 }
 
-
-function populateProfessionalsList() {
+function populateProfessionalsList(filter) {
   const professionalsList = document.querySelector('.professionals-container ul');
-  professionalsList.innerHTML = ''; // Pulisci l'elenco esistente
+  professionalsList.innerHTML = '';
 
-  professionals.forEach(professional => {
-      const listItem = document.createElement('li');
-      listItem.innerHTML = generateProfessionalHTML(professional);
-      professionalsList.appendChild(listItem);
+  let filteredProfessionals = professionals;
+
+  markers.forEach(marker => marker.setMap(null));
+
+  if (filter) {
+    filteredProfessionals = professionals.filter(p => filter(p));
+  }
+
+  
+  filteredProfessionals.forEach(professional => {
+    const listItem = document.createElement('li');
+    listItem.innerHTML = generateProfessionalHTML(professional);
+    professionalsList.appendChild(listItem);
+    markers.find(m => m.professional.id === professional.id).setMap(map);
+
+    listItem.firstChild.addEventListener('click', function () {
+      google.maps.event.trigger(markers.find(m => m.professional.id === professional.id), 'click');
+    });
   });
 }
 
 function generateProfessionalHTML(professional) {
+  const isChecked = favoritesList.includes(professional.id) ? 'checked' : '';
   return `<div class="worker-entry" data-lat="${professional.lat}" data-id="${professional.id}" data-lng="${professional.lng}" data-name="${professional.name}" data-category="${professional.category}" data-rating="${professional.rating}">
               <div class="external-container">
                 <div class="img-infos-container">
@@ -76,7 +87,7 @@ function generateProfessionalHTML(professional) {
                         <img src="img/professionals/${professional.image}" alt="${professional.image.split(".")[0]}">
                         <div class="favourite">
                             <div class="heart-container" title="Like">
-                            <input type="checkbox" class="checkbox" id="heart">
+                            <input type="checkbox" class="checkbox" id="heart" ${isChecked}>
                             <div class="svg-container">
                                 <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
@@ -152,43 +163,49 @@ function generateProfessionalHTML(professional) {
             </div>`;
 }
 
-function filterProfessionals(category) {
-  const professionalsList = document.querySelector('.professionals-container ul');
-  professionalsList.innerHTML = ''; // Pulisci l'elenco esistente
-
-  
-  professionals.forEach(professional => {
-      const marker = markers.find(m => m.professional.name.toLowerCase() === professional.name.toLowerCase());
-      if (professional.category.toLowerCase() === category.toLowerCase()) {
-          const listItem = document.createElement('li');
-          listItem.innerHTML = generateProfessionalHTML(professional);
-          professionalsList.appendChild(listItem);
-          marker.setMap(map); 
-      } else {
-          marker.setMap(null); 
-      }
-  });
-}
+document.addEventListener('DOMContentLoaded', function () {
+  populateProfessionalsList();
+  initMap();
+});
 
 document.querySelectorAll('.category-button').forEach(button => {
   button.addEventListener('click', function () {
-    
-      const category = this.getAttribute('data-category');
-      filterProfessionals(category);
+    const category = this.getAttribute('data-category').toLowerCase();
+    if (this.classList.contains('active')) {
+      this.classList.remove('active');
+      populateProfessionalsList();
+    } else {
+      document.querySelectorAll('.category-button').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      populateProfessionalsList(p => p.category.toLowerCase() === category);
+    }
   });
 });
 
 document.querySelector('.favorites-toggle-button').addEventListener('click', function () {
   this.classList.toggle('active');
-  // Logica per mostrare/nascondere i preferiti
   if (this.classList.contains('active')) {
-    // Codice per filtrare e mostrare solo i preferiti
+    populateProfessionalsList(p => favoritesList.includes(p.id));
   } else {
-    // Codice per mostrare tutti i professionisti
+    populateProfessionalsList();
   }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-  populateProfessionalsList();
-  initMap();
+document.addEventListener('change', function (event) {
+  if (event.target.matches('.heart-container .checkbox')) {
+    const checkbox = event.target;
+    const workerEntry = checkbox.closest('.worker-entry');
+    const id = parseInt(workerEntry.dataset.id, 10);
+    const index = favoritesList.indexOf(id);
+
+    if (checkbox.checked) {
+      if (index === -1) {
+        favoritesList.push(id);
+      }
+    } else {
+      if (index !== -1) {
+        favoritesList.splice(index, 1);
+      }
+    }
+  }
 });
