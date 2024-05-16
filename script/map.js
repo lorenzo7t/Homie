@@ -2,44 +2,16 @@ var markers = [];
 
 var favoritesList = [1, 3];
 
-/* var professionals = [
-  { name: "Mario Rossi", category: "Idraulico", lat: 41.9028, lng: 12.4964, rating: 4.5, image: "mario-rossi-1.jpeg", callPrice: "€10", hPrice: "€12/ora", id: 1, position: "Via dell'arcipelago" },
+var professionals = [
+  { nome: "Mario Rossi", professione: "Idraulico", lat: 41.9028, lng: 12.4964, rating: 4.5, image: "mario-rossi-1.jpeg", prezzo_orario: "€10", prezzo_chiamata: "€12/ora", piva: 1, position: "Via dell'arcipelago" },
   { name: "Gianna Limone", category: "Colf", lat: 41.9050, lng: 12.5000, rating: 4.5, image: "gianna-limone-2.jpeg", callPrice: "€10", hPrice: "€12/ora", id: 2, position: "Via del mare" },
   { name: "Paolo Pelo", category: "Fabbro", lat: 41.9060, lng: 12.5050, rating: 4.5, image: "paolo-pelo-3.jpeg", callPrice: "€10", hPrice: "€12/ora", id: 3, position: "Via del sole" }
-]; */
-
-var professionals = [];
+];
 
 var map;
 var openInfoWindow;
 var currentlySelectedProfessional;
 var executed = false;
-
-var professionals = []; // Inizializza l'array vuoto se non è già definito altrove.
-
-function populateProfessionalsList(data) {
-    // Pulisci l'array esistente.
-    professionals = [];
-
-    // Aggiungi i nuovi dati scaricati.
-    data.forEach(professional => {
-        professionals.push({
-            name: professional.nome,
-            category: professional.professione,
-            lat: parseFloat(professional.lat), // Assicurati che lat e lng siano numeri.
-            lng: parseFloat(professional.lng),
-            rating: parseFloat(professional.rating),
-            image: professional.image,
-            callPrice: professional.callPrice,
-            hPrice: professional.hPrice,
-            id: professional.id,
-            position: professional.position
-        });
-    });
-
-    console.log("Professionals array updated:", professionals);
-}
-
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -52,6 +24,8 @@ function initMap() {
   openInfoWindow = null;
   currentlySelectedProfessional = null;
 
+  
+
   professionals.forEach(professional => {
     var marker = new google.maps.Marker({
       position: { lat: professional.lat, lng: professional.lng },
@@ -61,13 +35,13 @@ function initMap() {
     });
 
     var infoWindow = new google.maps.InfoWindow({
-      content: `<h3>${professional.name}</h3><p>${professional.category}</p>`
+      content: `<h3>${professional.nome}</h3><p>${professional.professione}</p>`
     });
 
     marker.addListener('click', function () {
       if (openInfoWindow) openInfoWindow.close();
       if (currentlySelectedProfessional) currentlySelectedProfessional.classList.remove('professional-selected');
-      var professionalElement = document.querySelector(`.worker-entry[data-name='${professional.name}']`);
+      var professionalElement = document.querySelector(`.worker-entry[data-name='${professional.nome}']`);
       professionalElement.classList.add('professional-selected');
       currentlySelectedProfessional = professionalElement;
       map.setCenter(marker.getPosition());
@@ -75,14 +49,14 @@ function initMap() {
       openInfoWindow = infoWindow;
       professionalElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
-    document.querySelector(`.worker-entry[data-name='${professional.name}']`).addEventListener('click', function () {
+    document.querySelector(`.worker-entry[data-name='${professional.nome}']`).addEventListener('click', function () {
       google.maps.event.trigger(marker, 'click');
     });
     markers.push(marker);
   });
 }
 
-function populateProfessionalsSection(professionalList) {
+function populateProfessionalsList(professionalList) {
   console.log('propagating')
   const professionalsList = document.querySelector('.professionals-container ul');
   professionalsList.innerHTML = '';
@@ -94,7 +68,7 @@ function populateProfessionalsSection(professionalList) {
     listItem.innerHTML = generateProfessionalHTML(professional);
     professionalsList.appendChild(listItem);
 
-    const marker = markers.find(m => m.professional.id === professional.id);
+    const marker = markers.find(m => m.professional.piva === professional.piva);
     if (marker) {
       marker.setMap(map); // Rendi visibile il marker corrispondente
     }
@@ -106,11 +80,9 @@ function populateProfessionalsSection(professionalList) {
 }
 
 
-
-
 function generateProfessionalHTML(professional) {
-  const isChecked = favoritesList.includes(professional.id) ? 'checked' : '';
-  return `<div class="worker-entry" data-lat="${professional.lat}" data-id="${professional.id}" data-lng="${professional.lng}" data-name="${professional.name}" data-category="${professional.category}" data-rating="${professional.rating}">
+  const isChecked = favoritesList.includes(professional.piva) ? 'checked' : '';
+  return `<div class="worker-entry" data-lat="${professional.lat}" data-id="${professional.piva}" data-lng="${professional.lng}" data-name="${professional.nome}" data-category="${professional.professione}" data-rating="${professional.rating}">
               <div class="external-container">
                 <div class="img-infos-container">
                     <div class="internal-container">
@@ -141,8 +113,8 @@ function generateProfessionalHTML(professional) {
                     </div>
                     <div class="infos-container">
                         <div class="worker-info">
-                            <span class="worker-name">${professional.name}</span>
-                            <span class="worker-category">${professional.category}</span>
+                            <span class="worker-name">${professional.nome}</span>
+                            <span class="worker-category">${professional.professione}</span>
 
                             <div class="worker-price">
                                 <div class="call-price">
@@ -151,11 +123,11 @@ function generateProfessionalHTML(professional) {
                                         <path class="clr-i-solid clr-i-solid-path-1" d="M15.22,20.64a20.37,20.37,0,0,0,7.4,4.79l3.77-3a.67.67,0,0,1,.76,0l7,4.51a2,2,0,0,1,.33,3.18l-3.28,3.24a4,4,0,0,1-3.63,1.07,35.09,35.09,0,0,1-17.15-9A33.79,33.79,0,0,1,1.15,8.6a3.78,3.78,0,0,1,1.1-3.55l3.4-3.28a2,2,0,0,1,3.12.32L13.43,9a.63.63,0,0,1,0,.75l-3.07,3.69A19.75,19.75,0,0,0,15.22,20.64Z"></path>
                                         <rect x="0" y="0" width="36" height="36" fill-opacity="0" />
                                     </svg>
-                                    <span>${professional.callPrice}</span>
+                                    <span>${professional.prezzo_chiamata}</span>
                                 </div>
                                 <div class="hour-price">
                                     <div class="separator-point">·</div>
-                                    <span>${professional.hPrice}</span>
+                                    <span>${professional.prezzo_orario}</span>
                                 </div>
 
                                 <div class="hour-price-open">
@@ -163,7 +135,7 @@ function generateProfessionalHTML(professional) {
                                         <circle cx="12" cy="12" r="9" stroke="#457B9D" stroke-width="2" />
                                         <path d="M16.5 12H12.25C12.1119 12 12 11.8881 12 11.75V8.5" stroke="#457B9D" stroke-width="2" stroke-linecap="round" />
                                     </svg>
-                                    <span>${professional.hPrice}</span>
+                                    <span>${professional.prezzo_orario}</span>
                                 </div>
 
 
@@ -194,11 +166,18 @@ function generateProfessionalHTML(professional) {
 }
 
 
-
-document.addEventListener('DOMContentLoaded', function () {
-  populateProfessionalsList(professionals);
-  initMap();
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('utilities.php?action=getProfessionals')
+  .then(response => response.json())
+  .then(data => {
+      professionals = data;
+      populateProfessionalsList(professionals);
+      initMap(); // Ensure initMap uses the updated professionals array
+  })
+  .catch(error => console.error('Error loading professionals:', error));
 });
+
+
 
 document.querySelectorAll('.category-button').forEach(button => {
   button.addEventListener('click', function () {
@@ -211,7 +190,7 @@ document.querySelectorAll('.category-button').forEach(button => {
     } else {
       document.querySelectorAll('.category-button').forEach(b => b.classList.remove('active'));
       this.classList.add('active');
-      filteredProfessionals = professionals.filter(p => p.category.toLowerCase() === category);
+      filteredProfessionals = professionals.filter(p => p.professione.toLowerCase() === category);
     }
 
     // Se il toggle dei preferiti è attivo, filtra ulteriormente per mostrare solo i preferiti nella categoria selezionata
@@ -219,7 +198,7 @@ document.querySelectorAll('.category-button').forEach(button => {
       filteredProfessionals = filteredProfessionals.filter(p => favoritesList.includes(p.id));
     }
 
-    populateProfessionalsSection(filteredProfessionals);
+    populateProfessionalsList(filteredProfessionals);
   });
 });
 
@@ -235,15 +214,15 @@ function toggleFavorites() {
     const activeCategoryButton = document.querySelector('.category-button.active');
     if (activeCategoryButton) {
       const category = activeCategoryButton.getAttribute('data-category').toLowerCase();
-      filteredProfessionals = filteredProfessionals.filter(p => p.category.toLowerCase() === category);
+      filteredProfessionals = filteredProfessionals.filter(p => p.professione.toLowerCase() === category);
     }
 
     if (this.classList.contains('active')) {
-      filteredProfessionals = filteredProfessionals.filter(professional => favoritesList.includes(professional.id));
+      filteredProfessionals = filteredProfessionals.filter(professional => favoritesList.includes(professional.piva));
     }
 
     console.log('Filtered professionals:', filteredProfessionals);
-    populateProfessionalsSection(filteredProfessionals);
+    populateProfessionalsList(filteredProfessionals);
     executed = true
   } else {
     executed = false
