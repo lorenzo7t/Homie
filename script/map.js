@@ -1,30 +1,138 @@
 var markers = [];
-
 var favoritesList = [1, 3];
-
-var professionals = [
-  { nome: "Mario Rossi", professione: "Idraulico", lat: 41.9028, lng: 12.4964, rating: 4.5, image: "mario-rossi-1.jpeg", prezzo_orario: "€10", prezzo_chiamata: "€12/ora", piva: 1, position: "Via dell'arcipelago" },
-  { name: "Gianna Limone", category: "Colf", lat: 41.9050, lng: 12.5000, rating: 4.5, image: "gianna-limone-2.jpeg", callPrice: "€10", hPrice: "€12/ora", id: 2, position: "Via del mare" },
-  { name: "Paolo Pelo", category: "Fabbro", lat: 41.9060, lng: 12.5050, rating: 4.5, image: "paolo-pelo-3.jpeg", callPrice: "€10", hPrice: "€12/ora", id: 3, position: "Via del sole" }
-];
-
+var professionals = [];
 var map;
 var openInfoWindow;
 var currentlySelectedProfessional;
 var executed = false;
+const customStyle =
+[
+  {
+    "featureType": "all",
+    "elementType": "all",
+    "stylers": [
+      {
+        "saturation": "32"
+      },
+      {
+        "lightness": "-3"
+      },
+      {
+        "visibility": "on"
+      },
+      {
+        "weight": "1.18"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape.man_made",
+    "elementType": "all",
+    "stylers": [
+      {
+        "saturation": "-70"
+      },
+      {
+        "lightness": "14"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "transit",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "all",
+    "stylers": [
+      {
+        "saturation": "100"
+      },
+      {
+        "lightness": "-14"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      },
+      {
+        "lightness": "12"
+      }
+    ]
+  }
+];
 
-function initMap() {
+function initMap(userLocation = { lat: 41.9028, lng: 12.4964 }) {
+  console.log(userLocation)
+  console.trace('Trace event handler calls');
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 15,
-    center: { lat: 41.9028, lng: 12.4964 },
+    styles: customStyle,
+    center: { lat: userLocation.lat, lng: userLocation.lng },
     streetViewControl: false,
     mapTypeControl: false
+  });
+
+  var userMarker = new google.maps.Marker({
+    position: { lat: userLocation.lat, lng: userLocation.lng },
+    map: map,
+    title: "La tua posizione",
+    icon: { // Opzionale: icona personalizzata
+      url: 'img/icons/house_pointer.png', // Percorso all'icona che vuoi usare
+      scaledSize: new google.maps.Size(50, 50) // Dimensioni dell'icona
+    }
   });
 
   openInfoWindow = null;
   currentlySelectedProfessional = null;
 
-  
+
 
   professionals.forEach(professional => {
     var marker = new google.maps.Marker({
@@ -165,16 +273,69 @@ function generateProfessionalHTML(professional) {
             </div>`;
 }
 
+function toggleFavorites() {
+  if (!executed) {
+    console.trace('Trace event handler calls');
+    console.log('Favorites toggle clicked');
+    this.classList.toggle('active');
+    let filteredProfessionals = professionals;
 
-document.addEventListener('DOMContentLoaded', function() {
+    const activeCategoryButton = document.querySelector('.category-button.active');
+    if (activeCategoryButton) {
+      const category = activeCategoryButton.getAttribute('data-category').toLowerCase();
+      filteredProfessionals = filteredProfessionals.filter(p => p.professione.toLowerCase() === category);
+    }
+
+    if (this.classList.contains('active')) {
+      filteredProfessionals = filteredProfessionals.filter(professional => favoritesList.includes(professional.piva));
+    }
+
+    console.log('Filtered professionals:', filteredProfessionals);
+    populateProfessionalsList(filteredProfessionals);
+    executed = true
+  } else {
+    executed = false
+  }
+}
+
+function handleLocationError(hasGeolocation) {
+  var errorText = hasGeolocation ? 'The Geolocation service failed.' : 'Your browser doesn\'t support geolocation.';
+  console.error(errorText);
+}
+
+const favoritesToggleButton = document.querySelector('.favorites-toggle-button');
+favoritesToggleButton.addEventListener('click', toggleFavorites);
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
   fetch('utilities.php?action=getProfessionals')
-  .then(response => response.json())
-  .then(data => {
+    .then(response => response.json())
+    .then(data => {
       professionals = data;
-      populateProfessionalsList(professionals);
-      initMap(); // Ensure initMap uses the updated professionals array
-  })
-  .catch(error => console.error('Error loading professionals:', error));
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          var userLocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          console.log('User location:', userLocation);
+
+          populateProfessionalsList(professionals); // Popola la lista dei professionisti
+          initMap(userLocation); // Inizializza la mappa con la posizione dell'utente
+        }, function () {
+          handleLocationError(true);
+          populateProfessionalsList(professionals);
+          initMap();
+        });
+      } else {
+        handleLocationError(false);
+        populateProfessionalsList(professionals);
+        initMap();
+      }
+    })
+    .catch(error => console.error('Error loading professionals:', error));
 });
 
 
@@ -204,33 +365,9 @@ document.querySelectorAll('.category-button').forEach(button => {
 
 
 
-function toggleFavorites() {
-  if (!executed) {
-    console.trace('Trace event handler calls');
-    console.log('Favorites toggle clicked');
-    this.classList.toggle('active');
-    let filteredProfessionals = professionals;
 
-    const activeCategoryButton = document.querySelector('.category-button.active');
-    if (activeCategoryButton) {
-      const category = activeCategoryButton.getAttribute('data-category').toLowerCase();
-      filteredProfessionals = filteredProfessionals.filter(p => p.professione.toLowerCase() === category);
-    }
 
-    if (this.classList.contains('active')) {
-      filteredProfessionals = filteredProfessionals.filter(professional => favoritesList.includes(professional.piva));
-    }
 
-    console.log('Filtered professionals:', filteredProfessionals);
-    populateProfessionalsList(filteredProfessionals);
-    executed = true
-  } else {
-    executed = false
-  }
-}
-
-const favoritesToggleButton = document.querySelector('.favorites-toggle-button');
-favoritesToggleButton.addEventListener('click', toggleFavorites);
 
 
 /* document.addEventListener('change', function (event) {

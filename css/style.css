@@ -1494,6 +1494,11 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
     border-radius: 50%;
 }
 
+.gm-style div[title="La tua posizione"] img[src="https://maps.gstatic.com/mapfiles/transparent.png"] {
+    box-shadow:none;
+    border-radius: none;
+}
+
 .gm-style div[role="button"] {
     overflow: visible !important;
 }
