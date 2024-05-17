@@ -61,6 +61,10 @@ h1 {
     display: none;
 }
 
+.active {
+    display: block !important;
+}
+
 .separator-point {
     font-size: 30px;
     margin-left: 10px;
@@ -773,6 +777,43 @@ span::before {
 
 .register-signup-link a {
     text-decoration: underline;
+}
+
+.upload-area {
+    position: relative;
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
+}
+
+.upload-area:hover {
+    background-color: #f0f0f0;
+}
+
+.upload-area input[type="file"] {
+    display: none;
+}
+
+.upload-area label {
+    display: block;
+    font-size: 16px;
+    color: #333;
+}
+.upload-area label {
+    display: block;
+    font-size: 16px;
+    color: #333;
+}
+
+.upload-area.error {
+    border-color: red;
+}
+
+.upload-area.error label {
+    color: red;
 }
 
 
@@ -1713,4 +1754,63 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
         opacity: 0;
         display: none;
     }
+}
+
+/* Profile Page */
+
+
+
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 15px 15px 15px 15px;
+    background-color: #F1FAEE;
+    box-shadow: 0px 0px 13px -9px #000000;
+    background-color: #A8DADC;
+}   
+
+.navigation-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    width: 30%;
+    padding: 10px;
+    margin: 10px;
+
+}
+.navigation-bar a:hover {
+    background-color: #457B9D;
+    transition: cubic-bezier(0, 1.15, 0.65, 0.96) 1s;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+    color: #F1FAEE;
+}
+
+.navigation-bar a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+    border-radius: 15px;
+    margin: 10px;
+    color: #000000;
+    text-decoration: none;
+    transition: cubic-bezier(0, 1.15, 0.65, 0.96) 1s;
+}
+
+.profile-content .page{
+    display: none;
+}
+.profile-name{
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+}
+
+.profile-info{
+
 }

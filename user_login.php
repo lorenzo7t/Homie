@@ -15,11 +15,12 @@ if ($result->num_rows == 0) {
     header('Location:login_page.php?error= Credenziali non valide');
 } 
 else {
+    $row = $result->fetch_assoc();
     $userid= $row['userid'];
-    echo $userid;
     $_SESSION['userid'] = $userid;
     $_SESSION['email'] = $email;
     $_SESSION['name'] = $row['nome'];
+    $_SESSION['indirizzo'] = $row['indirizzo'];
     //setcookie('user_id', $userid, time() + (30 * 24 * 60 * 60), '/');
     header('Location:home.php');
     exit();
