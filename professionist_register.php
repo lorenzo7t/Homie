@@ -84,7 +84,12 @@ include 'db_connection.php';
 
             </div>
             <p id="password_error" style="color: red;"></p>
-            <div class="input-container">
+            <div class="upload-area" id="uploadArea" required="">
+            <input type="file" id="fileInput" accept="image/*" />
+            <label for="fileInput">Trascina qui l'immagine o clicca per selezionarla</label>
+            </div>
+            <div class="input-container" style="margin-top: 10%;">
+
                 <input type="submit" class="login-button" value="Registrati"></input>
             </div>
             <p class="signup-link">
