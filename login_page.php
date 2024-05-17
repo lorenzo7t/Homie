@@ -1,9 +1,10 @@
-<?php  
-    include 'db_connection.php';
+<?php
+include 'db_connection.php';
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Landing</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -21,13 +22,13 @@
 
 <body style="background-color: #A8DADC;">
     <div class="login-container">
-    <a href="index.php" class="homie-logo">
+        <a href="index.php" class="homie-logo">
             <img class="logo" src="img/logo_new.png">
 
         </a>
-        <form class="form" style = "height: 35vw; width:50vh" action="user_login.php" method="POST">
+        <form class="form" style="height: 35vw; width:50vh" action="user_login.php" method="POST">
             <p class="form-title">Accedi</p>
-            <?php if(isset($_GET['error'])) { ?>
+            <?php if (isset($_GET['error'])) { ?>
                 <p class="error" style="color: red;"><?php echo $_GET['error']; ?></p>
             <?php } ?>
             <div class="input-container">

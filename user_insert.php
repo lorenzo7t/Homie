@@ -3,6 +3,9 @@
 session_start();
 use function PHPSTORM_META\map;
 
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 include 'db_connection.php';
 $nome= $conn->real_escape_string($_POST['nome']);
 $cognome= $conn->real_escape_string($_POST['cognome']);
@@ -34,6 +37,7 @@ if ($conn->query($sql) === TRUE) {
   exit();
 } else {
   header('Location:register_page.php?error= Errore nella creazione dell\'account');
+  exit();
 }
 
 
