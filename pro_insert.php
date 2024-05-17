@@ -13,7 +13,7 @@ $professione= $conn->real_escape_string($_POST['professione']);
 $piva= $conn->real_escape_string($_POST['piva']);
 $p_orario= $conn->real_escape_string($_POST['p_orario']);
 $p_chiamata= $conn->real_escape_string($_POST['p_chiamata']);
-
+$rating = rand(4, 5);
 
 $sql = "SELECT * FROM homie.pro_data WHERE email = '$email' OR piva = '$piva'";
 if ($conn->query($sql)->num_rows > 0) {
@@ -23,8 +23,8 @@ if ($conn->query($sql)->num_rows > 0) {
 } 
 
 
-$sql = "INSERT INTO homie.pro_data (nome, cognome, email, indirizzo, password, professione, piva, prezzo_orario, prezzo_chiamata)
-VALUES ('$nome', '$cognome', '$email', '$indirizzo', '$password', '$professione', '$piva', '$p_orario', '$p_chiamata')";
+$sql = "INSERT INTO homie.pro_data (nome, cognome, email, indirizzo, password, professione, piva, prezzo_orario, prezzo_chiamata, rating)
+VALUES ('$nome', '$cognome', '$email', '$indirizzo', md5('$password'), '$professione', '$piva', '$p_orario', '$p_chiamata', '$rating')";
 
 if ($conn->query($sql) === TRUE) {
     $piva= $row['piva'];
@@ -37,6 +37,7 @@ if ($conn->query($sql) === TRUE) {
     $_SESSION['professione'] = $row['professione'];
     $_SESSION['p_orario'] = $row['prezzo_orario'];
     $_SESSION['p_chiamata'] = $row['prezzo_chiamata'];
+    $_SESSION['rating'] = $row['rating'];
 
     //setcookie('user_id', $userid, time() + (30 * 24 * 60 * 60), '/');
     header('Location:home.php');

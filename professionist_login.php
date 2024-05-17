@@ -25,7 +25,7 @@
         <a href="index.php" class="homie-logo">
             <img class="logo" src="img/logo_new.png">
         </a>
-        <form class="form" style="height: 35vw; width:50vh" action="pro_login.php" method="POST">
+        <form class="form" style="height: 25vw; width:50vh" action="pro_login.php" method="POST">
             <p class="form-title">Accedi</p>
             <?php if(isset($_GET['error'])) { ?>
                 <p class="error" style="color: red;"><?php echo $_GET['error']; ?></p>

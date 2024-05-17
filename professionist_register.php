@@ -1,5 +1,5 @@
-<?php  
-    include 'db_connection.php';
+<?php
+include 'db_connection.php';
 ?>
 
 <!DOCTYPE html>
@@ -25,23 +25,23 @@
         <a href="index.php" class="homie-logo">
             <img class="logo" src="img/logo_new.png">
         </a>
-        <form class="form" style="width: 50vh;height: 150vh;" action="pro_insert.php" method="POST">
+        <form class="form" style="width: 50vh;height: 120vh;" action="pro_insert.php" method="POST">
             <p class="form-title">Registrati</p>
 
-            <?php if(isset($_GET['error'])) { ?>
+            <?php if (isset($_GET['error'])) { ?>
                 <p class="error" style="color: red;"><?php echo $_GET['error']; ?></p>
             <?php } ?>
-            <p class="input-container">
+            <div class="input-container">
                 <label for="nome">Nome</label>
                 <input class="input-field" type="text" placeholder="Enter Name" required="" id="nome" name="nome">
-            </p>
+            </div>
             <div class="input-container">
                 <label for="cognome">Cognome</label>
                 <input class="input-field" type="text" placeholder="Enter Surname" required="" id="cognome" name="cognome">
             </div>
             <div class="input-container">
                 <label for="email">Email</label>
-                <input class="input-field" type="email" placeholder="Enter email" required="" id="email" name="email" >
+                <input class="input-field" type="email" placeholder="Enter email" required="" id="email" name="email">
             </div>
             <div class="input-container">
                 <label for="piva">PIVA</label>
@@ -52,37 +52,31 @@
                 <input class="input-field" type="text" placeholder="Enter Address" required="" id="indirizzo" name="indirizzo">
             </div>
             <div class="input-container">
-            <label>
-                    <span>
-                        Professione
-                    </span>
-                    <select class="input-field" required="" id="professione" name="professione">
-                        <option value="" disabled selected>Seleziona il tuo ruolo</option>
-                        <option value="elettricista">Elettricista</option>
-                        <option value="idraulico">Idraulico</option>
-                        <option value="colf">Colf</option>
-                        <option value="pittore">Pittore</option>
-                        <option value="fabbro">Fabbro</option>
-                        <option value="muratore">Muratore</option>
-                        <option value="tuttofare">Tuttofare</option>
-                    </select>
-                </label>
+                <span>
+                    Professione
+                </span>
+                <select class="input-field" required="" id="professione" name="professione">
+                    <option value="" disabled selected>Seleziona il tuo ruolo</option>
+                    <option value="elettricista">Elettricista</option>
+                    <option value="idraulico">Idraulico</option>
+                    <option value="colf">Colf</option>
+                    <option value="pittore">Pittore</option>
+                    <option value="fabbro">Fabbro</option>
+                    <option value="muratore">Muratore</option>
+                    <option value="tuttofare">Tuttofare</option>
+                </select>
             </div>
             <div class="input-container">
                 <label for="prezzo-orario">Prezzo Orario</label>
-                <input class="input-field" type="number"  placeholder="Enter Prezzo Orario" required="" id="p_orario" name="p_orario">
+                <input class="input-field" type="number" placeholder="Enter Prezzo Orario" required="" id="p_orario" name="p_orario">
             </div>
-            <div class="input-container">
             <div class="input-container">
                 <label for="prezzo-chiamata">Prezzo per chiamata</label>
                 <input class="input-field" type="number" placeholder="Enter Prezzo chiamata" required="" id="p_chiamata" name="p_chiamata">
             </div>
             <div class="input-container">
-            <label>
-            <label>
-            <div class="input-container">
                 <label for="password">Password</label>
-                <input class="input-field" type="password" placeholder="Enter password" required="" id="password" name="password" >
+                <input class="input-field" type="password" placeholder="Enter password" required="" id="password" name="password">
             </div>
             <div class="input-container">
                 <label for="confirm_password">Conferma password</label>
@@ -95,6 +89,7 @@
             <label for="fileInput">Trascina qui l'immagine o clicca per selezionarla</label>
             </div>
             <div class="input-container" style="margin-top: 10%;">
+
                 <input type="submit" class="login-button" value="Registrati"></input>
             </div>
             <p class="signup-link">
@@ -104,4 +99,3 @@
         </form>
     </div>
 </body>
-
