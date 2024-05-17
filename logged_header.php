@@ -1,10 +1,8 @@
 <?php
 session_start();
 include 'db_connection.php'; 
-$username = $_SESSION['name'];
-$indirizzo = $_SESSION['indirizzo'];
+$username = ucfirst($_SESSION['name']) . " " . ucfirst($_SESSION['cognome']);
 ?>
-
 <div class="header-container header-bg">
     <div class="header fixed-width">
         <div class="header-right">
@@ -56,7 +54,7 @@ $indirizzo = $_SESSION['indirizzo'];
                         <circle cx="12" cy="7" r="4" />
                         <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                     </svg>
-                    <span class="username" > <?php echo $username ?></span>
+                    <span class="username" > <?php echo $username?></span>
                 </button>
                 <div class="dropdown-content">
                     <a href="profile.php">Profilo</a>

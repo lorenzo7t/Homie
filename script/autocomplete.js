@@ -113,7 +113,11 @@ async function handleInputB() {
         for(let i in results['predictions']){
             const resultElement = document.createElement('li');
             resultElement.textContent = results['predictions'][i]['description'];
-            resultElement.className = "entry";
+            resultElement.className = "entry address-submit";
+            resultElement.addEventListener('click', function(event) {
+                event.preventDefault();
+                handleAddressChange(resultElement);
+            });
             resultElement.addEventListener('click', function() {
                 inputField.value = results['predictions'][i]['description'];
                 resultsContainer.innerHTML = '';

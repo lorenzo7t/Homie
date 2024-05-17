@@ -23,6 +23,7 @@ if ($conn->query($sql)->num_rows > 0) {
 $sql = "INSERT INTO homie.user_data (nome, cognome, email, indirizzo, password)
 VALUES ('$nome', '$cognome', '$email', '$indirizzo', '$password')";
 
+
 if ($conn->query($sql) === TRUE) {
   echo "New record created successfully";
   $userid= $row['userid'];
@@ -33,6 +34,7 @@ if ($conn->query($sql) === TRUE) {
   $_SESSION['cognome'] = $row['cognome'];
   $_SESSION['indirizzo'] = $row['indirizzo'];
   //setcookie('user_id', $userid, time() + (30 * 24 * 60 * 60), '/');
+  
   header('Location:home.php');
   exit();
 } else {

@@ -57,76 +57,39 @@
 
             </div>
             <ul>
-                <!-- <li>
-                    <div class="worker-entry" data-lat="41.9028" data-id="1" data-lng="12.4964" data-name="Mario Rossi" data-category="Idraulico" data-rating="4.5">
-
-                        <div class="external-container">
-                            <div class="img-infos-container">
-                                <div class="internal-container">
-                                    <img src="img/professionals/mario-rossi.jpeg" alt="mario-rossi">
-                                    <div class="favourite">
-                                        <?php include 'favorite_heart.php'; ?>
-                                    </div>
-                                </div>
-                                <div class="infos-container">
-                                    <div class="worker-info">
-                                        <span class="worker-name">Mario Rossi</span>
-                                        <span class="worker-category">Idraulico</span>
-
-                                        <div class="worker-price">
-                                            <div class="call-price">
-                                                <svg fill="#457B9D" width="800px" height="800px" viewBox="0 0 36 36" version="1.1" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                    <title>phone-handset-solid</title>
-                                                    <path class="clr-i-solid clr-i-solid-path-1" d="M15.22,20.64a20.37,20.37,0,0,0,7.4,4.79l3.77-3a.67.67,0,0,1,.76,0l7,4.51a2,2,0,0,1,.33,3.18l-3.28,3.24a4,4,0,0,1-3.63,1.07,35.09,35.09,0,0,1-17.15-9A33.79,33.79,0,0,1,1.15,8.6a3.78,3.78,0,0,1,1.1-3.55l3.4-3.28a2,2,0,0,1,3.12.32L13.43,9a.63.63,0,0,1,0,.75l-3.07,3.69A19.75,19.75,0,0,0,15.22,20.64Z"></path>
-                                                    <rect x="0" y="0" width="36" height="36" fill-opacity="0" />
-                                                </svg>
-                                                <span>€10</span>
-                                            </div>
-                                            <div class="hour-price">
-                                                <div class="separator-point">·</div>
-                                                <span>€12/ora</span>
-                                            </div>
-
-                                            <div class="hour-price-open">
-                                                <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <circle cx="12" cy="12" r="9" stroke="#457B9D" stroke-width="2" />
-                                                    <path d="M16.5 12H12.25C12.1119 12 12 11.8881 12 11.75V8.5" stroke="#457B9D" stroke-width="2" stroke-linecap="round" />
-                                                </svg>
-                                                <span>€12/ora</span>
-                                            </div>
-
-
-                                        </div>
-                                        <div class="worker-position">
-                                            <svg width="25px" height="25px" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 8.49478C8.604 8.49478 9.5 7.59934 9.5 6.49606C9.5 5.39278 8.604 4.49738 7.5 4.49738C6.396 4.49738 5.5 5.39278 5.5 6.49606C5.5 7.59934 6.396 8.49478 7.5 8.49478Z" stroke="#457B9D" stroke-linecap="square" />
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M13.5 6.49606C13.5 11.4928 8.5 14.4909 7.5 14.4909C6.5 14.4909 1.5 11.4928 1.5 6.49606C1.5 3.18522 4.187 0.5 7.5 0.5C10.813 0.5 13.5 3.18522 13.5 6.49606Z" stroke="#457B9D" stroke-linecap="square" />
-                                            </svg>
-                                            <span>Via dell'incenso, Roma</span>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="worker-rating">
-                                        <span class="rating">4.5</span>
-                                        <svg fill="#E63946" width="22px" height="22px" id="star" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" class="icon flat-color">
-                                            <path id="primary" d="M22,9.81a1,1,0,0,0-.83-.69l-5.7-.78L12.88,3.53a1,1,0,0,0-1.76,0L8.57,8.34l-5.7.78a1,1,0,0,0-.82.69,1,1,0,0,0,.28,1l4.09,3.73-1,5.24A1,1,0,0,0,6.88,20.9L12,18.38l5.12,2.52a1,1,0,0,0,.44.1,1,1,0,0,0,1-1.18l-1-5.24,4.09-3.73A1,1,0,0,0,22,9.81Z" style="fill: #E63946"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="worker-menu">
-                                <button class="call-worker-button">Richiedi</button>
-                            </div>
-                        </div>
+                <div id="loader-container">
+                    <div class="loader">
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
                     </div>
-                </li> -->
+                </div>
             </ul>
 
         </div>
 
         <div class="map" id="map">
-
+            <div id="loader-container">
+                <div class="loader">
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+        <div id="professional-details" class="hidden">
+            <div class="container-1">
+                <img id="professional-image" src="img/professionals/cristian-delauretis-piva.jpeg" alt="">
+                <div id="professional-internal-details">
+                    <h2 id="professional-name">Cristian De Lauretis</h2>
+                    <p id="professional-category">Idraulico</p>
+                    <p id="professional-address">Via Roma 1, 20100 Milano</p>
+                </div>
+            </div>
+            
+            <button onclick="chiudiDettagli()">Chiudi</button>
         </div>
     </div>
 </div>

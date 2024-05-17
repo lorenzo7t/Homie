@@ -61,15 +61,51 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   var professionalsContainer = document.querySelector('.professionals-container');
   var title = document.querySelector('.professionals-container-title');
 
-  professionalsContainer.addEventListener('scroll', function() {
-      if (professionalsContainer.scrollTop > 0) {
-          title.classList.add('shadow-active');
-      } else {
-          title.classList.remove('shadow-active');
-      }
+  professionalsContainer.addEventListener('scroll', function () {
+    if (professionalsContainer.scrollTop > 0) {
+      title.classList.add('shadow-active');
+    } else {
+      title.classList.remove('shadow-active');
+    }
   });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('MapInitialized', function () {
+    const professionistiButtons = document.querySelectorAll('.worker-menu .call-worker-button');
+
+    professionistiButtons.forEach(button => {
+      button.addEventListener('click', function () {
+        const workerEntry = button.closest('.worker-entry');
+        const nome = workerEntry.dataset.name;
+        const professione = workerEntry.dataset.category;
+        const prezzoOrario = workerEntry.dataset.rating;
+        const posizione = workerEntry.dataset.position;
+
+        // Nascondi la mappa
+        const map = document.getElementById('map');
+        map.classList.add('hidden');
+
+        // Mostra i dettagli del professionista
+        const dettagliContainer = document.getElementById('professional-details');
+        document.getElementById('professional-name').textContent = `${nome}`;
+        /* document.getElementById('dettagli-info').innerHTML = `
+                  Professione: ${professione}<br>
+                  Prezzo Orario: ${prezzoOrario}<br>
+                  Posizione: ${posizione}
+              `; */
+        dettagliContainer.classList.remove('hidden');
+      });
+    });
+  });
+
+});
+
+function chiudiDettagli() {
+  document.getElementById('map').classList.remove('hidden');  // Mostra nuovamente la mappa
+  document.getElementById('professional-details').classList.add('hidden');
+}
