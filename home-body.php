@@ -80,16 +80,53 @@
             </div>
         </div>
         <div id="professional-details" class="hidden">
-            <div class="container-1">
-                <img id="professional-image" src="img/professionals/cristian-delauretis-piva.jpeg" alt="">
-                <div id="professional-internal-details">
-                    <h2 id="professional-name">Cristian De Lauretis</h2>
-                    <p id="professional-category">Idraulico</p>
-                    <p id="professional-address">Via Roma 1, 20100 Milano</p>
+            <div class="container-4">
+                <div class="container-2">
+                    <div class="container-1">
+                        <img id="professional-image" src="img/professionals/cristian-delauretis-piva.jpeg" alt="">
+                        <div id="professional-internal-details">
+                            <h2 id="professional-name">Cristian De Lauretis</h2>
+                            <p id="professional-category">Idraulico</p>
+                            <div>
+                                <p id="professional-address">Via Roma 1, 20100 Milano</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-3">
+                        <div class="is-active">
+                            <div class="pulsing-circle"></div>
+                            <p>Disponibile</p>
+                        </div>
+                    </div>
                 </div>
+                <button class="close-button" onclick="chiudiDettagli()">
+                    X
+                </button>
             </div>
-            
-            <button onclick="chiudiDettagli()">Chiudi</button>
+            <div class="request-box">
+                <h3>Richiedi un intervento</h3>
+                <p>Descrivi il tuo problema, ogni dettaglio è importante! Non dimenticare Nulla!</p>
+                <div class="text-area-container">
+                    <textarea name="request" id="request" cols="30" rows="10" placeholder="Descrivi il tuo problema"></textarea>
+                </div>
+                <div class="buttons-container">
+                    <!-- <button class="close-button" onclick="chiudiDettagli()">
+                        Chiudi
+                    </button> -->
+                    <button class="send-request-button">
+                        Invia
+                        <div class="icon">
+                            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+
+            </div>
+
+
         </div>
     </div>
 </div>
