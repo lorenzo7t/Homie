@@ -5,10 +5,10 @@ if (!isset($_SESSION['userid'])) {
     header('Location: login_page.php');
     exit();
 }
-$username = $_SESSION['name'];
+$username = ucfirst($_SESSION['name']) . " " . ucfirst($_SESSION['cognome']);
 $indirizzo = $_SESSION['indirizzo'];
-?>
 
+?>
 <div class="header-container header-bg">
     <div class="header fixed-width">
         <div class="header-right">
@@ -60,7 +60,7 @@ $indirizzo = $_SESSION['indirizzo'];
                         <circle cx="12" cy="7" r="4" />
                         <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                     </svg>
-                    <span class="username" > <?php echo $username ?></span>
+                    <span class="username" > <?php echo $username?></span>
                 </button>
                 <div class="dropdown-content">
                     <a href="profile.php">Profilo</a>

@@ -5,112 +5,113 @@ var map;
 var openInfoWindow;
 var currentlySelectedProfessional;
 var executed = false;
+var userMarker;
 const customStyle =
-[
-  {
-    "featureType": "all",
-    "elementType": "all",
-    "stylers": [
-      {
-        "saturation": "32"
-      },
-      {
-        "lightness": "-3"
-      },
-      {
-        "visibility": "on"
-      },
-      {
-        "weight": "1.18"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "landscape",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "landscape.man_made",
-    "elementType": "all",
-    "stylers": [
-      {
-        "saturation": "-70"
-      },
-      {
-        "lightness": "14"
-      }
-    ]
-  },
-  {
-    "featureType": "poi",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "transit",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "all",
-    "stylers": [
-      {
-        "saturation": "100"
-      },
-      {
-        "lightness": "-14"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
-      },
-      {
-        "lightness": "12"
-      }
-    ]
-  }
-];
+  [
+    {
+      "featureType": "all",
+      "elementType": "all",
+      "stylers": [
+        {
+          "saturation": "32"
+        },
+        {
+          "lightness": "-3"
+        },
+        {
+          "visibility": "on"
+        },
+        {
+          "weight": "1.18"
+        }
+      ]
+    },
+    {
+      "featureType": "administrative",
+      "elementType": "labels",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape",
+      "elementType": "labels",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape.man_made",
+      "elementType": "all",
+      "stylers": [
+        {
+          "saturation": "-70"
+        },
+        {
+          "lightness": "14"
+        }
+      ]
+    },
+    {
+      "featureType": "poi",
+      "elementType": "labels",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "featureType": "road",
+      "elementType": "labels",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "featureType": "transit",
+      "elementType": "labels",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "featureType": "water",
+      "elementType": "all",
+      "stylers": [
+        {
+          "saturation": "100"
+        },
+        {
+          "lightness": "-14"
+        }
+      ]
+    },
+    {
+      "featureType": "water",
+      "elementType": "labels",
+      "stylers": [
+        {
+          "visibility": "off"
+        },
+        {
+          "lightness": "12"
+        }
+      ]
+    }
+  ];
+
 
 function initMap(userLocation = { lat: 41.9028, lng: 12.4964 }) {
   console.log(userLocation)
-  console.trace('Trace event handler calls');
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 15,
     styles: customStyle,
@@ -119,7 +120,7 @@ function initMap(userLocation = { lat: 41.9028, lng: 12.4964 }) {
     mapTypeControl: false
   });
 
-  var userMarker = new google.maps.Marker({
+  userMarker = new google.maps.Marker({
     position: { lat: userLocation.lat, lng: userLocation.lng },
     map: map,
     title: "La tua posizione",
@@ -162,6 +163,7 @@ function initMap(userLocation = { lat: 41.9028, lng: 12.4964 }) {
     });
     markers.push(marker);
   });
+  document.dispatchEvent(new CustomEvent('MapInitialized'));
 }
 
 function populateProfessionalsList(professionalList) {
@@ -190,7 +192,7 @@ function populateProfessionalsList(professionalList) {
 
 function generateProfessionalHTML(professional) {
   const isChecked = favoritesList.includes(professional.piva) ? 'checked' : '';
-  return `<div class="worker-entry" data-lat="${professional.lat}" data-id="${professional.piva}" data-lng="${professional.lng}" data-name="${professional.nome}" data-category="${professional.professione}" data-rating="${professional.rating}">
+  return `<div class="worker-entry" data-lat="${professional.lat}" data-lng="${professional.lng}" data-id="${professional.piva}" data-name="${professional.nome}" data-category="${professional.professione}" data-rating="${professional.rating}" data-img="img/professionals/${professional.image}" data-callPrice="${professional.prezzo_chiamata}" data-hourPrice="${professional.prezzo_orario}">
               <div class="external-container">
                 <div class="img-infos-container">
                     <div class="internal-container">
@@ -267,7 +269,7 @@ function generateProfessionalHTML(professional) {
                     </div>
                 </div>
                 <div class="worker-menu">
-                    <button class="call-worker-button">Richiedi</button>
+                    <button class="default-button call-worker-button">Richiedi</button>
                 </div>
               </div>
             </div>`;
@@ -275,7 +277,6 @@ function generateProfessionalHTML(professional) {
 
 function toggleFavorites() {
   if (!executed) {
-    console.trace('Trace event handler calls');
     console.log('Favorites toggle clicked');
     this.classList.toggle('active');
     let filteredProfessionals = professionals;
@@ -360,6 +361,44 @@ document.querySelectorAll('.category-button').forEach(button => {
     }
 
     populateProfessionalsList(filteredProfessionals);
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const requestButton = document.querySelector('.send-request-button');
+
+  requestButton.addEventListener('click', function () {
+    const workerEntry = this.closest('.worker-entry');
+    const professionalId = workerEntry.dataset.id;
+    const professionalName = workerEntry.dataset.name;
+    const callPrice = workerEntry.dataset.callprice;
+    const hourPrice = workerEntry.dataset.hourprice;
+
+    const requestData = {
+      professionalId: professionalId,
+      professionalName: professionalName,
+      callPrice: callPrice,
+      hourPrice: hourPrice
+    };
+
+    fetch('utilities.php?action=addRequest', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestData)
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Richiesta inviata con successo a ' + professionalName);
+        } else {
+          alert('Errore durante l invio della richiesta');
+        }
+      })
+      .catch(error => {
+        console.error('Errore:', error);
+      });
   });
 });
 

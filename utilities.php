@@ -5,9 +5,8 @@ error_reporting(E_ALL);
 
 session_start();
 
-
-
-function downloadProfessionals() {
+function downloadProfessionals()
+{
     include 'db_connection.php';
     header('Content-Type: application/json');
 
@@ -33,34 +32,47 @@ function downloadProfessionals() {
             ];
             $professionals[] = $professional;
         }
-        $conn->close();
         echo json_encode($professionals);
     } else {
         echo json_encode([]);
     }
+    $conn->close();
 }
 
-function getLatLong($address) {
-    $apiUrl = "https://geocode.maps.co/search?q=" . urlencode($address) . "&api_key=664669617aeef661539064zlu442ed8";
-    $response = file_get_contents($apiUrl);
+function getLatLong($address)
+{
+    $apiKey = "AIzaSyAV2pCTErRiX6IWUu6Ol7gVE0U37rWWB_s";  // Sostituisci con la tua chiave API di Google Maps
+    $baseUrl = "https://maps.googleapis.com/maps/api/geocode/json";
+    $formattedAddress = urlencode($address);
+    $url = "{$baseUrl}?address={$formattedAddress}&key={$apiKey}";
+
+    $response = file_get_contents($url);
     $data = json_decode($response, true);
-    if ($data && isset($data[0]['place_id'])) {
-        return ["lat" => $data[0]['lat'], "lng" => $data[0]['lon']];
+
+    if (isset($data['results'][0])) {
+        $geometry = $data['results'][0]['geometry']['location'];
+        return [
+            "lat" => $geometry['lat'],
+            "lng" => $geometry['lng']
+        ];
     } else {
         return ["lat" => null, "lng" => null];
     }
 }
 
 
-function getAddress() {
+
+function getAddress()
+{
     include 'db_connection.php';
-    // Assumi che l'ID utente sia salvato in sessione
-    $userId = $_SESSION['user_id'];
-    $query = "SELECT address, lat, lng FROM user_data WHERE user_id = $userId";
+    $userId = $_SESSION['userid'];
+    header('Content-Type: application/json');
+    $query = "SELECT indirizzo FROM homie.user_data WHERE userid = $userId";
     $result = $conn->query($query);
 
     if ($row = $result->fetch_assoc()) {
-        echo json_encode(['success' => true, 'address' => $row['address'], 'lat' => (float) $row['lat'], 'lng' => (float) $row['lng']]);
+        $coords = getLatLong($row['indirizzo']);
+        echo json_encode(['success' => true, 'address' => $row['indirizzo'], 'lat' => (float) $coords['lat'], 'lng' => (float) $coords['lng']]);
     } else {
         echo json_encode(['success' => false]);
     }
@@ -68,15 +80,15 @@ function getAddress() {
     $conn->close();
 }
 
-function updateAddress() {
+function updateAddress()
+{
     include 'db_connection.php';
     $data = json_decode(file_get_contents('php://input'), true);
     $newAddress = $data['address'];
-    // Puoi usare una funzione per ottenere lat e lng qui
-    $coords = getLatLong($newAddress); // Assumi che questa funzione esista
+    $coords = getLatLong($newAddress);
 
-    $userId = $_SESSION['user_id'];
-    $query = "UPDATE user_data SET address = '$newAddress', lat = '{$coords['lat']}', lng = '{$coords['lng']}' WHERE user_id = $userId";
+    $userId = $_SESSION['userid'];
+    $query = "UPDATE homie.user_data SET indirizzo = '$newAddress' WHERE userid = $userId";
     if ($conn->query($query)) {
         echo json_encode(['success' => true, 'lat' => $coords['lat'], 'lng' => $coords['lng']]);
     } else {
@@ -86,7 +98,115 @@ function updateAddress() {
     $conn->close();
 }
 
-if (isset($_GET['action'])) {
+
+function updatePrice()
+{
+    include 'db_connection.php';
+    $json = file_get_contents('php://input');
+    $data = json_decode($json, true);
+
+    if ($data === null && json_last_error() !== JSON_ERROR_NONE) {
+        echo json_encode(['success' => false, 'error' => 'Invalid JSON']);
+        exit;
+    }
+
+    $priceType = $data['priceType'];
+    $value = intval($data['value']);
+    $pro_id = $_SESSION['piva'];
+    $column = $priceType === 'callInput' ? 'prezzo_chiamata' : 'prezzo_orario';
+    $sql = "UPDATE homie.pro_data SET $column = $value WHERE piva = '$pro_id'";
+
+    if ($conn->query($sql)) {
+        echo json_encode(['success' => true]);
+        if ($priceType === 'callInput') {
+            $_SESSION['p_chiamata'] = $value;
+        } else {
+            $_SESSION['p_orario'] = $value;
+        }
+    } else {
+        echo json_encode(['success' => false, 'error' => $conn->error]);
+    }
+
+    $conn->close();
+}
+
+
+function updateActive()
+{
+    include 'db_connection.php';
+    $json = file_get_contents('php://input');
+    $data = json_decode($json, true);
+
+    if ($data === null && json_last_error() !== JSON_ERROR_NONE) {
+        echo json_encode(['success' => false, 'error' => 'Invalid JSON']);
+        exit;
+    }
+
+    if (!isset($data['isActive'])) {
+        echo json_encode(['success' => false, 'error' => 'Missing isActive field']);
+        exit;
+    }
+
+    $isActive = $data['isActive'] === true ? 1 : 0; // Assicurati che sia un booleano corretto
+    $pro_id = $_SESSION['piva'];
+    $sql = "UPDATE homie.pro_data SET is_active = $isActive WHERE piva = '$pro_id'";
+
+    if ($conn->query($sql)) {
+        echo json_encode(['success' => true]);
+        $_SESSION['is_active'] = $isActive;
+    } else {
+        echo json_encode(['success' => false, 'error' => $conn->error]);
+    }
+
+    $conn->close();
+}
+
+function addRequest($data) {
+    $requestDetails = [
+        'requestId' => uniqid(),
+        'userId' => $_SESSION['userid'],
+        'professionalId' => $data['professionalId'],
+        'status' => 'pending',
+        'timestamp' => date('c')
+    ];
+
+    $file = 'requests.json';
+    $current_data = file_exists($file) ? file_get_contents($file) : '[]';
+    $array_data = json_decode($current_data, true);
+    $array_data[] = $requestDetails;
+    $final_data = json_encode($array_data, JSON_PRETTY_PRINT);
+    if (file_put_contents($file, $final_data)) {
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false, 'error' => 'Error saving data']);
+    }
+}
+
+
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
+    switch ($_GET['action']) {
+        case 'updatePrice':
+            updatePrice();
+            break;
+
+        case 'updateActive':
+            updateActive();
+            break;
+
+        case 'updateAddress':
+            updateAddress();
+            break;
+        case 'addRequest':
+            $data = json_decode(file_get_contents('php://input'), true);
+            addRequest($data);
+            break;
+    }
+}
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
     switch ($_GET['action']) {
         case 'getProfessionals':
             downloadProfessionals();
@@ -99,9 +219,5 @@ if (isset($_GET['action'])) {
         case 'getAddress':
             getAddress();
             break;
-        case 'updateAddress':
-            updateAddress();
-            break;
     }
 }
-?>

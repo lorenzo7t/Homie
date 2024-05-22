@@ -20,6 +20,7 @@ else {
     $_SESSION['userid'] = $userid;
     $_SESSION['email'] = $email;
     $_SESSION['name'] = $row['nome'];
+    $_SESSION['cognome'] = $row['cognome'];
     $_SESSION['indirizzo'] = $row['indirizzo'];
     $_SESSION['cognome'] = $row['cognome'];
     header('Location:home.php');

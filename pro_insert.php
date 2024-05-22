@@ -29,18 +29,16 @@ $sql = "INSERT INTO homie.pro_data (nome, cognome, email, indirizzo, password, p
 VALUES ('$nome', '$cognome', '$email', '$indirizzo', md5('$password'), '$professione', '$piva', '$p_orario', '$p_chiamata', '$rating', '$filecontent')";
 
 if ($conn->query($sql) === TRUE) {
-    $piva= $row['piva'];
-    echo $userid;
     $_SESSION['piva'] = $piva;
     $_SESSION['email'] = $email;
-    $_SESSION['name'] = $row['nome'];
-    $_SESSION['cognome'] = $row['cognome'];
-    $_SESSION['indirizzo'] = $row['indirizzo'];
-    $_SESSION['professione'] = $row['professione'];
-    $_SESSION['p_orario'] = $row['prezzo_orario'];
-    $_SESSION['p_chiamata'] = $row['prezzo_chiamata'];
-    $_SESSION['rating'] = $row['rating'];
-    $_SESSION['profile_picture'] = $row['profile_picture'];
+    $_SESSION['name'] = $nome;
+    $_SESSION['cognome'] = $cognome;
+    $_SESSION['indirizzo'] = $indirizzo;
+    $_SESSION['professione'] = $professione;
+    $_SESSION['p_orario'] = $p_orario;
+    $_SESSION['p_chiamata'] = $p_chiamata;
+    $_SESSION['rating'] = $rating;
+
 
     //setcookie('user_id', $userid, time() + (30 * 24 * 60 * 60), '/');
     header('Location:home.php');
