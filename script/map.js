@@ -108,7 +108,7 @@ const customStyle =
       ]
     }
   ];
-  
+
 
 function initMap(userLocation = { lat: 41.9028, lng: 12.4964 }) {
   console.log(userLocation)
@@ -192,7 +192,7 @@ function populateProfessionalsList(professionalList) {
 
 function generateProfessionalHTML(professional) {
   const isChecked = favoritesList.includes(professional.piva) ? 'checked' : '';
-  return `<div class="worker-entry" data-lat="${professional.lat}" data-id="${professional.piva}" data-lng="${professional.lng}" data-name="${professional.nome}" data-category="${professional.professione}" data-rating="${professional.rating}">
+  return `<div class="worker-entry" data-lat="${professional.lat}" data-lng="${professional.lng}" data-id="${professional.piva}" data-name="${professional.nome}" data-category="${professional.professione}" data-rating="${professional.rating}" data-img="img/professionals/${professional.image}" data-callPrice="${professional.prezzo_chiamata}" data-hourPrice="${professional.prezzo_orario}">
               <div class="external-container">
                 <div class="img-infos-container">
                     <div class="internal-container">
@@ -269,7 +269,7 @@ function generateProfessionalHTML(professional) {
                     </div>
                 </div>
                 <div class="worker-menu">
-                    <button class="call-worker-button">Richiedi</button>
+                    <button class="default-button call-worker-button">Richiedi</button>
                 </div>
               </div>
             </div>`;
@@ -361,6 +361,44 @@ document.querySelectorAll('.category-button').forEach(button => {
     }
 
     populateProfessionalsList(filteredProfessionals);
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const requestButton = document.querySelector('.send-request-button');
+
+  requestButton.addEventListener('click', function () {
+    const workerEntry = this.closest('.worker-entry');
+    const professionalId = workerEntry.dataset.id;
+    const professionalName = workerEntry.dataset.name;
+    const callPrice = workerEntry.dataset.callprice;
+    const hourPrice = workerEntry.dataset.hourprice;
+
+    const requestData = {
+      professionalId: professionalId,
+      professionalName: professionalName,
+      callPrice: callPrice,
+      hourPrice: hourPrice
+    };
+
+    fetch('utilities.php?action=addRequest', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestData)
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Richiesta inviata con successo a ' + professionalName);
+        } else {
+          alert('Errore durante l invio della richiesta');
+        }
+      })
+      .catch(error => {
+        console.error('Errore:', error);
+      });
   });
 });
 

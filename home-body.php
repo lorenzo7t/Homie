@@ -85,10 +85,28 @@
                     <div class="container-1">
                         <img id="professional-image" src="img/professionals/cristian-delauretis-piva.jpeg" alt="">
                         <div id="professional-internal-details">
-                            <h2 id="professional-name">Cristian De Lauretis</h2>
-                            <p id="professional-category">Idraulico</p>
+                            <h2 id="professional-name"></h2>
+                            <p id="professional-category"></p>
                             <div>
-                                <p id="professional-address">Via Roma 1, 20100 Milano</p>
+                                <p id="professional-address"></p>
+                            </div>
+                            <div class="worker-price">
+                                <div class="call-price">
+                                    <svg fill="#457B9D" width="800px" height="800px" viewBox="0 0 36 36" version="1.1" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <title>phone-handset-solid</title>
+                                        <path class="clr-i-solid clr-i-solid-path-1" d="M15.22,20.64a20.37,20.37,0,0,0,7.4,4.79l3.77-3a.67.67,0,0,1,.76,0l7,4.51a2,2,0,0,1,.33,3.18l-3.28,3.24a4,4,0,0,1-3.63,1.07,35.09,35.09,0,0,1-17.15-9A33.79,33.79,0,0,1,1.15,8.6a3.78,3.78,0,0,1,1.1-3.55l3.4-3.28a2,2,0,0,1,3.12.32L13.43,9a.63.63,0,0,1,0,.75l-3.07,3.69A19.75,19.75,0,0,0,15.22,20.64Z"></path>
+                                        <rect x="0" y="0" width="36" height="36" fill-opacity="0" />
+                                    </svg>
+                                    <p id="professional-call-price"></p>
+                                </div>
+
+                                <div class="hour-price-open">
+                                    <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="12" cy="12" r="9" stroke="#457B9D" stroke-width="2" />
+                                        <path d="M16.5 12H12.25C12.1119 12 12 11.8881 12 11.75V8.5" stroke="#457B9D" stroke-width="2" stroke-linecap="round" />
+                                    </svg>
+                                    <p id="professional-hour-price"></p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -110,9 +128,6 @@
                     <textarea name="request" id="request" cols="30" rows="10" placeholder="Descrivi il tuo problema"></textarea>
                 </div>
                 <div class="buttons-container">
-                    <!-- <button class="close-button" onclick="chiudiDettagli()">
-                        Chiudi
-                    </button> -->
                     <button class="send-request-button">
                         Invia
                         <div class="icon">

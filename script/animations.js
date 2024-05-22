@@ -81,10 +81,13 @@ document.addEventListener('DOMContentLoaded', function () {
     professionistiButtons.forEach(button => {
       button.addEventListener('click', function () {
         const workerEntry = button.closest('.worker-entry');
+        console.log(workerEntry.dataset);
         const nome = workerEntry.dataset.name;
         const professione = workerEntry.dataset.category;
-        const prezzoOrario = workerEntry.dataset.rating;
-        const posizione = workerEntry.dataset.position;
+        const prezzoOrario = workerEntry.dataset.hourprice;
+        const prezzoCall = workerEntry.dataset.callprice; 
+        const posizione = workerEntry.querySelector('.worker-position span').textContent;
+        const img = workerEntry.dataset.img;
 
         // Nascondi la mappa
         const map = document.getElementById('map');
@@ -92,12 +95,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Mostra i dettagli del professionista
         const dettagliContainer = document.getElementById('professional-details');
+        document.getElementById('professional-image').src = `${img}`
         document.getElementById('professional-name').textContent = `${nome}`;
-        /* document.getElementById('dettagli-info').innerHTML = `
-                  Professione: ${professione}<br>
-                  Prezzo Orario: ${prezzoOrario}<br>
-                  Posizione: ${posizione}
-              `; */
+        document.getElementById('professional-category').textContent = `${professione}`;
+        document.getElementById('professional-address').textContent = `${posizione}`;
+        document.getElementById('professional-hour-price').textContent = `${prezzoOrario}`;
+        document.getElementById('professional-call-price').textContent = `${prezzoCall}`;
+        /*document.getElementById('professional-price').textContent = `${prezzoOrario}`;*/  
+
+
         dettagliContainer.classList.remove('hidden');
       });
     });
@@ -109,3 +115,20 @@ function chiudiDettagli() {
   document.getElementById('map').classList.remove('hidden');  // Mostra nuovamente la mappa
   document.getElementById('professional-details').classList.add('hidden');
 }
+
+/* document.querySelectorAll('.increment-button').forEach(button => {
+  button.addEventListener('click', function() {
+      const input = this.parentNode.previousElementSibling;  
+      input.value = parseInt(input.value) + 1; 
+  });
+});
+
+document.querySelectorAll('.decrement-button').forEach(button => {
+  button.addEventListener('click', function() {
+      const input = this.parentNode.previousElementSibling; 
+      if (parseInt(input.value) > 0) {
+          input.value = parseInt(input.value) - 1;
+      }
+  });
+});
+ */
