@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const addressInput = document.getElementById('address');
+    const displayedAddress = document.querySelector('.address-button .address');
     const addressButton = document.querySelector('.address-submit');
 
     // Funzione per gestire la modifica dell'indirizzo
-    function handleAddressChange() {
-        const newAddress = addressInput.value.trim();
+    window.handleAddressChange = function(addressButton) {
+        const newAddress = addressButton.textContent.trim();
+        console.log(newAddress);
         if(newAddress) {
             fetch('utilities.php?action=updateAddress', {
                 method: 'POST',
@@ -16,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if(data.success) {
-                    updateMap(data.lat, data.lng);
+                    updateMap(parseFloat(data.lat), parseFloat(data.lng));
                     document.querySelector('.address').textContent = newAddress;
                 } else {
                     console.error('Error updating address:', data.error);
@@ -27,22 +28,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateMap(lat, lng) {
+        console.log(lat, lng);
         const newPosition = { lat, lng };
         userMarker.setPosition(newPosition);
         map.setCenter(newPosition);
     }
 
-    addressButton.addEventListener('click', function(event) {
-        event.preventDefault();
-        handleAddressChange();
-    });
+    
 
     fetch('utilities.php?action=getAddress')
     .then(response => response.json())
     .then(data => {
+        console.log(data);
         if(data.success) {
-            addressInput.value = data.address;
-            updateMap(data.lat, data.lng);
+            displayedAddress.innerHTML = data.address;
+            document.addEventListener('MapInitialized', function() {
+                
+                updateMap(data.lat, data.lng);
+            });
         } else {
             console.error('Failed to fetch address');
         }

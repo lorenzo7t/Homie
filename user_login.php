@@ -20,6 +20,7 @@ else {
     $_SESSION['userid'] = $userid;
     $_SESSION['email'] = $email;
     $_SESSION['name'] = $row['nome'];
+    $_SESSION['cognome'] = $row['cognome'];
     $_SESSION['indirizzo'] = $row['indirizzo'];
     //setcookie('user_id', $userid, time() + (30 * 24 * 60 * 60), '/');
     header('Location:home.php');

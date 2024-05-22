@@ -16,6 +16,7 @@
     <script src="script/maps.js" defer></script>
     <script src="script/map.js" defer></script>
     <script src="script/animations.js" defer></script>
+    <script src="script/pro_dashboard.js" defer></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAV2pCTErRiX6IWUu6Ol7gVE0U37rWWB_s"></script>
 
@@ -23,16 +24,16 @@
 </head>
 
 <body>
-    <div class="background">
-        <?php include 'logged_header.php'; ?>
-    </div>
-    <div class="home-body-wrapper">
-        <?php include 'home-body.php'; ?>
+    <div class="professional-page">
+        <div class="background">
+            <?php include 'logged_header.php'; ?>
+        </div>
+        <div class="home-body-wrapper">
+            <?php include 'home-pro-body.php'; ?>
+        </div>
     </div>
     <div class="mp-footer">
         <?php include 'footer.php'; ?>
     </div>
 
 </body>
-
-</html>
