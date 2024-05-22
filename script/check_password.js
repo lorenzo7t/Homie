@@ -1,21 +1,40 @@
-async function checkPassword() {
-  if (password.length < 8) {
-  var passwordError = 'Password must be at least 8 characters long';
-  }
-  const passwordRegex =  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-    if (!passwordRegex.test(password)) {
-        var passwordError = 'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character';
-        }
+function checkPassword() {
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm_password').value;
+    const errorElement = document.getElementById('password_error');
 
-    if (passwordError) {
-        document.getElementById('password_error').innerHTML = passwordError;
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    let errorMessage = '';
+
+    if (password.length < minLength) {
+        errorMessage = `La password deve contenere almeno ${minLength} caratteri.`;
+    } else if (!hasUpperCase) {
+        errorMessage = 'La password deve contenere almeno una lettera maiuscola.';
+    } else if (!hasLowerCase) {
+        errorMessage = 'La password deve contenere almeno una lettera minuscola.';
+    } else if (!hasNumber) {
+        errorMessage = 'La password deve contenere almeno un numero.';
+    } else if (!hasSpecialChar) {
+        errorMessage = 'La password deve contenere almeno un carattere speciale.';
+    } else if (password !== confirmPassword) {
+        errorMessage = 'Le password non corrispondono.';
+    }else errorMessage = '';
+
+    if (errorMessage) {
+        errorElement.textContent = errorMessage;
+        document.querySelector('.login-button').disabled = true;
+    } else {
+        errorElement.textContent = '';
+        document.querySelector('.login-button').disabled = false;
     }
-    const password1= document.getElementById('password').value;
-    const password2= document.getElementById('confirm_password').value;
-    if (password1 != password2) {
-        var passwordError = 'Passwords do not match';
-        document.getElementById('password_error').innerHTML = passwordError;
-    }
-    
-  
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('password').addEventListener('keyup', checkPassword);
+    document.getElementById('confirm_password').addEventListener('keyup', checkPassword);
+});

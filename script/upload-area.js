@@ -21,8 +21,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    uploadArea.addEventListener('click', function () {
-        fileInput.click();
+    uploadArea.addEventListener('click', function (event) {
+        event.preventDefault();
+        if (event.target !== fileInput) {
+            fileInput.click();
+        }
+    });
+
+    fileInput.addEventListener('click', function (event) {
+        event.stopPropagation();
     });
 
     fileInput.addEventListener('change', function () {

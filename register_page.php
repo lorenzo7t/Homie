@@ -59,7 +59,7 @@ include 'db_connection.php';
             </div>
             <p id="password_error" style="color: red;"></p>
             <div class="input-container" style="margin-top: 10%;">
-                <input type="submit" class="login-button" value="Registrati"></input>
+                <input type="submit" class="login-button" value="Registrati" disabled></input>
             </div>
             <p class="signup-link">
                 Già registrato?
@@ -68,4 +68,13 @@ include 'db_connection.php';
         </form>
     </div>
     <div class="separator"></div>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            var indirizzoValue = localStorage.getItem('indirizzo');
+            if (indirizzoValue) {
+                document.getElementById('indirizzo').value = indirizzoValue;
+                localStorage.removeItem('indirizzo'); // Rimuovi il valore da localStorage se non è più necessario
+            }
+        });
+    </script>
 </body>

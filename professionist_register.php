@@ -18,6 +18,8 @@ include 'db_connection.php';
     <script src="script/autocomplete.js" defer></script>
     <script src="script/maps.js" defer></script>
     <script src="script/animations.js" defer></script>
+    <script src="script/upload-area.js" defer></script>
+    <script src="script/check_password.js" defer></script>
 </head>
 
 <body style="background-color: #A8DADC;">
@@ -25,7 +27,7 @@ include 'db_connection.php';
         <a href="index.php" class="homie-logo">
             <img class="logo" src="img/logo_new.png">
         </a>
-        <form class="form" style="width: 50vh;height: 120vh;" action="pro_insert.php" method="POST">
+        <form class="form" style="width: 50vh;" action="pro_insert.php" method="POST" enctype="multipart/form-data">
             <p class="form-title">Registrati</p>
 
             <?php if (isset($_GET['error'])) { ?>
@@ -83,14 +85,15 @@ include 'db_connection.php';
                 <input class="input-field" type="password" placeholder="Confirm password" required="" id="confirm_password" name="confirm_password" onkeyup="checkPassword()">
 
             </div>
+            <div>
             <p id="password_error" style="color: red;"></p>
-            <div class="upload-area" id="uploadArea" required="">
-            <input type="file" id="fileInput" accept="image/*" />
-            <label for="fileInput">Trascina qui l'immagine o clicca per selezionarla</label>
             </div>
-            <div class="input-container" style="margin-top: 10%;">
-
-                <input type="submit" class="login-button" value="Registrati"></input>
+            <div class="upload-area" id="uploadArea" style="margin-top: 2vh;">
+            <input type="file" id="fileInput" accept="image/*" required name="photo"/>
+            <label for="fileInput">Trascina qui o seleziona l'immagine del profilo</label>
+            </div>
+            <div class="input-container" style="margin-top: 2vh;">
+                <input type="submit" class="login-button" value="Registrati" disabled></input>
             </div>
             <p class="signup-link">
                 Già registrato?
