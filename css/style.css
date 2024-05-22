@@ -63,6 +63,7 @@ h1 {
 
 .active {
     display: block !important;
+    
 }
 
 .separator-point {
@@ -787,6 +788,8 @@ span::before {
     cursor: pointer;
     margin-bottom: 20px;
     transition: background-color 0.3s;
+    border-radius: 15px;
+
 }
 
 .upload-area:hover {
@@ -1769,7 +1772,7 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    border-radius: 15px 15px 15px 15px;
+    
     background-color: #F1FAEE;
     box-shadow: 0px 0px 13px -9px #000000;
     background-color: #A8DADC;
@@ -1781,16 +1784,16 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
     align-items: flex-start;
     justify-content: space-evenly;
     width: 30%;
-    padding: 10px;
-    margin: 10px;
+    border-right: 1px solid black;
 
 }
 .navigation-bar a:hover {
     background-color: #457B9D;
-    transition: cubic-bezier(0, 1.15, 0.65, 0.96) 1s;
-    border-radius: 15px;
-    padding: 10px;
-    margin: 10px;
+    /*transition: cubic-bezier(0, 1.15, 0.65, 0.96) 1s;
+    border-radius: 15px;*/
+    padding: 1vw;
+    /*margin: 10px;*/
+    
     color: #F1FAEE;
 }
 
@@ -1799,16 +1802,18 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    padding: 10px;
-    border-radius: 15px;
-    margin: 10px;
+    padding: 1vw;
+    /* border-radius: 15px; */
+    /* margin: 10px; */
+    width: -webkit-fill-available;
     color: #000000;
     text-decoration: none;
-    transition: cubic-bezier(0, 1.15, 0.65, 0.96) 1s;
+    border-bottom: 1px solid black;
 }
 
 .profile-content .page{
     display: none;
+
 }
 .profile-name{
     padding-top: 1vw;
@@ -1816,5 +1821,19 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
 }
 
 .profile-info{
+    
+}
+#editButton {
+    background-color: #007bff;
+    color: white;
+}
 
+#saveButton {
+    background-color: #28a745;
+    color: white;
+}
+
+#cancelButton {
+    background-color: #dc3545;
+    color: white;
 }

@@ -1,6 +1,10 @@
 <?php
 session_start();
 include 'db_connection.php'; 
+if (!isset($_SESSION['userid'])) {
+    header('Location: login_page.php');
+    exit();
+}
 $username = $_SESSION['name'];
 $indirizzo = $_SESSION['indirizzo'];
 ?>
@@ -8,7 +12,7 @@ $indirizzo = $_SESSION['indirizzo'];
 <div class="header-container header-bg">
     <div class="header fixed-width">
         <div class="header-right">
-            <a href="index.php" class="logo-container">
+            <a href="home.php" class="logo-container">
                 <img class="logo" src="img/logo_new.png">
             </a>
             <div class="search-container">
