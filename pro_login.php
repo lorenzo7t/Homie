@@ -33,6 +33,5 @@ else {
     exit();
 }
 
-// Close the database connection
 $conn->close();
 ?>

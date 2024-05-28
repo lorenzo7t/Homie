@@ -29,14 +29,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
   userButton.addEventListener('click', function (event) {
     dropdownContent.classList.toggle('show');
-    userButton.classList.toggle('active'); // Aggiungi/rimuovi la classe 'active'
+    userButton.classList.toggle('active');
     event.stopPropagation();
   });
 
   document.addEventListener('click', function (event) {
     if (!dropdownContent.contains(event.target) && !userButton.contains(event.target)) {
       dropdownContent.classList.remove('show');
-      userButton.classList.remove('active'); // Rimuovi la classe 'active'
+      userButton.classList.remove('active');
     }
   });
 });
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   userButton.addEventListener('click', function (event) {
     dropdownContent.classList.toggle('show');
-    userButton.classList.toggle('active'); // Aggiungi/rimuovi la classe 'active'
+    userButton.classList.toggle('active');
     event.stopPropagation();
   });
 
@@ -74,47 +74,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-  document.addEventListener('MapInitialized', function () {
-    const professionistiButtons = document.querySelectorAll('.worker-menu .call-worker-button');
-
-    professionistiButtons.forEach(button => {
-      button.addEventListener('click', function () {
-        const workerEntry = button.closest('.worker-entry');
-        console.log(workerEntry.dataset);
-        const nome = workerEntry.dataset.name;
-        const professione = workerEntry.dataset.category;
-        const prezzoOrario = workerEntry.dataset.hourprice;
-        const prezzoCall = workerEntry.dataset.callprice; 
-        const posizione = workerEntry.querySelector('.worker-position span').textContent;
-        const img = workerEntry.dataset.img;
-
-        // Nascondi la mappa
-        const map = document.getElementById('map');
-        map.classList.add('hidden');
-
-        // Mostra i dettagli del professionista
-        const dettagliContainer = document.getElementById('professional-details');
-        document.getElementById('professional-image').src = `${img}`
-        document.getElementById('professional-name').textContent = `${nome}`;
-        document.getElementById('professional-category').textContent = `${professione}`;
-        document.getElementById('professional-address').textContent = `${posizione}`;
-        document.getElementById('professional-hour-price').textContent = `${prezzoOrario}`;
-        document.getElementById('professional-call-price').textContent = `${prezzoCall}`;
-        /*document.getElementById('professional-price').textContent = `${prezzoOrario}`;*/  
 
 
-        dettagliContainer.classList.remove('hidden');
-      });
-    });
-  });
 
-});
 
-function chiudiDettagli() {
-  document.getElementById('map').classList.remove('hidden');  // Mostra nuovamente la mappa
-  document.getElementById('professional-details').classList.add('hidden');
-}
 
 /* document.querySelectorAll('.increment-button').forEach(button => {
   button.addEventListener('click', function() {

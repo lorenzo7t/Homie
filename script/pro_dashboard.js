@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const input = this.parentNode.previousElementSibling;
             const isIncrement = this.classList.contains('increment-button');
             const newValue = isIncrement ? parseInt(input.value) + 1 : parseInt(input.value) - 1;
-            if (newValue >= 0) { 
+            if (newValue >= 0) {
                 input.value = newValue;
                 updatePrice(input.id, newValue);
             }
@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('active-pro').addEventListener('change', function () {
         updateActiveStatus(this.checked);
     });
+
+
 
     function updatePrice(priceType, value) {
         const payload = {
@@ -54,5 +56,6 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => console.error('Error:', error));
     }
+
 
 });

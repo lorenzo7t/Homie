@@ -1,6 +1,7 @@
 <?php
-session_start();
 include 'db_connection.php'; 
+session_start();
+
 if (!isset($_SESSION['userid'])) {
     header('Location: login_page.php');
     exit();
@@ -13,9 +14,9 @@ $indirizzo = $_SESSION['indirizzo'];
     <div class="header fixed-width">
         <div class="header-right">
             <a href="home.php" class="logo-container">
-                <img class="logo" src="img/logo_new.png">
+                <img class="logo" src="img/text-logo.png">
             </a>
-            <div class="search-container">
+            <!-- <div class="search-container">
                 <form action="search.php" method="GET">
                     <input type="text" name="search" id="search" class="search-bar" placeholder="Cerca..." autocomplete="off">
                     <button type="submit" class="search-button">
@@ -25,7 +26,7 @@ $indirizzo = $_SESSION['indirizzo'];
                         </svg>
                     </button>
                 </form>
-            </div>
+            </div> -->
 
         </div>
         

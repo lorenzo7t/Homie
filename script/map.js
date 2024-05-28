@@ -6,6 +6,8 @@ var openInfoWindow;
 var currentlySelectedProfessional;
 var executed = false;
 var userMarker;
+var pollingInterval;
+
 const customStyle =
   [
     {
@@ -111,7 +113,6 @@ const customStyle =
 
 
 function initMap(userLocation = { lat: 41.9028, lng: 12.4964 }) {
-  console.log(userLocation)
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 15,
     styles: customStyle,
@@ -124,9 +125,9 @@ function initMap(userLocation = { lat: 41.9028, lng: 12.4964 }) {
     position: { lat: userLocation.lat, lng: userLocation.lng },
     map: map,
     title: "La tua posizione",
-    icon: { // Opzionale: icona personalizzata
-      url: 'img/icons/house_pointer.png', // Percorso all'icona che vuoi usare
-      scaledSize: new google.maps.Size(50, 50) // Dimensioni dell'icona
+    icon: {
+      url: 'img/icons/house_pointer.png',
+      scaledSize: new google.maps.Size(50, 50)
     }
   });
 
@@ -171,7 +172,7 @@ function populateProfessionalsList(professionalList) {
   const professionalsList = document.querySelector('.professionals-container ul');
   professionalsList.innerHTML = '';
 
-  markers.forEach(marker => marker.setMap(null)); // Nascondi tutti i marker
+  markers.forEach(marker => marker.setMap(null));
 
   professionalList.forEach(professional => {
     const listItem = document.createElement('li');
@@ -180,13 +181,24 @@ function populateProfessionalsList(professionalList) {
 
     const marker = markers.find(m => m.professional.piva === professional.piva);
     if (marker) {
-      marker.setMap(map); // Rendi visibile il marker corrispondente
+      marker.setMap(map);
     }
 
     listItem.querySelector('.worker-entry').addEventListener('click', () => {
       google.maps.event.trigger(marker, 'click');
     });
+
   });
+
+  if (professionalsList.children.length === 0) {
+    const noProfessionalsMessage = document.createElement('li');
+    noProfessionalsMessage.textContent = 'Nessun professionista attivo disponibile.';
+    noProfessionalsMessage.className = 'no-professionals';
+    professionalsList.appendChild(noProfessionalsMessage);
+  } else {
+    attachEventToRequestButtons();
+  };
+
 }
 
 
@@ -196,7 +208,7 @@ function generateProfessionalHTML(professional) {
               <div class="external-container">
                 <div class="img-infos-container">
                     <div class="internal-container">
-                        <img src="img/professionals/${professional.image}" alt="${professional.image.split(".")[0]}">
+                        <img draggable="false" src="img/professionals/${professional.image}" alt="${professional.image.split(".")[0]}">
                         <div class="favourite">
                             <div class="heart-container" title="Like">
                             <input type="checkbox" class="checkbox" id="heart" ${isChecked}>
@@ -273,6 +285,7 @@ function generateProfessionalHTML(professional) {
                 </div>
               </div>
             </div>`;
+
 }
 
 function toggleFavorites() {
@@ -304,6 +317,8 @@ function handleLocationError(hasGeolocation) {
   console.error(errorText);
 }
 
+
+
 const favoritesToggleButton = document.querySelector('.favorites-toggle-button');
 favoritesToggleButton.addEventListener('click', toggleFavorites);
 
@@ -313,7 +328,13 @@ document.addEventListener('DOMContentLoaded', function () {
   fetch('utilities.php?action=getProfessionals')
     .then(response => response.json())
     .then(data => {
-      professionals = data;
+
+
+      data.forEach(professional => {
+        if (professional.is_active == 1) {
+          professionals.push(professional);
+        }
+      });
 
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -337,6 +358,38 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     })
     .catch(error => console.error('Error loading professionals:', error));
+
+  fetch('utilities.php?action=getUserRequests')
+    .then(response => response.json())
+    .then(data => {
+      if (data.success && data.requests.length > 0) {
+        data.requests.forEach(request => {
+          console.log('Found active request:', request);
+
+          if (request.status === 'pending') {
+            const map = document.getElementById('map');
+            if (!map.classList.contains('hidden')) { map.classList.add('hidden'); }
+
+            handleSentRequest(request.professionalName, request.professionalId, request.requestId, 'past');
+
+            startPolling(request.requestId);
+          } else if (request.status === 'accepted') {
+
+            document.addEventListener('MapInitialized', function () {
+              document.querySelectorAll('.call-worker-button').forEach(button => {
+                button.disabled = true;
+                button.classList.add('request-sent');
+                if (button.closest('.worker-entry').dataset.id === request.professionalId) {
+                  button.textContent = 'Richiesta inviata';
+                }
+              });
+            });
+
+            startPolling(request.requestId);
+          }
+        });
+      }
+    });
 });
 
 
@@ -348,14 +401,13 @@ document.querySelectorAll('.category-button').forEach(button => {
 
     if (this.classList.contains('active')) {
       this.classList.remove('active');
-      filteredProfessionals = professionals; // Se disattivi la categoria, mostra tutti i professionisti.
+      filteredProfessionals = professionals;
     } else {
       document.querySelectorAll('.category-button').forEach(b => b.classList.remove('active'));
       this.classList.add('active');
       filteredProfessionals = professionals.filter(p => p.professione.toLowerCase() === category);
     }
 
-    // Se il toggle dei preferiti è attivo, filtra ulteriormente per mostrare solo i preferiti nella categoria selezionata
     if (document.querySelector('.favorites-toggle-button').classList.contains('active')) {
       filteredProfessionals = filteredProfessionals.filter(p => favoritesList.includes(p.id));
     }
@@ -364,46 +416,295 @@ document.querySelectorAll('.category-button').forEach(button => {
   });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-  const requestButton = document.querySelector('.send-request-button');
+/* document.addEventListener("DOMContentLoaded", function () {
+  // Gestione dell'inizializzazione della mappa
+  document.addEventListener('MapInitialized', function () {
+    attachEventToRequestButtons();
+  });
+}); */
 
-  requestButton.addEventListener('click', function () {
-    const workerEntry = this.closest('.worker-entry');
-    const professionalId = workerEntry.dataset.id;
-    const professionalName = workerEntry.dataset.name;
-    const callPrice = workerEntry.dataset.callprice;
-    const hourPrice = workerEntry.dataset.hourprice;
+function attachEventToRequestButtons() {
+  const professionistiButtons = document.querySelectorAll('.worker-menu .call-worker-button');
 
-    const requestData = {
-      professionalId: professionalId,
-      professionalName: professionalName,
-      callPrice: callPrice,
-      hourPrice: hourPrice
-    };
+  professionistiButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      showProfessionalDetails(this);
+    });
+  });
 
-    fetch('utilities.php?action=addRequest', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(requestData)
+  const sendRequestButton = document.querySelector('.send-request-button');
+  sendRequestButton.addEventListener('click', sendRequest);
+}
+
+function showProfessionalDetails(button) {
+  const workerEntry = button.closest('.worker-entry');
+  const nome = workerEntry.dataset.name;
+  const professione = workerEntry.dataset.category;
+  const prezzoOrario = workerEntry.dataset.hourprice;
+  const prezzoChiamata = workerEntry.dataset.callprice;
+  const posizione = workerEntry.querySelector('.worker-position span').textContent;
+  const img = workerEntry.dataset.img;
+
+  // Nascondi la mappa
+  const map = document.getElementById('map');
+  map.classList.add('hidden');
+
+  // Mostra i dettagli del professionista
+  const detailsContainer = document.getElementById('professional-details');
+  document.getElementById('professional-image').src = img;
+  document.getElementById('professional-name').textContent = nome;
+  document.getElementById('professional-category').textContent = professione;
+  document.getElementById('professional-address').textContent = posizione;
+  document.getElementById('professional-call-price').textContent = prezzoChiamata;
+  document.getElementById('professional-hour-price').textContent = prezzoOrario;
+  detailsContainer.dataset.id = workerEntry.dataset.id;
+  detailsContainer.dataset.name = nome;
+  detailsContainer.dataset.callprice = prezzoChiamata;
+  detailsContainer.dataset.hourprice = prezzoOrario;
+  detailsContainer.classList.remove('hidden');
+}
+
+function sendRequest() {
+  const detailsContainer = document.getElementById('professional-details');
+
+  const professionalId = detailsContainer.dataset.id;
+  const professionalName = detailsContainer.dataset.name;
+  const callPrice = detailsContainer.dataset.callprice;
+  const hourPrice = detailsContainer.dataset.hourprice;
+  const details = document.getElementById('request').value;
+
+  const requestData = {
+    professionalId,
+    professionalName,
+    callPrice,
+    hourPrice,
+    details,
+    userLng: userMarker.getPosition().lng(),
+    userLat: userMarker.getPosition().lat()
+  };
+
+  fetch('utilities.php?action=addRequest', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestData)
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        handleSentRequest(professionalName, professionalId, data.requestId, 'live');
+        startPolling(data.requestId);
+      } else {
+        alert('Errore durante invio della richiesta');
+      }
     })
+    .catch(error => {
+      console.error('Errore:', error);
+    });
+}
+
+function handleSentRequest(professionalName, professionalId, requestId, type) {
+  document.getElementById('professional-details').classList.add('hidden');
+  document.querySelector('.request-pending-container').classList.remove('hidden');
+  document.querySelector('.professional-name-post').textContent = professionalName;
+
+
+  const requestAcceptedContainer = document.querySelector('.request-pending-container');
+  requestAcceptedContainer.dataset.requestId = requestId;
+
+  if (type === 'past') {
+    document.addEventListener('MapInitialized', function () {
+      document.querySelectorAll('.call-worker-button').forEach(button => {
+        button.disabled = true;
+        button.classList.add('request-sent');
+        if (button.closest('.worker-entry').dataset.id === professionalId) {
+          button.textContent = 'Richiesta inviata';
+        }
+      });
+    });
+  } else {
+    document.querySelectorAll('.call-worker-button').forEach(button => {
+      button.disabled = true;
+      button.classList.add('request-sent');
+      if (button.closest('.worker-entry').dataset.id === professionalId) {
+        button.textContent = 'Richiesta inviata';
+      }
+    });
+  }
+}
+
+function handleFinishedRequest() {
+  console.log('Request has been closed');
+
+  document.querySelectorAll('.call-worker-button').forEach(button => {
+    button.disabled = false;
+    button.classList.remove('request-sent');
+    button.textContent = 'Richiedi';
+  });
+  const rejectedContainer = document.querySelector('.request-rejected-container');
+  if (rejectedContainer.classList.contains('hidden')) {
+    document.getElementById('map').classList.remove('hidden');
+  }
+}
+
+
+function startPolling(requestId) {
+  const pollRequest = () => {
+    fetch(`utilities.php?action=getRequestDetails&requestId=${requestId}`)
       .then(response => response.json())
       .then(data => {
-        if (data.success) {
-          alert('Richiesta inviata con successo a ' + professionalName);
-        } else {
-          alert('Errore durante l invio della richiesta');
+        console.log(data);
+        const map = document.getElementById('map');
+        if (!map.classList.contains('hidden')) { map.classList.add('hidden'); }
+
+        if (data.success && data.requestDetails) {
+          if (data.requestDetails.status === 'accepted') {
+            handleRequestAccept(data.requestDetails);
+          } else if (data.requestDetails.status === 'completed') {
+            updateClientOnCompletion(requestId);
+          } else if (data.requestDetails.status === 'canceled') {
+            clearInterval(pollingInterval);
+            clearCanceledRequest(requestId);
+          }
+        } else if (!data.success && data.error === 'Request not found') {
+          handleRequestRemoval();
         }
       })
-      .catch(error => {
-        console.error('Errore:', error);
-      });
+      .catch(error => console.error('Error fetching request details:', error));
+  };
+
+  pollRequest();
+  pollingInterval = setInterval(pollRequest, 5000);
+}
+
+function clearCanceledRequest() {
+  const requestContainer = document.querySelector('.request-pending-container');
+  const requestId = requestContainer.dataset.requestId;
+  
+  fetch('utilities.php?action=clearCanceledRequest', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ requestId })
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        console.log('Request cleared');
+      } else {
+        console.error('Error deleting request:', data.error);
+      }
+    })
+    .catch(error => console.error('Error deleting request:', error));
+}
+
+function handleRequestAccept(details) {
+  console.log('Request has been accepted');
+  document.dispatchEvent(new CustomEvent('RequestAccepted', { detail: { details: details } }));
+  console.log(details);
+  document.querySelector('.request-pending-container').classList.add('hidden');
+  document.querySelector('.request-accepted-container').classList.remove('hidden');
+  document.querySelector('.professional-name-banner').textContent = details.professionalName;
+  document.querySelector('.banner-internal-container img').src = `img/professionals/${details.professionalName.split(' ')[0].toLowerCase() + '-' + details.professionalName.split(' ')[1].toLowerCase() + '-' + details.professionalId}.jpeg`;
+}
+
+
+function handleRequestRemoval() {
+  console.log('Request has been rejected or removed');
+  document.querySelector('.request-pending-container').classList.add('hidden');
+  document.querySelector('.request-rejected-container').classList.remove('hidden');
+  document.querySelector('.professional-name-rejected').textContent = document.querySelector('.professional-name-post').textContent;
+
+  const closeRejectedButton = document.querySelector('#close-rejected-button');
+  closeRejectedButton.addEventListener('click', function () {
+    document.querySelector('.request-rejected-container').classList.add('hidden');
+    handleFinishedRequest();
   });
+
+  clearInterval(pollingInterval);
+}
+
+function updateClientOnCompletion(requestId) {
+  console.log('Request has been completed');
+  document.querySelector('.request-accepted-container').classList.add('hidden');
+  clearInterval(pollingInterval);
+  stopProfessionalTracking();
+  handleFinishedRequest();
+
+  fetch('utilities.php?action=deleteRequest', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ requestId })
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        console.log('Request deleted');
+      } else {
+        console.error('Error deleting request:', data.error);
+      }
+    })
+    .catch(error => console.error('Error deleting request:', error));
+}
+
+function chiudiDettagli() {
+  document.getElementById('map').classList.remove('hidden');
+  document.getElementById('professional-details').classList.add('hidden');
+}
+
+
+function setupCancellation() {
+  const cancelButton = document.querySelector('#cancel-button');
+  cancelButton.addEventListener('click', function () {
+    cancelRequest();
+    clearCanceledRequest();
+  });
+}
+
+function cancelRequest() {
+  const requestContainer = document.querySelector('.request-pending-container');
+  const requestId = requestContainer.dataset.requestId;
+
+  fetch('utilities.php?action=cancelRequest', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ requestId })
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        closeRequestAccepted();
+      } else {
+        alert('Errore durante annullamento della richiesta.');
+      }
+    })
+    .catch(error => {
+      console.error('Errore:', error);
+    });
+}
+
+function closeRequestAccepted() {
+  const requestAcceptedContainer = document.querySelector('.request-pending-container');
+  requestAcceptedContainer.classList.add('hidden');
+  document.getElementById('map').classList.remove('hidden');
+
+  document.querySelectorAll('.call-worker-button').forEach(button => {
+    button.disabled = false;
+    button.classList.remove('request-sent');
+    button.textContent = 'Richiedi';
+  });
+  clearInterval(pollingInterval);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  setupCancellation();
 });
-
-
-
 
 
 

@@ -3,7 +3,7 @@
 <div class="header fixed-width">
     <div class="header-right">
         <a href="index.php" class="logo-container">
-            <img class="logo" src="img/logo_new.png">
+            <img class="logo" src="img/text-logo.png">
         </a>
     </div>
     <div class="header-left">

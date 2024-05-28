@@ -3,37 +3,37 @@
 
         <div class="category">
             <button class="category-button" data-category="idraulico">
-                <img src="img/idraulico.png" alt="idraulico">
+                <img draggable="false" src="img/idraulico.png" alt="idraulico">
             </button>
             <span class="category-name">Idraulico</span>
         </div>
         <div class="category">
             <button class="category-button" data-category="pittore">
-                <img src="img/pittore.png" alt="pittore">
+                <img draggable="false" src="img/pittore.png" alt="pittore">
             </button>
             <span class="category-name">Pittore</span>
         </div>
         <div class="category">
             <button class="category-button" data-category="elettricista">
-                <img src="img/elettricista.png" alt="elettricista">
+                <img draggable="false" src="img/elettricista.png" alt="elettricista">
             </button>
             <span class="category-name">Elettricista</span>
         </div>
         <div class="category">
             <button class="category-button" data-category="fabbro">
-                <img src="img/fabbro.png" alt="fabbro">
+                <img draggable="false" src="img/fabbro.png" alt="fabbro">
             </button>
             <span class="category-name">Fabbro</span>
         </div>
         <div class="category">
             <button class="category-button" data-category="colf">
-                <img src="img/colf.png" alt="colf">
+                <img draggable="false" src="img/colf.png" alt="colf">
             </button>
             <span class="category-name">Colf</span>
         </div>
         <div class="category">
             <button class="category-button" data-category="tuttofare">
-                <img src="img/tuttofare.png" alt="tuttofare">
+                <img draggable="false" src="img/tuttofare.png" alt="tuttofare">
             </button>
             <span class="category-name">Tuttofare</span>
         </div>
@@ -79,11 +79,11 @@
                 </div>
             </div>
         </div>
-        <div id="professional-details" class="hidden">
+        <div id="professional-details" data-id="" data-name="" data-callprice="" data-hourprice="" class="hidden">
             <div class="container-4">
                 <div class="container-2">
                     <div class="container-1">
-                        <img id="professional-image" src="img/professionals/cristian-delauretis-piva.jpeg" alt="">
+                        <img draggable="false" id="professional-image" src="" alt="">
                         <div id="professional-internal-details">
                             <h2 id="professional-name"></h2>
                             <p id="professional-category"></p>
@@ -139,6 +139,79 @@
                     </button>
                 </div>
 
+            </div>
+
+
+        </div>
+        <div class="request-pending-container hidden">
+            <div class="request-pending">
+                <div class="internal-container-2">
+                    <div class="internal-container-1">
+                        <h2>Richiesta inviata con successo!</h2>
+                        <p>Siamo in attesa che <span class="professional-name-post"></span> accetti la tua richiesta.</p>
+                    </div>
+                    <div class="gif-container" style="width:100%;height:50%;position:relative">
+                        <img draggable="false" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExN3hsZ24waW83eHhiam41bXdlem1jb2pob3NrbzYwNmNwd3gwNG92dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/BDQmMy3ZM8sgRNFkhe/giphy.gif" width="100%" height="100%" style="position:absolute;border-radius: 15px;" frameBorder="0" class="giphy-embed" ></img>
+                    </div>
+                    <button class="default-button" id="cancel-button">
+                        Annulla
+                    </button>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="request-accepted-container hidden">
+            <div class="banner-container">
+                <div class="banner">
+                    <div class="banner-internal-container">
+                        <img draggable="false" src="" alt="">
+                        <div class="i-container">
+                            <h2>Richiesta accettata!</h2>
+                            <p><span class="professional-name-banner"></span> è in arrivo!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="map" id="tracking-map"></div>
+        </div>
+
+
+        <!-- <div class="request-accepted">
+                <div class="internal-accepted-container-3">
+                    <div class="internal-accepted-container-4">
+                        <h2>Richiesta accettata!</h2>
+                        <p><span class="professional-name-post"></span> è in arrivo!</p>
+                        <div class="arrival-info">
+                            <p>Orario previsto di arrivo: <span id="estimated-arrival-time">Caricamento...</span></p>
+                            <p>Dettagli del professionista:</p>
+                            <ul>
+                                <li>Specializzazione: <span id="professional-specialization"></span></li>
+                                <li>Esperienza: <span id="professional-experience"></span> anni</li>
+                            </ul>
+                        </div>
+                        <button class="default-button" onclick="cancelRequest()">Annulla Richiesta</button>
+                    </div>
+                </div>
+            </div> -->
+
+
+        <div class="request-rejected-container hidden">
+            <div class="request-rejected">
+                <div class="internal-container-2">
+                    <div class="internal-rejected-container-4">
+                        <h2>Richiesta rifiutata!</h2>
+                        <p>Ci dispiace ma <span class="professional-name-rejected"></span> non ha accettato la tua richiesta.</p>
+                        <p>Riprova più tardi.</p>
+                    </div>
+                    <div class="gif-container" style="width:100%;height:50%;position:relative;">
+                        <img draggable="false" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHB1YWlxeDhqdDRibnIyZ3d6a2RjdmU3OWhjMXBtcmZrMndkZThzNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ISOckXUybVfQ4/giphy.gif" width="100%" height="100%" style="position:absolute;border-radius: 15px;" frameBorder="0" class="giphy-embed"></img>
+                    </div>
+                    <button class="default-button" id="close-rejected-button">
+                        Chiudi
+                    </button>
+                </div>
             </div>
 
 
