@@ -5,16 +5,13 @@ $password = "AVNS_cHQGTt60SUNMFk3QDFb";
 $dbname = "defaultdb";
 $port=25060;
 
-// Create connection
 $conn = new mysqli($host, $username, $password, $dbname, $port);
-
+$conn->options(MYSQLI_OPT_CONNECT_TIMEOUT, 30); 
 
 // Check connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-/* echo "Connected successfully";
- */
 ?>
 
 

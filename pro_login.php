@@ -19,6 +19,7 @@ else {
     
     $_SESSION['email'] = $email;
     $_SESSION['piva'] = $row['piva'];
+    $_SESSION['userid'] = $row['piva'];
     $_SESSION['name'] = $row['nome'];
     $_SESSION['cognome'] = $row['cognome'];
     $_SESSION['indirizzo'] = $row['indirizzo'];
@@ -32,6 +33,5 @@ else {
     exit();
 }
 
-// Close the database connection
 $conn->close();
 ?>

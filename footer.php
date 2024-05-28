@@ -24,9 +24,9 @@
             <div class="column">
                 <h3 class="footer-title dark_text">Social</h3>
                 <ul class="social-icons">
-                    <li><a href="#"><img src="img/icons/facebook.png" alt="Facebook"></a></li>
-                    <li><a href="#"><img src="img/icons/X.svg" alt="X"></a></li>
-                    <li><a href="#"><img src="img/icons/instagram.png" alt="Instagram"></a></li>
+                    <li><a href="#"><img draggable="false" src="img/icons/facebook.png" alt="Facebook"></a></li>
+                    <li><a href="#"><img draggable="false" src="img/icons/X.svg" alt="X"></a></li>
+                    <li><a href="#"><img draggable="false" src="img/icons/instagram.png" alt="Instagram"></a></li>
                 </ul>
             
         </div>
