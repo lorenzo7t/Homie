@@ -2,8 +2,8 @@
 // Start the session
 session_start();
 include 'db_connection.php';
-if (isset($_SESSION['professione'])) {
-    header('Location:pro_profile.php');
+if (!isset($_SESSION['professione'])) {
+    header('Location:profile.php');
     exit();
 }
 ?>
@@ -142,15 +142,16 @@ if (isset($_SESSION['professione'])) {
                 <div id="ordini" class="page">
                     <h1>I Miei Ordini</h1>
                     <?php
-                    $query = "SELECT distinct * FROM homie.orders JOIN homie.pro_data WHERE user_id = '$userId' AND pro_id = piva ORDER BY date DESC";
-                    $result = $conn->query($query);
+                    // Fetch the orders from the database
+                    $query = "SELECT distinct * FROM homie.orders JOIN homie.user_data WHERE pro_id = '$userId' AND user_id = userid ORDER BY date DESC";
+                        $result = $conn->query($query);
 
                     // Check if there are any orders
                     if ($result->num_rows > 0) {
                         // Loop through the orders and create the HTML elements
                         while ($row = $result->fetch_assoc()) {
-                            $pro_id = htmlspecialchars($row['pro_id']);
-                            $pro_name= htmlspecialchars($row['nome']);
+                            $user_id = htmlspecialchars($row['user_id']);
+                            $user_name= htmlspecialchars($row['nome']);
                             $orderDate = htmlspecialchars($row['date']);
                             $details = htmlspecialchars($row['details']);
                                 if(htmlspecialchars(
@@ -165,17 +166,17 @@ if (isset($_SESSION['professione'])) {
 
                             // Create the HTML elements for each order
                             echo '<div class="order">';
-                            echo '<p>Professionista: ' . $pro_name . '</p>';
+                            echo '<p>Cliente: ' . $user_name . '</p>';
                             echo '<p>Data: ' . $orderDate . '</p>';
                             echo '<p>Dettagli: ' . $details . '</p>';
                             echo '<p>Stato: ' . $completed . '</p>';
                             echo '</div>';
                         }
-                    } else {
-                        // Display a message if there are no orders
-                        echo '<p>No orders found.</p>';
                     }
-                    
+                        else {
+                            // Display a message if there are no orders
+                            echo '<p>No orders found.</p>';
+                        }
                     ?>
                 </div>
                 <div id="contact" class="page">
@@ -210,18 +211,6 @@ if (isset($_SESSION['professione'])) {
             </div>
         </div>
     </div>
-
-
-<!--     <script>
-        function openPage(pageName) {
-            var i, pages;
-            pages = document.getElementsByClassName("page");
-            for (i = 0; i < pages.length; i++) {
-                pages[i].classList.remove("active");
-            }
-            document.getElementById(pageName).classList.add("active");
-        }
-    </script> -->
     <div class="mp-footer">
         <?php include 'footer.php'; ?>
     </div>

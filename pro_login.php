@@ -15,7 +15,7 @@ if ($result->num_rows == 0) {
     header('Location:professionist_login.php?error= Credenziali non valide');
 } 
 else {
-    $row = $result->fetch_assoc();
+    $row = $result->fetch_assoc(); 
     
     $_SESSION['email'] = $email;
     $_SESSION['piva'] = $row['piva'];
