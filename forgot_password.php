@@ -24,7 +24,7 @@
     <a href="index.php" class="homie-logo">
             <img class="logo" src="img/logo_new.png">
     </a>
-    <form class="form"  style="height: 15vw" action="reset_password.php" method="POST">
+    <form class="form"  style="height: 15vw" action="send_reset_email.php" method="POST">
     <p class="form-title ">Inserisci la mail per reimpostare la password</p>
     <div class="input-container">
         <label>Email </label>

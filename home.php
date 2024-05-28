@@ -1,4 +1,12 @@
-
+<?php
+// Start the session
+session_start();
+include 'db_connection.php';
+if (isset($_SESSION['professione'])) {
+    header('Location:home_pro.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -17,6 +25,7 @@
     <script src="script/maps.js" defer></script>
     <script src="script/map.js" defer></script>
     <script src="script/animations.js" defer></script>
+    <script src="favorite.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAV2pCTErRiX6IWUu6Ol7gVE0U37rWWB_s"></script>
 

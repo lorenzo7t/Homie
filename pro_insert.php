@@ -11,6 +11,7 @@ $cognome= $conn->real_escape_string($_POST['cognome']);
 $email= $conn->real_escape_string($_POST['email']);
 $indirizzo= $conn->real_escape_string($_POST['indirizzo']);
 $password= $conn->real_escape_string($_POST['password']);
+
 $professione= $conn->real_escape_string($_POST['professione']);
 $piva= $conn->real_escape_string($_POST['piva']);
 $p_orario= $conn->real_escape_string($_POST['p_orario']);

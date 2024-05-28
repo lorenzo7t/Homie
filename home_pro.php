@@ -1,3 +1,12 @@
+<?php
+// Start the session
+session_start();
+include 'db_connection.php';
+if (!isset($_SESSION['professione'])) {
+    header('Location:home.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html>
 

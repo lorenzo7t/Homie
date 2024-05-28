@@ -221,3 +221,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
             break;
     }
 }
+
+/* function favorite_handler(){
+    session_start();
+include 'db_connection.php';
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+$response = ['success' => false];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $input = json_decode(file_get_contents('php://input'), true);
+    $user_id = $_SESSION['userid'];
+    $item_id = $conn->real_escape_string($input['item_id']);
+    $checked = filter_var($input['checked'], FILTER_VALIDATE_BOOLEAN);
+
+    if ($checked) {
+        // Add to favorites
+        $query = "INSERT INTO homie.favorites (userid, item_id) VALUES (?, ?)";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ii", $user_id, $item_id);
+        if ($stmt->execute()) {
+            $response['success'] = true;
+            $response['message'] = "Aggiunto ai preferiti.";
+        } else {
+            $response['message'] = 'Errore durante l\'aggiunta ai preferiti: ' . $conn->error;
+        }
+    } else {
+        // Remove from favorites
+        $query = "DELETE FROM homie.favorites WHERE userid = ? AND item_id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ii", $user_id, $item_id);
+        if ($stmt->execute()) {
+            $response['success'] = true;
+            $response['message'] = "Rimosso dai preferiti.";
+        } else {
+            $response['message'] = 'Errore durante la rimozione dai preferiti: ' . $conn->error;
+        }
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+
+echo json_encode($response);
+
+} */
