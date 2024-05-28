@@ -14,17 +14,17 @@
                 <div class="steps-container">
                     <div class="step">
                         <h4 class="step-title roboto-regular">Problemi in casa?</h4>
-                        <img src="img/problems.png" alt="Step 1">
+                        <img draggable="false" src="img/problems.png" alt="Step 1">
                         <a class="step-description">Un rubinetto che perde? Una serratura da cambiare? Apri Homie e dicci cosa ti serve.</a>
                     </div>
                     <div class="step">
                         <h4 class="step-title roboto-regular">Apri Homie</h4>
-                        <img src="img/call.png" alt="Step 2">
+                        <img draggable="false" src="img/call.png" alt="Step 2">
                         <a class="step-description">Visualizza i professionisti disponibili vicino a te e scegli quello che preferisci in base a recensioni e tariffe.</a>
                     </div>
                     <div class="step">
                         <h4 class="step-title roboto-regular">Fatto!</h4>
-                        <img src="img/solution.png" alt="Step 3">
+                        <img draggable="false" src="img/solution.png" alt="Step 3">
                         <a class="step-description">Conferma il servizio e il tuo professionista arriverà in un istante.</a>
                     </div>
                 </div>
@@ -34,30 +34,30 @@
                 <div class="workers-container">
                     <div class="col">
                         <div class="worker">
-                            <img src="img/idraulico.png" alt="Plumber">
+                            <img draggable="false" src="img/idraulico.png" alt="Plumber">
                             <a class="worker-title roboto-regular">Idraulico</a>
                         </div>
                         <div class="worker">
-                            <img src="img/elettricista.png" alt="Electrician">
+                            <img draggable="false" src="img/elettricista.png" alt="Electrician">
                             <a class="worker-title roboto-regular">Elettricista</a>
                         </div>
 
                         <div class="worker">
-                            <img src="img/fabbro.png" alt="Blacksmith">
+                            <img draggable="false" src="img/fabbro.png" alt="Blacksmith">
                             <a class="worker-title roboto-regular">Fabbro</a>
                         </div>
                     </div>
                     <div class="col">
                         <div class="worker">
-                            <img src="img/pittore.png" alt="Painter">
+                            <img draggable="false" src="img/pittore.png" alt="Painter">
                             <a class="worker-title roboto-regular">Pittore</a>
                         </div>
                         <div class="worker">
-                            <img src="img/colf.png" alt="Housekeeper">
+                            <img draggable="false" src="img/colf.png" alt="Housekeeper">
                             <a class="worker-title roboto-regular">Colf</a>
                         </div>
                         <div class="worker">
-                            <img src="img/tuttofare.png" alt="Handyman">
+                            <img draggable="false" src="img/tuttofare.png" alt="Handyman">
                             <a class="worker-title roboto-regular">Tuttofare</a>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
             <section class="live-tracking">
                 <div class="live-tracking-container">
                     <div class="live-tracking-content">
-                        <img src="img/tracking.png" alt="Live tracking">
+                        <img draggable="false" src="img/tracking.png" alt="Live tracking">
                         <div class="text-wrapper">
                             <a class="roboto-bold dark_text" style="font-size: 30px;">Non sai quando arriverà il tuo professionista?</a>
                             <a class="description dark_text">Con Homie puoi seguirlo in tempo reale e sapere esattamente quando arriverà.</a>

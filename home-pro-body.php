@@ -24,7 +24,7 @@ $rating = $_SESSION['rating'];
                 <div class="external-professional-details-container">
                     <div class="professional-details-container">
                         <div class="professional-image">
-                            <img src="img/professionals/<?php echo $image?>" alt="">
+                            <img draggable="false" src="img/professionals/<?php echo $image?>" alt="">
                         </div>
                         <div class="professional-details">
                             <h2><?php echo $username?></h2>
@@ -81,7 +81,7 @@ $rating = $_SESSION['rating'];
                     </div>
 
                     <div>
-                        <button class="default-button">Rifiuta tutto</button>
+                        <button class="default-button" onclick="rejectAll()">Rifiuta tutto</button>
                     </div>
                 </div>
             </div>
@@ -93,26 +93,11 @@ $rating = $_SESSION['rating'];
                 </div>
 
                 <ul>
-                    <div class="request-container">
-                        <div class="request">
-                            <div class="img-det-container">
-                                <div class="request-image">
-                                    <img src="img/default-avatar.png" alt="default-avatar">
-                                </div>
-                                <div class="request-details">
-                                    <h2>Pino Pappa</h2>
-                                    <p>Via Roma 1, 20100 Milano</p>
-                                    <p style="font-style: italic;">6 minuti fa</p>
-                                </div>
-                            </div>
-                            <div class="request-buttons">
-                                <button class="default-button accept-request">Accetta</button>
-                                <button class="default-button reject-request">Rifiuta</button>
-                            </div>
-                        </div>
-                    </div>
-
                 </ul>
+            </div>
+
+            <div class="map ongoing-request-container hidden">
+
             </div>
         </div>
     </div>
