@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const cancelButton = document.getElementById('cancelButton');
     const inputs = document.querySelectorAll('#profileForm input');
     const responseMessage = document.getElementById('responseMessage');
+    document.querySelector(".navigation-bar button.active-btn").click();
 
     editButton.addEventListener('click', function () {
         inputs.forEach(input => input.disabled = false);

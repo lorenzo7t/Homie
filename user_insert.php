@@ -11,6 +11,9 @@ $email = $conn->real_escape_string($_POST['email']);
 $indirizzo = $conn->real_escape_string($_POST['indirizzo']);
 $password = $conn->real_escape_string($_POST['password']);
 
+// Cripta la password usando MD5
+$password_md5 = md5($password);
+
 $sql = "SELECT * FROM homie.user_data WHERE email = '$email'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -19,7 +22,7 @@ if ($result->num_rows > 0) {
 }
 
 $sql = "INSERT INTO homie.user_data (nome, cognome, email, indirizzo, password)
-VALUES ('$nome', '$cognome', '$email', '$indirizzo', '$password')";
+VALUES ('$nome', '$cognome', '$email', '$indirizzo', '$password_md5')";
 
 if ($conn->query($sql) === TRUE) {
     $userid = $conn->insert_id;

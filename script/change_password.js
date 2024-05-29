@@ -7,6 +7,10 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault();
         const formData = new FormData(this);
 
+         // Clear previous error messages
+         clearMessages();
+
+
         const oldPassword = document.getElementById("old_password").value;
         const newPassword = document.getElementById("password").value;
         const confirmPassword = document.getElementById("confirm_password").value;
@@ -20,25 +24,49 @@ document.addEventListener("DOMContentLoaded", function () {
             method: 'POST',
             body: formData
         })
-        .then(response => response.json())
+        .then(response => response.text())  // Change to .text() to inspect the raw response
         .then(data => {
-            if (data.success) {
-                responseMessage.textContent = 'Password aggiornata con successo!';
-                responseMessage.style.color = 'green';
-                oldPassword.value = '';
-                newPassword.value = '';
-                confirmPassword.value = '';
-
-                //window.location.reload();
-            } else {
-                responseMessage.textContent = 'Errore durante l\'aggiornamento del profilo.';
-                responseMessage.style.color = 'red';
+            try {
+                const jsonData = JSON.parse(data);  // Try to parse the response as JSON
+                if (jsonData.success) {
+                    showMessage(responseMessage, 'Password aggiornata con successo!', 'green');
+                    clearForm();
+                } else {
+                    if (jsonData.message === "La vecchia password non è corretta.") {
+                        showError(passwordError, jsonData.message);
+                    } else {
+                        showMessage(responseMessage, 'Errore durante l\'aggiornamento del profilo.', 'red');
+                    }
+                }
+            } catch (e) {
+                // If JSON.parse fails, log the raw response
+                showMessage(responseMessage, 'Errore durante la richiesta: ' + data, 'red');
+                console.error('Error:', data);
             }
         })
         .catch(error => {
-            responseMessage.textContent = 'Errore durante la richiesta: ' + error.message;
-            responseMessage.style.color = 'red';
+            showMessage(responseMessage, 'Errore durante la richiesta: ' + error.message, 'red');
             console.error('Error:', error);
         });
     });
+
+    function showMessage(element, message, color) {
+        element.textContent = message;
+        element.style.color = color;
+    }
+
+    function showError(element, message) {
+        element.textContent = message;
+    }
+
+    function clearMessages() {
+        passwordError.textContent = '';
+        responseMessage.textContent = '';
+    }
+
+    function clearForm() {
+        document.getElementById("old_password").value = '';
+        document.getElementById("password").value = '';
+        document.getElementById("confirm_password").value = '';
+    }
 });
