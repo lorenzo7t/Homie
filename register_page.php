@@ -16,9 +16,13 @@ include 'db_connection.php';
     <link rel="icon" href="img/icons/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="img/icons/favicon.ico" type="image/x-icon">
     <script src="script/autocomplete.js" defer></script>
+    <script src="script/address.js" defer></script>
     <script src="script/maps.js" defer></script>
     <script src="script/animations.js" defer></script>
     <script src="script/check_password.js" defer></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAV2pCTErRiX6IWUu6Ol7gVE0U37rWWB_s"></script>
+
 </head>
 
 <body style="background-color: #A8DADC;">
@@ -46,8 +50,10 @@ include 'db_connection.php';
             </div>
             <div class="input-container">
                 <label for="indirizzo">Indirizzo</label>
-                <input class="input-field" type="text" placeholder="Enter Address" required="" id="indirizzo" name="indirizzo">
+                <input class="input-field" type="text" placeholder="Enter Address" required="" id="address" name="indirizzo" onkeyup="handleInputB()">
+                
             </div>
+            <ul id="resultsContainer"></ul>
             <div class="input-container">
                 <label for="password">Password</label>
                 <input class="input-field" type="password" placeholder="Enter password" required="" id="password" name="password" >
