@@ -97,6 +97,7 @@ function getAddress()
     $conn->close();
 }
 
+
 function updateAddress()
 {
     include 'db_connection.php';
@@ -105,14 +106,18 @@ function updateAddress()
     $coords = getCachedCoords($newAddress);
 
     $userId = $_SESSION['userid'];
-    $query = "UPDATE homie.user_data SET indirizzo = '$newAddress' WHERE userid = $userId";
-    if ($conn->query($query)) {
+    $query = "UPDATE homie.user_data SET indirizzo = ? WHERE userid = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("si", $newAddress, $userId);
+
+    if ($stmt->execute()) {
         $_SESSION['indirizzo'] = $newAddress;
         echo json_encode(['success' => true, 'lat' => $coords['lat'], 'lng' => $coords['lng']]);
     } else {
-        echo json_encode(['success' => false, 'error' => $conn->error]);
+        echo json_encode(['success' => false, 'error' => $stmt->error]);
     }
 
+    $stmt->close();
     $conn->close();
 }
 
@@ -606,6 +611,58 @@ function getUserRequests()
     }
 }
 
+function getFavorites() {
+    include 'db_connection.php';
+    $userId = $_SESSION['userid'];
+    header('Content-Type: application/json');
+
+    $query = "SELECT pro_id FROM homie.favorites WHERE user_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $userId);
+
+    if ($stmt->execute()) {
+        $result = $stmt->get_result();
+        $favorites = [];
+        while ($row = $result->fetch_assoc()) {
+            $favorites[] = $row['pro_id'];
+        }
+        echo json_encode(['success' => true, 'favorites' => $favorites]);
+    } else {
+        echo json_encode(['success' => false, 'error' => 'Errore durante il recupero dei preferiti']);
+    }
+    
+    $stmt->close();
+    $conn->close();
+}
+
+function addFavorite() {
+    include 'db_connection.php';
+    $data = json_decode(file_get_contents('php://input'), true);
+    $userId = $_SESSION['userid'];
+    $professionalId = $data['professionalId'];
+    $isFavorite = $data['isFavorite'];
+
+    header('Content-Type: application/json');
+
+    if ($isFavorite) {
+        $query = "INSERT INTO homie.favorites (user_id, pro_id) VALUES (?, ?)";
+    } else {
+        $query = "DELETE FROM homie.favorites WHERE user_id = ? AND pro_id = ?";
+    }
+
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("is", $userId, $professionalId);
+
+    if ($stmt->execute()) {
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false, 'error' => 'Errore durante l\'aggiornamento dei preferiti']);
+    }
+    
+    $stmt->close();
+    $conn->close();
+}
+
 
 
 
@@ -665,6 +722,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
         case 'clearCanceledRequest':
             clearCanceledRequest();
             break;
+
+        case 'addFavorite':
+            addFavorite();
+            break;
     }
 }
 
@@ -695,6 +756,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
 
         case 'getUserRequests':
             getUserRequests();
+            break;
+
+        case 'getFavorites':
+            getFavorites();
             break;
     }
 }
