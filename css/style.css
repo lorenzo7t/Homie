@@ -870,9 +870,10 @@ span::before {
 
 .step-description {
     color: #1D3557;
-    padding-left: 40px;
+/*     padding-left: 40px;
     padding-right: 40px;
-    padding-top: 20px;
+    padding-top: 20px; */
+    padding: 30px;
     font-size: 20px;
 }
 
@@ -2775,6 +2776,7 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
 .external-title-container .pulsing-circle {
     background: #cee6c3;
 }
+
 @media (min-width: 426px) {
     .carousel-container {
         display: none;
@@ -2876,6 +2878,9 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
 
     .input-container input {
         width: 100%;
+    }
+    #login-button {
+        text-align: center;
     }
 
     .signup-link {
@@ -2995,6 +3000,8 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
     .number-input-container {
         margin: 10px 0px !important;
 
+    }
+
     #business-signup-button{
        display: none;
     }
@@ -3017,8 +3024,20 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
         width: 8vh;
     }
     .mini-map{
-        width: 6vh;
-        height: 8vh;
+        width: 60px;
+        height: auto;
+    }
+    .columns-wrapper {
+        flex-direction: column;
+    }
+    .social-icons {
+        flex-direction: row;
+    }
+
+    .main-page-top {
+        height: 72vh;
+        padding-top: 10%;
+
     }
     .search-box-container{
         width: 100%;
@@ -3109,12 +3128,24 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
         padding: 20px;
         height: 27vh;
         display: grid;
+        justify-content: center;
+    }
+    .section-title {
+        font-size: 35px;
+    }
+    .live-tracking-content img {
+        width: 300px;
+        height: auto !important;
+    }
+
+    .live-tracking-content .text-wrapper a {
+        text-align: center;
     }
 
     .worker img {
         max-width: 100%;
-        height: auto;
         margin-bottom: 10px;
+        height: 150px;
     }
 
     .worker-title {
@@ -3143,6 +3174,7 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
         right: 10px;
     }
 }
+
 
 @media screen and (max-width: 1024px) {
     
