@@ -14,7 +14,10 @@ $indirizzo = $_SESSION['indirizzo'];
     <div class="header fixed-width">
         <div class="header-right">
             <a href="home.php" class="logo-container">
-                <img class="logo" src="img/text-logo.png">
+                     <!-- Logo per schermi più grandi -->
+              <img class="logo logo-large" src="img/text-logo.png" alt="Logo">
+            <!-- Logo per schermi più piccoli -->
+            <img class="logo logo-small" src="img/logo_new.png" alt="Logo" style="display: none;">
             </a>
             <!-- <div class="search-container">
                 <form action="search.php" method="GET">
