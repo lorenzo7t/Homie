@@ -105,6 +105,7 @@ if ($uploadOk == 0) {
         if ($conn->query($sql) === TRUE) {
             // Set session variables
             $_SESSION['piva'] = $piva;
+            $_SESSION['userid'] = $piva;
             $_SESSION['email'] = $email;
             $_SESSION['name'] = $nome;
             $_SESSION['cognome'] = $cognome;
