@@ -64,7 +64,6 @@ include 'db_connection.php';
                     <option value="colf">Colf</option>
                     <option value="pittore">Pittore</option>
                     <option value="fabbro">Fabbro</option>
-                    <option value="muratore">Muratore</option>
                     <option value="tuttofare">Tuttofare</option>
                 </select>
             </div>
