@@ -1,5 +1,5 @@
 var markers = [];
-var favoritesList = [1, 3];
+var favoritesList = [];
 var professionals = [];
 var map;
 var openInfoWindow;
@@ -168,7 +168,7 @@ function initMap(userLocation = { lat: 41.9028, lng: 12.4964 }) {
 }
 
 function populateProfessionalsList(professionalList) {
-  console.log('propagating')
+  console.log('propagating');
   const professionalsList = document.querySelector('.professionals-container ul');
   professionalsList.innerHTML = '';
 
@@ -188,6 +188,9 @@ function populateProfessionalsList(professionalList) {
       google.maps.event.trigger(marker, 'click');
     });
 
+    listItem.querySelector('.heart-container .checkbox').addEventListener('change', (event) => {
+      handleFavoriteToggle(event, professional.piva);
+    });
   });
 
   if (professionalsList.children.length === 0) {
@@ -197,13 +200,14 @@ function populateProfessionalsList(professionalList) {
     professionalsList.appendChild(noProfessionalsMessage);
   } else {
     attachEventToRequestButtons();
-  };
+  }
 
 }
 
 
 function generateProfessionalHTML(professional) {
   const isChecked = favoritesList.includes(professional.piva) ? 'checked' : '';
+  console.log(favoritesList)
   return `<div class="worker-entry" data-lat="${professional.lat}" data-lng="${professional.lng}" data-id="${professional.piva}" data-name="${professional.nome}" data-category="${professional.professione}" data-rating="${professional.rating}" data-img="img/professionals/${professional.image}" data-callPrice="${professional.prezzo_chiamata}" data-hourPrice="${professional.prezzo_orario}">
               <div class="external-container">
                 <div class="img-infos-container">
@@ -288,6 +292,38 @@ function generateProfessionalHTML(professional) {
 
 }
 
+function handleFavoriteToggle(event, piva) {
+  const isChecked = event.target.checked;
+  if (isChecked) {
+    if (!favoritesList.includes(piva)) {
+      favoritesList.push(piva);
+    }
+  } else {
+    const index = favoritesList.indexOf(piva);
+    if (index !== -1) {
+      favoritesList.splice(index, 1);
+    }
+  }
+
+  fetch('utilities.php?action=addFavorite', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ professionalId: piva, isFavorite: isChecked })
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (!data.success) {
+        console.error('Errore durante l\'aggiornamento dei preferiti:', data.error);
+      }
+    })
+    .catch(error => {
+      console.error('Errore durante l\'aggiornamento dei preferiti:', error);
+    });
+}
+
+
 function toggleFavorites() {
   if (!executed) {
     console.log('Favorites toggle clicked');
@@ -306,9 +342,9 @@ function toggleFavorites() {
 
     console.log('Filtered professionals:', filteredProfessionals);
     populateProfessionalsList(filteredProfessionals);
-    executed = true
+    executed = true;
   } else {
-    executed = false
+    executed = false;
   }
 }
 
@@ -325,6 +361,15 @@ favoritesToggleButton.addEventListener('click', toggleFavorites);
 
 
 document.addEventListener('DOMContentLoaded', function () {
+  fetch('utilities.php?action=getFavorites')
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        favoritesList = data.favorites
+      }
+    })
+    .catch(error => console.error('Error loading favorites:', error));
+
   fetch('utilities.php?action=getProfessionals')
     .then(response => response.json())
     .then(data => {
@@ -581,7 +626,7 @@ function startPolling(requestId) {
 function clearCanceledRequest() {
   const requestContainer = document.querySelector('.request-pending-container');
   const requestId = requestContainer.dataset.requestId;
-  
+
   fetch('utilities.php?action=clearCanceledRequest', {
     method: 'POST',
     headers: {
@@ -707,25 +752,3 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
-
-
-/* document.addEventListener('change', function (event) {
-  if (event.target.matches('.heart-container .checkbox')) {
-    const checkbox = event.target;
-    const workerEntry = checkbox.closest('.worker-entry');
-    const id = parseInt(workerEntry.dataset.id, 10);
-    const index = favoritesList.indexOf(id);
-
-    if (checkbox.checked) {
-      if (index === -1) {
-        favoritesList.push(id);
-      }
-    } else {
-      if (index !== -1) {
-        favoritesList.splice(index, 1);
-      }
-    }
-  }
-});
- */
