@@ -41,7 +41,6 @@
                             <img draggable="false" src="img/elettricista.png" alt="Electrician">
                             <a class="worker-title roboto-regular">Elettricista</a>
                         </div>
-
                         <div class="worker">
                             <img draggable="false" src="img/fabbro.png" alt="Blacksmith">
                             <a class="worker-title roboto-regular">Fabbro</a>
@@ -62,6 +61,49 @@
                         </div>
                     </div>
                 </div>
+                <div class="carousel-container">
+
+                    <div class="carousel">
+                        <div class="carousel-item">
+                            <div class="worker">
+                                <img draggable="false" src="img/idraulico.png" alt="Plumber">
+                                <a class="worker-title roboto-regular">Idraulico</a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="worker">
+                                <img draggable="false" src="img/elettricista.png" alt="Electrician">
+                                <a class="worker-title roboto-regular">Elettricista</a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="worker">
+                                <img draggable="false" src="img/fabbro.png" alt="Blacksmith">
+                                <a class="worker-title roboto-regular">Fabbro</a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="worker">
+                                <img draggable="false" src="img/pittore.png" alt="Painter">
+                                <a class="worker-title roboto-regular">Pittore</a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="worker">
+                                <img draggable="false" src="img/colf.png" alt="Housekeeper">
+                                <a class="worker-title roboto-regular">Colf</a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="worker">
+                                <img draggable="false" src="img/tuttofare.png" alt="Handyman">
+                                <a class="worker-title roboto-regular">Tuttofare</a>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-button prev">&lt;</button>
+                    <button class="carousel-button next">&gt;</button>
+                </div>
             </section>
             <section class="live-tracking">
                 <div class="live-tracking-container">
@@ -69,6 +111,7 @@
                         <img draggable="false" src="img/tracking.png" alt="Live tracking">
                         <div class="text-wrapper">
                             <a class="roboto-bold dark_text" style="font-size: 30px;">Non sai quando arriverà il tuo professionista?</a>
+                            <img class="live-traking-img-small" draggable="false" src="img/tracking.png" alt="Live tracking" style="display: none;">
                             <a class="description dark_text">Con Homie puoi seguirlo in tempo reale e sapere esattamente quando arriverà.</a>
                         </div>
                     </div>
@@ -80,3 +123,85 @@
 
 </div>
 </div>
+<script>
+    function initializeCarousel() {
+        const carousel = document.querySelector('.carousel');
+        const prevButton = document.querySelector('.carousel-button.prev');
+        const nextButton = document.querySelector('.carousel-button.next');
+        let index = 0;
+
+        function updateCarousel() {
+            const items = document.querySelectorAll('.carousel-item');
+            const totalItems = items.length;
+            const visibleItems = 1; // Only 1 item visible on screens smaller than 425px
+
+            if (index < 0) {
+                index = totalItems - visibleItems;
+            } else if (index >= totalItems) {
+                index = 0;
+            }
+
+            const translateX = -index * 100; // Translate based on 1 visible item
+            carousel.style.transform = `translateX(${translateX}%)`;
+        }
+
+        prevButton.addEventListener('click', () => {
+            index--;
+            updateCarousel();
+        });
+
+        nextButton.addEventListener('click', () => {
+            index++;
+            updateCarousel();
+        });
+
+        function handleTouchStart(event) {
+            startX = event.touches[0].clientX;
+        }
+
+        function handleTouchMove(event) {
+            if (!startX) return;
+
+            currentX = event.touches[0].clientX;
+        }
+
+        function handleTouchEnd() {
+            if (!startX || !currentX) return;
+
+            const diffX = startX - currentX;
+
+            if (diffX > 50) {
+                // Swipe left
+                index++;
+            } else if (diffX < -50) {
+                // Swipe right
+                index--;
+            }
+
+            updateCarousel();
+
+            // Reset values
+            startX = null;
+            currentX = null;
+        }
+
+        carousel.addEventListener('touchstart', handleTouchStart);
+        carousel.addEventListener('touchmove', handleTouchMove);
+        carousel.addEventListener('touchend', handleTouchEnd);
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 425) {
+                updateCarousel();
+            } else {
+                carousel.style.transform = 'translateX(0)';
+            }
+        });
+
+        // Initialize carousel on load if the screen is small enough
+        if (window.innerWidth <= 425) {
+            updateCarousel();
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', initializeCarousel);
+</script>

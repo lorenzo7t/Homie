@@ -59,6 +59,10 @@ include 'db_connection.php';
                     </svg>
                     Continua con Google
                 </button> -->
+
+            <p class="signup-link">
+                Sei un professionista?
+                <a href="professionist_login.php">Accedi qui</a>
             </p>
         </form>
     </div>
