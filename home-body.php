@@ -127,7 +127,7 @@
                 <h3>Richiedi un intervento</h3>
                 <p>Descrivi il tuo problema, ogni dettaglio è importante! Non dimenticare Nulla!</p>
                 <div class="text-area-container">
-                    <textarea name="request" id="request" cols="30" rows="10" placeholder="Descrivi il tuo problema"></textarea>
+                    <textarea name="request" id="request" cols="30" rows="7" placeholder="Descrivi il tuo problema"></textarea>
                 </div>
                 <div class="buttons-container">
                     <button class="send-request-button">
@@ -163,7 +163,6 @@
 
 
         </div>
-
         <div class="request-accepted-container hidden">
             <div class="banner-container">
                 <div class="banner">
@@ -178,27 +177,6 @@
             </div>
             <div class="map" id="tracking-map"></div>
         </div>
-
-
-        <!-- <div class="request-accepted">
-                <div class="internal-accepted-container-3">
-                    <div class="internal-accepted-container-4">
-                        <h2>Richiesta accettata!</h2>
-                        <p><span class="professional-name-post"></span> è in arrivo!</p>
-                        <div class="arrival-info">
-                            <p>Orario previsto di arrivo: <span id="estimated-arrival-time">Caricamento...</span></p>
-                            <p>Dettagli del professionista:</p>
-                            <ul>
-                                <li>Specializzazione: <span id="professional-specialization"></span></li>
-                                <li>Esperienza: <span id="professional-experience"></span> anni</li>
-                            </ul>
-                        </div>
-                        <button class="default-button" onclick="cancelRequest()">Annulla Richiesta</button>
-                    </div>
-                </div>
-            </div> -->
-
-
         <div class="request-rejected-container hidden">
             <div class="request-rejected">
                 <div class="internal-container-2">

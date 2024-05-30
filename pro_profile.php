@@ -29,8 +29,8 @@ if (!isset($_SESSION['professione'])) {
     <script src="script/change_password.js" defer></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAV2pCTErRiX6IWUu6Ol7gVE0U37rWWB_s&callback=initMap"></script>
-    
-        
+
+
     <script>
         function showContent(sectionId, btn) {
             //reset password form and error messages
@@ -76,7 +76,7 @@ if (!isset($_SESSION['professione'])) {
             }
         });
     </script>
-    
+
 </head>
 
 <html>
@@ -94,11 +94,11 @@ if (!isset($_SESSION['professione'])) {
     $userId = htmlspecialchars($_SESSION['userid']);
     ?>
     <div class="profile-name">
-            <h1>Benvenuto <span style="color: #E63946"><?php echo $nome ?></span> !</h1>
-     </div>
+        <h1>Benvenuto <span style="color: #E63946"><?php echo $nome ?></span> !</h1>
+    </div>
     <div class="profile-home-body-wrapper">
 
-        <div class="profile-container fixed-width" >
+        <div class="profile-container fixed-width">
 
             <div class="navigation-bar">
                 <button onclick="showContent('profile-info',this)" class="active-btn">Informazioni Personali</button>
@@ -107,29 +107,30 @@ if (!isset($_SESSION['professione'])) {
                 <button onclick="showContent('contact',this)">Contact</button>
             </div>
 
-            <div class="profile-content" style="
-            margin-left: 100px;
-            width: 100%;
-            overflow: scroll;">
-            
-                <div id="profile-info" class="page active" style="width: 50%;">
-                <h1>Informazioni Personali</h1>
+            <div class="profile-content">
+
+                <div id="profile-info" class="page active">
+                    <h1>Informazioni Personali</h1>
                     <form id="profileForm" class="profile-form">
-                        <div class="input-container">
-                            <label for="nome">Nome: </label>
-                            <input type="text" id="nome" name="nome" value="<?php echo $nome ?>" disabled>
+                        <div class="t-rows-container">
+                            <div class="input-container">
+                                <label for="nome">Nome: </label>
+                                <input type="text" id="nome" name="nome" value="<?php echo $nome ?>" disabled>
+                            </div>
+                            <div class="input-container">
+                                <label for="cognome">Cognome:</label>
+                                <input type="text" id="cognome" name="cognome" value="<?php echo  $cognome  ?>" disabled>
+                            </div>
                         </div>
-                        <div class="input-container">
-                            <label for="cognome">Cognome:</label>
-                            <input type="text" id="cognome" name="cognome" value="<?php echo  $cognome  ?>" disabled>
-                        </div>
-                        <div class="input-container">
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" value="<?php echo $email ?>" disabled>
-                        </div>
-                        <div class="input-container">
-                            <label for="indirizzo">Indirizzo:</label>
-                            <input type="text" id="indirizzo" name="indirizzo" value="<?php echo $indirizzo ?>" disabled>
+                        <div class="t-rows-container">
+                            <div class="input-container">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="email" value="<?php echo $email ?>" disabled>
+                            </div>
+                            <div class="input-container">
+                                <label for="indirizzo">Indirizzo:</label>
+                                <input type="text" id="indirizzo" name="indirizzo" value="<?php echo $indirizzo ?>" disabled>
+                            </div>
                         </div>
                         <div class="button-container">
                             <button type="button" id="editButton">Modifica</button>
@@ -144,25 +145,27 @@ if (!isset($_SESSION['professione'])) {
                     <?php
                     // Fetch the orders from the database
                     $query = "SELECT distinct * FROM homie.orders JOIN homie.user_data WHERE pro_id = '$userId' AND user_id = userid ORDER BY date DESC";
-                        $result = $conn->query($query);
+                    $result = $conn->query($query);
 
                     // Check if there are any orders
                     if ($result->num_rows > 0) {
                         // Loop through the orders and create the HTML elements
                         while ($row = $result->fetch_assoc()) {
                             $user_id = htmlspecialchars($row['user_id']);
-                            $user_name= htmlspecialchars($row['nome']);
+                            $user_name = htmlspecialchars($row['nome']);
                             $orderDate = htmlspecialchars($row['date']);
                             $details = htmlspecialchars($row['details']);
-                                if(htmlspecialchars(
-                                    $row['accepted']) == 0){
-                                        $completed = "Non accettato";
-                                    } else if(htmlspecialchars(
-                                        $row['completed']) == 0){
-                                            $completed = "Accettato In attesa";
-                                    } else {
-                                            $completed = "Completato";
-                                    }
+                            if (htmlspecialchars(
+                                $row['accepted']
+                            ) == 0) {
+                                $completed = "Non accettato";
+                            } else if (htmlspecialchars(
+                                $row['completed']
+                            ) == 0) {
+                                $completed = "Accettato In attesa";
+                            } else {
+                                $completed = "Completato";
+                            }
 
                             // Create the HTML elements for each order
                             echo '<div class="order">';
@@ -172,42 +175,41 @@ if (!isset($_SESSION['professione'])) {
                             echo '<p>Stato: ' . $completed . '</p>';
                             echo '</div>';
                         }
+                    } else {
+                        // Display a message if there are no orders
+                        echo '<p>No orders found.</p>';
                     }
-                        else {
-                            // Display a message if there are no orders
-                            echo '<p>No orders found.</p>';
-                        }
                     ?>
                 </div>
                 <div id="contact" class="page">
                     <h1>Contact</h1>
                     <div class="contact-content">
-                    <p>help@homie.it<br>Via luigi vittorio bertarelli 131, Roma (RM), 00159, IT</p>
+                        <p>help@homie.it<br>Via luigi vittorio bertarelli 131, Roma (RM), 00159, IT</p>
+                    </div>
                 </div>
-                </div>
-                <div id="change_password" class="page" >
-                <h1>Cambia Password</h1>
-                <form id="changePasswordForm" class="change-password-form" style="width: 50%;">
-                    <div class="input-container">
-                        <label for="old_password">Vecchia Password:</label>
-                        <input type="password" id="old_password" name="old_password" required>
-                    </div>
-                    <div class="input-container">
-                        <label for="new_password">Nuova Password:</label>
-                        <input type="password" id="password" name="new_password" required>
-                    </div>
-                    <div class="input-container">
-                        <label for="confirm_password">Conferma Password:</label>
-                        <input type="password" id="confirm_password" name="confirm_password" required onkeyup="checkPassword()">
-                    </div>
-                    <p id="password_error" class="profile-error-message"></p>
-                    <p id="passwordresponseMessage" class="profile-error-message"></p>
-                    <div class="button-container">
-                        <button type="submit" class="login-button" disabled style="background-color: #E63946;
+                <div id="change_password" class="page">
+                    <h1>Cambia Password</h1>
+                    <form id="changePasswordForm" class="change-password-form" style="width: 50%;">
+                        <div class="input-container">
+                            <label for="old_password">Vecchia Password:</label>
+                            <input type="password" id="old_password" name="old_password" required>
+                        </div>
+                        <div class="input-container">
+                            <label for="new_password">Nuova Password:</label>
+                            <input type="password" id="password" name="new_password" required>
+                        </div>
+                        <div class="input-container">
+                            <label for="confirm_password">Conferma Password:</label>
+                            <input type="password" id="confirm_password" name="confirm_password" required onkeyup="checkPassword()">
+                        </div>
+                        <p id="password_error" class="profile-error-message"></p>
+                        <p id="passwordresponseMessage" class="profile-error-message"></p>
+                        <div class="button-container">
+                            <button type="submit" class="login-button" disabled style="background-color: #E63946;
                         color: #fff;">Cambia Password</button>
-                    </div>
-                </form>
-            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
