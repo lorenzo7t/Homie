@@ -1,43 +1,45 @@
 <div class="fixed-width">
-    <div class="categories-container">
+    <div class="external-categories-container">
+        <div class="categories-container">
 
-        <div class="category">
-            <button class="category-button" data-category="idraulico">
-                <img draggable="false" src="img/idraulico.png" alt="idraulico">
-            </button>
-            <span class="category-name">Idraulico</span>
-        </div>
-        <div class="category">
-            <button class="category-button" data-category="pittore">
-                <img draggable="false" src="img/pittore.png" alt="pittore">
-            </button>
-            <span class="category-name">Pittore</span>
-        </div>
-        <div class="category">
-            <button class="category-button" data-category="elettricista">
-                <img draggable="false" src="img/elettricista.png" alt="elettricista">
-            </button>
-            <span class="category-name">Elettricista</span>
-        </div>
-        <div class="category">
-            <button class="category-button" data-category="fabbro">
-                <img draggable="false" src="img/fabbro.png" alt="fabbro">
-            </button>
-            <span class="category-name">Fabbro</span>
-        </div>
-        <div class="category">
-            <button class="category-button" data-category="colf">
-                <img draggable="false" src="img/colf.png" alt="colf">
-            </button>
-            <span class="category-name">Colf</span>
-        </div>
-        <div class="category">
-            <button class="category-button" data-category="tuttofare">
-                <img draggable="false" src="img/tuttofare.png" alt="tuttofare">
-            </button>
-            <span class="category-name">Tuttofare</span>
-        </div>
+            <div class="category">
+                <button class="category-button" data-category="idraulico">
+                    <img draggable="false" src="img/idraulico.png" alt="idraulico">
+                </button>
+                <span class="category-name">Idraulico</span>
+            </div>
+            <div class="category">
+                <button class="category-button" data-category="pittore">
+                    <img draggable="false" src="img/pittore.png" alt="pittore">
+                </button>
+                <span class="category-name">Pittore</span>
+            </div>
+            <div class="category">
+                <button class="category-button" data-category="elettricista">
+                    <img draggable="false" src="img/elettricista.png" alt="elettricista">
+                </button>
+                <span class="category-name">Elettricista</span>
+            </div>
+            <div class="category">
+                <button class="category-button" data-category="fabbro">
+                    <img draggable="false" src="img/fabbro.png" alt="fabbro">
+                </button>
+                <span class="category-name">Fabbro</span>
+            </div>
+            <div class="category">
+                <button class="category-button" data-category="colf">
+                    <img draggable="false" src="img/colf.png" alt="colf">
+                </button>
+                <span class="category-name">Colf</span>
+            </div>
+            <div class="category">
+                <button class="category-button" data-category="tuttofare">
+                    <img draggable="false" src="img/tuttofare.png" alt="tuttofare">
+                </button>
+                <span class="category-name">Tuttofare</span>
+            </div>
 
+        </div>
     </div>
 
     <div class="body-container">
@@ -151,7 +153,7 @@
                         <p>Siamo in attesa che <span class="professional-name-post"></span> accetti la tua richiesta.</p>
                     </div>
                     <div class="gif-container" style="width:100%;height:50%;position:relative">
-                        <img draggable="false" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExN3hsZ24waW83eHhiam41bXdlem1jb2pob3NrbzYwNmNwd3gwNG92dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/BDQmMy3ZM8sgRNFkhe/giphy.gif" width="100%" height="100%" style="position:absolute;border-radius: 15px;" frameBorder="0" class="giphy-embed" ></img>
+                        <img draggable="false" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExN3hsZ24waW83eHhiam41bXdlem1jb2pob3NrbzYwNmNwd3gwNG92dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/BDQmMy3ZM8sgRNFkhe/giphy.gif" width="100%" height="100%" style="position:absolute;border-radius: 15px;" frameBorder="0" class="giphy-embed"></img>
                     </div>
                     <button class="default-button" id="cancel-button">
                         Annulla
