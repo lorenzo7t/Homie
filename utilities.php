@@ -368,6 +368,9 @@ function endRequest($requestId)
         return;
     }
     $requestDetails['rating'] = rand(3, 5);
+
+    echo json_encode(['requestDetails' => $requestDetails]);
+
     if (file_put_contents($filePath, json_encode($data, JSON_PRETTY_PRINT))) {
         $sql = "INSERT INTO homie.orders (order_id, user_id, pro_id, rating, date, details, accepted, completed)
                 VALUES (?, ?, ?, ?, NOW(), ?, ?, ?)";
