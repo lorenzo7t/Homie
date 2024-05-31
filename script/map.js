@@ -176,6 +176,13 @@ function populateProfessionalsList(professionalList) {
 
   professionalList.forEach(professional => {
     const listItem = document.createElement('li');
+
+    if (professional.rating == 0 ) {
+      professional.rating = '-';
+    }
+
+    
+
     listItem.innerHTML = generateProfessionalHTML(professional);
     professionalsList.appendChild(listItem);
 
@@ -207,7 +214,7 @@ function populateProfessionalsList(professionalList) {
 
 function generateProfessionalHTML(professional) {
   const isChecked = favoritesList.includes(professional.piva) ? 'checked' : '';
-  console.log(favoritesList)
+  
   return `<div class="worker-entry" data-lat="${professional.lat}" data-lng="${professional.lng}" data-id="${professional.piva}" data-name="${professional.nome}" data-category="${professional.professione}" data-rating="${professional.rating}" data-img="img/professionals/${professional.image}" data-callPrice="${professional.prezzo_chiamata}" data-hourPrice="${professional.prezzo_orario}">
   <div class="external-container">
       <div class="img-infos-container">

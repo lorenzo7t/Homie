@@ -28,7 +28,7 @@ include 'db_connection.php';
             <img class="logo" src="img/logo_new.png">
         </a>
         <form class="form" style="width: 50vh;" action="pro_insert.php" method="POST" enctype="multipart/form-data">
-            <p class="form-title">Registrati</p>
+            <p class="form-title">Registrati come professionista</p>
 
             <?php if (isset($_GET['error'])) { ?>
                 <p class="error" style="color: red;"><?php echo $_GET['error']; ?></p>
@@ -96,7 +96,7 @@ include 'db_connection.php';
             </div>
             <p class="signup-link">
                 Già registrato?
-                <a href="professionist_login.php">Accedi</a>
+                <a href="login_page_pro.php">Accedi</a>
             </p>
         </form>
     </div>

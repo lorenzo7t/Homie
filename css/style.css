@@ -606,12 +606,15 @@ h4 {
 
 }
 
+.homie-logo {
+    margin: 50px;
+}
 
-.homie-logo::after {
+/* .homie-logo::after {
     display: block;
     content: "";
     height: 10vh;
-}
+} */
 
 .login-container {
     background: #A8DADC;
@@ -2051,7 +2054,7 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
     padding: 19px 19px 0px 19px;
     background-color: #f1f1f1;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 #professional-image {
@@ -2156,6 +2159,7 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
     justify-content: center;
     align-items: center;
     background: white;
+    margin-bottom: 50px;
 }
 
 .request-box {
@@ -2724,8 +2728,8 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
 }
 
 .banner-internal-container img {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: auto;
     border-radius: 15px;
 }
 
@@ -2870,6 +2874,10 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
 
 @media screen and (max-width: 425px) {
 
+    .text-area-container{
+        margin-bottom: 0;
+    }
+    
     .form {
         width: 80% !important;
         height: 100% !important;
@@ -2967,6 +2975,7 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
 
     .dropdown-content {
         right: 0vh;
+        width: 150px;
         border-radius: 20px 0 20px 20px;
         left: auto;
     }
@@ -2974,10 +2983,6 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
 
     .profile-content {
         margin-left: 0;
-    }
-
-    #professional-details {
-        justify-content: space-between;
     }
 
     #professional-details .close-button {
@@ -3089,18 +3094,7 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
         display: block !important;
         width: 50vw;
     }
-/*     .worker{
-        height: 15vh;
-        width: 17vh;
-    }
-    .workers-container .col .worker img {
-    width: 5vh;
-    height: 10vh;
-    }
-    .worker-title{
-        font-size: small;
-        padding-left: 1vh;
-    } */
+
     .workers-container {
         display: none;
     }
@@ -3118,7 +3112,7 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
     }
 
     .carousel-item {
-        min-width: 100%; /* Show 1 item per view */
+        min-width: 100%; 
         box-sizing: border-box;
         padding: 10px;
     }
@@ -3273,6 +3267,11 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
     }
 
     .request-pending {
+        width: 100%;
+        margin: 0;
+    }
+
+    .request-rejected {
         width: 100%;
         margin: 0;
     }

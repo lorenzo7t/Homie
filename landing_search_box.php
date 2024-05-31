@@ -30,7 +30,7 @@
             <div class="search-wrapper">
                 <div class="search-line-container">
                     <input class="searchInput" id="bigSearchInput" type="text" name="" placeholder="Inserisci la tua località..." onkeyup="handleInputMain()">
-                    <button class="searchButton big-search-button" id="search-button-landing" >
+                    <button class="searchButton big-search-button" id="search-button-landing">
                         <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
                             <g clip-path="url(#clip0_2_17)">
                                 <g filter="url(#filter0_d_2_17)">
@@ -108,15 +108,15 @@
                 <rect x="10" y="10" fill="none" rx="15" ry="15" width="30" height="50" stroke="#1D3557" stroke-width="2"></rect>
                 <circle class="scroll-arrow" cx="25" cy="25" r="3" stroke="#F1FAEE" fill="#1D3557"></circle>
             </svg>
-            </a>
+        </a>
 
     </div>
 
 </div>
 <script type="text/javascript">
-        document.getElementById('search-button-landing').addEventListener('click', function() {
-            var searchValue = document.getElementById('bigSearchInput').value;
-            localStorage.setItem('indirizzo', searchValue); // Salva il valore dell'input in localStorage
-            window.location.href = 'register_page.php'; // Reindirizza a register_page.php
-        });
-    </script>
+    document.getElementById('search-button-landing').addEventListener('click', function() {
+        var searchValue = document.getElementById('bigSearchInput').value;
+        localStorage.setItem('insert-address', searchValue);
+        window.location.href = 'register_page.php'; 
+    });
+</script>

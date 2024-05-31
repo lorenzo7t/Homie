@@ -24,7 +24,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows == 0) {
-    header('Location:professionist_login.php?error= Credenziali non valide');
+    header('Location:login_page_pro.php?error= Credenziali non valide');
 } 
 else {
     $row = $result->fetch_assoc(); 

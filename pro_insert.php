@@ -19,7 +19,7 @@ $rating = 0;
 
 $sql = "SELECT * FROM homie.pro_data WHERE email = '$email' OR piva = '$piva'";
 if ($conn->query($sql)->num_rows > 0) {
-    header('Location:professionist_register.php?error=Email o P.IVA già associata ad un account');
+    header('Location:register_page_pro.php?error=Email o P.IVA già associata ad un account');
     exit();
 }
 
@@ -42,34 +42,34 @@ if ($check !== false) {
     $uploadOk = 1;
 } else {
     $uploadOk = 0;
-    header('Location:professionist_register.php?error=File is not an image.');
+    header('Location:register_page_pro.php?error=File is not an image.');
     exit();
 }
 
 
 if (file_exists($target_file)) {
     $uploadOk = 0;
-    header('Location:professionist_register.php?error=File already exists.');
+    header('Location:register_page_pro.php?error=File already exists.');
     exit();
 }
 
 
 if ($_FILES["photo"]["size"] > 5000000) {
     $uploadOk = 0;
-    header('Location:professionist_register.php?error=File is too large.');
+    header('Location:register_page_pro.php?error=File is too large.');
     exit();
 }
 
 
 if ($imageFileType != "jpeg") {
     $uploadOk = 0;
-    header('Location:professionist_register.php?error=Only JPG, JPEG, PNG & GIF files are allowed.');
+    header('Location:register_page_pro.php?error=Only JPG, JPEG, PNG & GIF files are allowed.');
     exit();
 }
 
 
 if ($uploadOk == 0) {
-    header('Location:professionist_register.php?error=Your file was not uploaded.');
+    header('Location:register_page_pro.php?error=Your file was not uploaded.');
     exit();
 } else {
     if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) {
@@ -95,11 +95,11 @@ if ($uploadOk == 0) {
             header('Location:home_pro.php');
             exit();
         } else {
-            header('Location:professionist_register.php?error=Errore nella creazione dell\'account: ' . $conn->error);
+            header('Location:register_page_pro.php?error=Errore nella creazione dell\'account: ' . $conn->error);
             exit();
         }
     } else {
-        header('Location:professionist_register.php?error=Errore durante il caricamento del file.');
+        header('Location:register_page_pro.php?error=Errore durante il caricamento del file.');
         exit();
     }
 }

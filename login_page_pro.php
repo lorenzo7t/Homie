@@ -26,7 +26,7 @@
             <img class="logo" src="img/logo_new.png">
         </a>
         <form class="form" style="height: 25vw; width:50vh" action="pro_login.php" method="POST">
-            <p class="form-title">Accedi</p>
+            <p class="form-title">Accedi come professionista</p>
             <?php if(isset($_GET['error'])) { ?>
                 <p class="error" style="color: red;"><?php echo $_GET['error']; ?></p>
             <?php } ?>
@@ -45,7 +45,7 @@
 
             <p class="signup-link">
                 Non hai un account?
-                <a href="professionist_register.php">Registrati</a>
+                <a href="register_page_pro.php">Registrati</a>
             </p>
         </form>
     </div>

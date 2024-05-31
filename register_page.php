@@ -16,8 +16,6 @@ include 'db_connection.php';
     <link rel="icon" href="img/icons/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="img/icons/favicon.ico" type="image/x-icon">
     <script src="script/autocomplete.js" defer></script>
-    <script src="script/address.js" defer></script>
-    <script src="script/maps.js" defer></script>
     <script src="script/animations.js" defer></script>
     <script src="script/check_password.js" defer></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
@@ -76,10 +74,10 @@ include 'db_connection.php';
     <div class="separator"></div>
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function() {
-            var indirizzoValue = localStorage.getItem('indirizzo');
+            var indirizzoValue = localStorage.getItem('insert-address');
             if (indirizzoValue) {
-                document.getElementById('indirizzo').value = indirizzoValue;
-                localStorage.removeItem('indirizzo'); // Rimuovi il valore da localStorage se non è più necessario
+                document.getElementById('address').value = indirizzoValue;
+                localStorage.removeItem('address'); 
             }
         });
     </script>

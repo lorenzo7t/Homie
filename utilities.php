@@ -424,7 +424,7 @@ function rejectRequest()
             // Registra la richiesta rifiutata nel database
             $sql = "INSERT INTO homie.orders (order_id, user_id, pro_id, details, accepted, completed) VALUES (?, ?, ?, ?, 0, 0)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("siis", $request['requestId'], $request['userId'], $request['professionalId'], $request['details']);
+            $stmt->bind_param("siss", $request['requestId'], $request['userId'], $request['professionalId'], $request['details']);
             $stmt->execute();
             $stmt->close();
 

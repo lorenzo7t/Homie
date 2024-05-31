@@ -62,7 +62,7 @@ include 'db_connection.php';
 
             <p class="signup-link">
                 Sei un professionista?
-                <a href="professionist_login.php">Accedi qui</a>
+                <a href="login_page_pro.php">Accedi qui</a>
             </p>
         </form>
     </div>
