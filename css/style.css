@@ -557,7 +557,7 @@ h4 {
 }
 
 .section-title {
-    text-align: left;
+    text-align: center;
     font-size: 40px;
 }
 
@@ -2869,6 +2869,32 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
     .scroll-action {
         display: none;
     }
+    .landing-title{
+        font-size: xxx-large !important;
+    }
+    .container{
+        margin-top: 15vh;
+    }
+    .step-description{
+        font-size: x-large;
+    }
+    .step-title{
+        height: 50px;
+        font-size: larger;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .steps-container{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    .step{
+        width: 100%;
+        height: fit-content;
+        margin-bottom: 4vh;
+    }
 
 }
 
@@ -3020,7 +3046,7 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
         font-size: small;
     }
     .landing-title{
-        font-size: 5vh;
+        font-size: 5vh !important ;
     }
     .subtitle{
         font-size: 3vh;
@@ -3080,12 +3106,15 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
         flex-wrap: nowrap;
     }
     .step{
-        width: 100%;
-        height: fit-content;
-        margin-bottom: 4vh;
+        width: 100% !important;
+        height: fit-content !important;
+        margin-bottom: 4vh !important;
     }
     .step-title{
-        font-size: x-large;
+        font-size: x-large !important;
+    }
+    .step-description{
+        font-size: larger !important;
     }
     .live-tracking-content img{
         display: none;
@@ -3317,6 +3346,31 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
         height: 40px;
         width: 85px;
     }
+    .container{
+        margin-top: 25vh;
+    }
+    .scroll-action  {
+        margin-top: 2vh;
+
+    }
+    .workers-container .col .worker img {
+        height: 100px;
+        width: 80px;
+        margin: 10px;
+    }
+    .landing-title{
+        font-size: 58px ;
+    }
+    .step{
+        height: 400px !important;
+    }
+    .step-title{
+        font-size: x-large !important;
+    }
+    .live-tracking-content{
+        margin-top: 13vh;
+    }
+
 }
 
 @media screen and (max-width: 320px) {
@@ -3359,4 +3413,159 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
 
 #changePasswordForm .input-container {
     width: 100%;
+}
+
+
+@media screen and (max-width: 760px) {
+    .text-container{
+        width: 100%;
+    }
+    .searchBox{
+        width: 98%;
+    }
+    .workers-container {
+        display: none;
+    }
+    .carousel-container {
+        display: block;
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        margin: 20px auto;
+    }
+
+    .carousel {
+        display: flex;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .carousel-item {
+        min-width: 100%; /* Show 1 item per view */
+        box-sizing: border-box;
+        padding: 10px;
+    }
+
+    .worker {
+        text-align: center;
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        height: 27vh;
+        display: grid;
+        justify-content: center;
+    }
+    .section-title {
+        font-size: 35px;
+    }
+    .live-tracking-content img {
+        width: 300px;
+        height: auto !important;
+    }
+
+    .live-tracking-content .text-wrapper a {
+        text-align: center;
+    }
+
+    .worker img {
+        max-width: 100%;
+        margin-bottom: 10px;
+        height: 150px;
+    }
+
+    .worker-title {
+        display: block;
+        font-size: 16px;
+        color: #333;
+        padding-left: 0;
+    }
+
+    .carousel-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .carousel-button.prev {
+        left: 10px;
+    }
+
+    .carousel-button.next {
+        right: 10px;
+    }
+    .logo-container {
+        margin-top: 0px !important;
+    }
+    
+    .form {
+        width: 100%;
+    }
+
+    .input-container {
+        width: 100%;
+    }
+
+    .input-container input {
+        width: 100%;
+    }
+
+    .signup-link {
+        width: 100%;
+    }
+
+    .logo-large {
+        display: none;
+    }
+
+    .logo-small {
+        height: 8vh;
+        display: block !important;
+        /* height: auto; */
+        max-width: 100px;
+        padding: 1vh;
+    }
+
+    .body-container {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+    }
+    .steps-container{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    .step{
+        width: 100%;
+        height: fit-content;
+        margin-bottom: 4vh;
+    }
+    .step-title{
+        font-size: x-large;
+    }
+    .live-tracking-content img {
+        width: 300px;
+        height: auto !important;
+    }
+
+    .live-tracking-content .text-wrapper a {
+        text-align: center;
+    }
+
+
+
+
+}
+@media screen and (max-width: 1459px) {
+   .landing-title{
+    font-size: 70px;
+   }
+
+    
 }

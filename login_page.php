@@ -31,6 +31,14 @@ include 'db_connection.php';
             <?php if (isset($_GET['error'])) { ?>
                 <p class="error" style="color: red;"><?php echo $_GET['error']; ?></p>
             <?php } ?>
+            <?php if (isset($_GET['success'])) { ?>
+                <?php if ($_GET['success'] == 'true') { ?>
+                    <p style="color: #1D3557;">Password cambiata con successo</p>
+                <?php } else {?>
+                    <p  style="color: red;">Errore nel cambio password</p>
+                <?php }?>
+                
+            <?php } ?>
             <div class="input-container">
                 <label>Email </label>
                 <input id="abc" class="input-field" type="email" placeholder="Enter email" required="" name="email" id="email">
