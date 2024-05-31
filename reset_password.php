@@ -36,7 +36,7 @@
     <p class="form-title ">Reimposta la password</p>
     <div class="input-container">
         <label for="New Password">Nuova Password </label>
-        <input id="abc" class="input-field" type="password" required="" name="password" id="password">
+        <input class="input-field" type="password"  name="new_password" id="password" required>
     </div>
     <div class="input-container">
         <label for="confirm_password">Conferma Password:</label>
