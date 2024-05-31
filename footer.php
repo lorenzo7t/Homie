@@ -4,11 +4,11 @@
         <div class="columns-wrapper fixed-width">
             <div class="column">
                 <h3 class="footer-title dark_text">Chi siamo</h3>
-                <p class="footer-text dark_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut turpis eget nunc fermentum ultricies. Nullam nec purus nec nunc fermentum ultricies.</p>
+                <p class="footer-text dark_text">Homie è una piattaforma innovativa che connette professionisti qualificati con clienti in cerca di servizi affidabili. Grazie a Homie, puoi trovare rapidamente il professionista giusto per ogni tua esigenza, garantendo qualità e sicurezza in ogni intervento.</p>
             </div>
             <div class="column">
                 <h3 class="footer-title dark_text">Contattaci</h3>
-                <p class="footer-text dark_text">help@homie.it <br> Via luigi vittorio bertarelli 131, Roma (RM), 00159, IT</p>
+                <p class="footer-text dark_text">aiuto.homie@gmail.com<br>Viale dello Scalo S. Lorenzo, 82, 00159 Roma RM</p>
                 <p class="footer-text">
             </div>
             
@@ -17,8 +17,7 @@
                 <ul class="footer-links">
                     <li><a class="link dark_text" href="index.php" class="dark_text">Home</a></li>
                     <li><a class="link dark_text" href="login.php" class="dark_text">Login</a></li>
-                    <li><a class="link dark_text" href="about.php" class="dark_text">About Us</a></li>
-                    <li><a class="link dark_text" href="contact.php" class="dark_text">Contact</a></li>
+                    <li><a class="link dark_text" href="register_page.php" class="dark_text">Register</a></li>
                 </ul>
             </div>
             <div class="column">
