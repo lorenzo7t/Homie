@@ -378,7 +378,7 @@ function endRequest($requestId)
         $accepted = 1;
         $completed = 1;
         $stmt->bind_param(
-            "siissii",
+            "sisssii",
             $requestDetails['requestId'],
             $requestDetails['userId'],
             $requestDetails['professionalId'],
