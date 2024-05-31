@@ -12,23 +12,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_password = $conn->real_escape_string($_POST['new_password']);
     $confirm_password = $conn->real_escape_string($_POST['confirm_password']);
 
+
     if ($new_password !== $confirm_password) {
         $response['message'] = 'Le password non coincidono.';
     } else {
-        // Hash del token ricevuto
+        echo $token;
         $token_hash = hash('sha256', $token);
+        echo $token_hash;
 
-        // Verifica il token e la sua scadenza
         $sql = "SELECT userid, reset_token_expires_at FROM homie.user_data WHERE reset_token_hash='$token_hash'";
         $result = $conn->query($sql);
-
+        
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $userid = $row['userid'];
             $expiry = $row['reset_token_expires_at'];
 
             if (strtotime($expiry) > time()) {
-                // Token valido, aggiorna la password
+
                 $new_password_md5 = md5($new_password);
                 $sql = "UPDATE homie.user_data SET password='$new_password_md5', reset_token_hash=NULL, reset_token_expires_at=NULL WHERE userid='$userid'";
 
