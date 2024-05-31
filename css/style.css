@@ -1131,13 +1131,11 @@ body>div.background>div>div>div.header-left>div>div>a:nth-child(3) {
     display: none;
     position: absolute;
     top: 140%;
-    /* Modificato da 140% a 100% per farlo apparire giusto sotto il bottone */
     left: 50%;
-    /* Centra orizzontalmente il dropdown */
     transform: translateX(-50%);
-    /* Sposta il dropdown indietro di metà della sua larghezza */
     background-color: #F1FAEE;
-    width: 25vw;
+    width: 40vw;
+    max-width: 400px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     height: auto;

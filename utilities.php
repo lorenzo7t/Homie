@@ -471,7 +471,7 @@ function rejectAll()
     // Processa tutte le richieste pendenti
     foreach ($requests as $request) {
         if ($request['professionalId'] === $professionalId && $request['status'] === 'pending') {
-            $stmt->bind_param("siis", $request['requestId'], $request['userId'], $request['professionalId'], $request['details']);
+            $stmt->bind_param("siss", $request['requestId'], $request['userId'], $request['professionalId'], $request['details']);
             $stmt->execute();
             $anyRejected = true;
         } else {
