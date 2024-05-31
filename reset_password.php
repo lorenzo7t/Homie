@@ -1,10 +1,10 @@
 <?php  
     session_start();
     include 'db_connection.php';
-    if (!isset($_SESSION['userid'])) {
+/*     if (!isset($_SESSION['userid'])) {
         header('Location: login_page.php');
         exit();
-    }
+    } */
 ?>
 
 <!DOCTYPE html>

@@ -22,31 +22,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $row = $result->fetch_assoc();
         $userid = $row['userid'];
 
-        // Genera un token unico
         $token = bin2hex(random_bytes(50));
         $token_hash = hash('sha256', $token);
         $expiry = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
-        // Salva il token nel database
         $sql = "UPDATE homie.user_data SET reset_token_hash='$token_hash', reset_token_expires_at='$expiry' WHERE userid='$userid '";
         if ($conn->query($sql) === TRUE) {
-            $resetLink = "http://homie.website/reset_password.php?token=$token_hash";
+            $resetLink = "https://homie.website/reset_password.php?token=$token_hash";
             
             try {
-                // Configurazione del server
+                
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'aiuto.homie@gmail.com'; // Il tuo indirizzo Gmail
-                $mail->Password = 'aehv smop cfmm zjnb'; // La tua password Gmail o la password per l'app
+                $mail->Username = 'aiuto.homie@gmail.com'; 
+                $mail->Password = 'aehv smop cfmm zjnb';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
             
-                // Destinatari
-                $mail->setFrom('no-reply@miosito.com', 'Nome del sito');
+                $mail->setFrom('aiuto.homie@gmail.com', 'Homie');
                 $mail->addAddress($email);
 
-                // Contenuto dell'email
                 $mail->isHTML(true);
                 $mail->Subject = 'Recupero Password';
                 $mail->Body    = "Clicca sul seguente link per resettare la tua password: <a href='$resetLink'>$resetLink</a>";
