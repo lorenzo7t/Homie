@@ -8,6 +8,11 @@ if (!isset($_SESSION['userid'])) {
 }
 $username = ucfirst($_SESSION['name']) . " " . ucfirst($_SESSION['cognome']);
 $indirizzo = $_SESSION['indirizzo'];
+if (isset($_SESSION['professione'])) {
+    $professione = $_SESSION['professione'];
+} else {
+    $professione = false;
+}
 
 ?>
 <div class="header-container header-bg">
@@ -68,7 +73,7 @@ $indirizzo = $_SESSION['indirizzo'];
                 </button>
                 <div class="dropdown-content">
                     <a href="profile.php">Profilo</a>
-                    <a href="profile.php?section=ordini">Ordini</a>
+                    <a href="<?php echo $professione ? 'pro_profile.php?section=ordini' : 'profile.php?section=ordini'; ?>">Ordini</a>
                     <a href="logout.php">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
