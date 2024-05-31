@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Salva il token nel database
         $sql = "UPDATE homie.user_data SET reset_token_hash='$token_hash', reset_token_expires_at='$expiry' WHERE userid='$userid '";
         if ($conn->query($sql) === TRUE) {
-            $resetLink = "http://homie.website/reset_password.php?token=$resetToken";
+            $resetLink = "http://homie.website/reset_password.php?token=$token_hash";
             
             try {
                 // Configurazione del server
