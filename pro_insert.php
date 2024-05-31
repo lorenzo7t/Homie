@@ -29,8 +29,9 @@ $target_dir = "img/professionals/";
 if (!file_exists($target_dir)) {
     mkdir($target_dir, 0777, true);
 }
+
 $imageFileType = strtolower(pathinfo($_FILES["photo"]["name"], PATHINFO_EXTENSION));
-$new_filename = $nome . "-" . $cognome . "-" . $piva . "." . $imageFileType;
+$new_filename = strtolower($nome) . "-" . strtolower($cognome) . "-" . strtolower($piva) . "." . strtolower($imageFileType);
 $target_file = $target_dir . $new_filename;
 $uploadOk = 1;
 
