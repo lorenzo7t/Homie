@@ -1,3 +1,7 @@
 .DS_Store
 cors-anywhere
 img/.DS_Store
+img/professionals/
+cache
+requests.json
+locations.json
