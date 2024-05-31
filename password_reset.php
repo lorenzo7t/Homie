@@ -16,11 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($new_password !== $confirm_password) {
         $response['message'] = 'Le password non coincidono.';
     } else {
-        echo $token;
-        $token_hash = hash('sha256', $token);
-        echo $token_hash;
 
-        $sql = "SELECT userid, reset_token_expires_at FROM homie.user_data WHERE reset_token_hash='$token_hash'";
+
+        $sql = "SELECT userid, reset_token_expires_at FROM homie.user_data WHERE reset_token_hash='$token'";
         $result = $conn->query($sql);
         
         if ($result->num_rows > 0) {
@@ -36,11 +34,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($conn->query($sql) === TRUE) {
                     $response['success'] = true;
                     $response['message'] = 'Password aggiornata con successo.';
+                    header('Location: login_page.php?success=true');
                 } else {
                     $response['message'] = 'Errore durante l\'aggiornamento della password: ' . $conn->error;
+                    header('Location: login_page.php?success=false');
                 }
             } else {
                 $response['message'] = 'Il link per il reset è scaduto.';
+                header('Location: login_page.php?success=false');
             }
         } else {
             $response['message'] = 'Token non valido.';
